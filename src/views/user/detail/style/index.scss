@@ -1,0 +1,86 @@
+.container {
+  .data {
+    line-height: 35px;
+    background: rgba(255, 59, 48, 0.1);
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 59, 48, 1);
+    padding-left: 15px;
+    padding-right: 15px;
+    img {
+      width: 12px;
+    }
+    div {
+      float: right;
+    }
+    .in {
+      margin-right: 20px;
+    }
+  }
+  .list {
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 1);
+    margin: 0 auto;
+    width: 345px;
+    padding-top: 10px;
+
+    .item {
+      &:last-of-type {
+        border: none;
+      }
+      box-shadow: 0px 1px 13px 0px rgba(0, 0, 0, 0.1);
+      height: 90px;
+      position: relative;
+      padding-left: 81px;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+      .cover {
+        position: absolute;
+        width: 55px;
+        border-radius: 3px;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 11px;
+      }
+      .tuijian {
+        position: absolute;
+        width: 47px;
+        right: 0;
+        top: 0;
+      }
+      .name {
+        font-size: 14px;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 1);
+        padding-top: 25px;
+        span {
+          display: inline-block;
+          border: 1px solid rgba(255, 70, 59, 1);
+          border-radius: 4px;
+          line-height: 14px;
+          padding: 0 2px;
+          font-size: 10px;
+          font-family: PingFang SC;
+          font-weight: 400;
+          color: rgba(255, 59, 48, 1);
+          transform: scale(0.8);
+        }
+      }
+      .instro {
+        width: 200px;
+        margin-top: 5px;
+        font-size: 12px;
+        color: #666;
+      }
+      .right {
+        right: 10px;
+        font-size: 13px;
+        font-weight: bold;
+        color: rgba(245, 154, 35, 1);
+      }
+      .grey{
+          color: #666;
+      }
+    }
+  }
+}

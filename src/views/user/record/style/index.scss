@@ -1,0 +1,40 @@
+.container {
+  .search {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .filter {
+  }
+  .item {
+    width: 345px;
+    height: 85px;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px 1px 13px 0px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    margin-top: 10px;
+    position: relative;
+    padding-left: 78px;
+    .name {
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(0, 0, 0, 1);
+      padding-top: 22px;
+    }
+    img {
+      width: 55px;
+      left: 11px;
+      border-radius: 3px;
+    }
+    .tips {
+      font-size: 11px;
+      color: rgba(102, 102, 102, 1);
+      margin-top: 5px;
+    }
+    .right {
+      right: 10px;
+      font-size: 13px;
+      font-weight: bold;
+      color: rgba(102, 102, 102, 1);
+    }
+  }
+}

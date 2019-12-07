@@ -68,7 +68,7 @@
       </div>
       <div class="line"></div>
     </div>
-    <tabbar :active="1"></tabbar>
+    <tabbar :active="3"></tabbar>
   </div>
 </template>
 

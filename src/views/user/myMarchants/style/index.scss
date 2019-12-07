@@ -1,0 +1,73 @@
+.container {
+  .search {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .list {
+      margin-top: 40px;
+    .item {
+      width: 345px;
+      height: 100px;
+      background: rgba(255, 255, 255, 1);
+      box-shadow: 0px 1px 13px 0px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      margin: 0 auto;
+      position: relative;
+      padding-left: 91px;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+      .cover {
+        position: absolute;
+        width: 67px;
+        border-radius: 3px;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 11px;
+      }
+      .tuijian {
+        position: absolute;
+        width: 47px;
+        right: 0;
+        top: 0;
+      }
+      .name {
+        font-size: 14px;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 1);
+        padding-top: 14px;
+      }
+      .labels {
+        overflow: hidden;
+        line-height: 12px;
+        margin-top: 5px;
+        & > div {
+          background: rgba(255, 255, 255, 1);
+          border: 1px solid rgba(184, 116, 26, 1);
+          border-radius: 4px;
+          float: left;
+          padding: 3px 6px;
+          font-size: 10px;
+          color: #b8741a;
+          margin-right: 3px;
+        }
+      }
+      .instro {
+        margin-top: 10px;
+        width: 200px;
+        font-size: 13px;
+        color: rgba(255, 59, 48, 1);
+      }
+      .num {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 12px;
+        color: rgba(102, 102, 102, 1);
+        right: 15px;
+        img{
+            width: 18px;
+        }
+      }
+    }
+  }
+}
