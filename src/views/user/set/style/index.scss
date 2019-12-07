@@ -1,0 +1,99 @@
+.container{
+  .item{
+      
+      border-bottom: 1px solid #ddd;
+      &:first-of-type{
+        border-top: 1px solid #ddd;
+      }
+      line-height: 50px;
+      font-size: 13px;
+      padding: 0 15px;
+      width: 375px;
+      position: relative;
+      .img{
+          float: right;
+          img{
+              width: 32px;
+              height: 32px;
+              border-radius: 50%;
+          }
+      }
+      span{
+          float: right;
+          img{
+              width: 9px;
+              margin-left: 10px;
+              margin-top: -1px;
+          }
+      }
+      .right{
+          position: absolute;
+          top: 11px;
+          right: 33px;
+          line-height: 13px;
+          font-size: 13px;
+          div{
+              font-size: 12px;
+              line-height: 12px;
+              color: #FF3B30;
+              text-align: right;
+              margin-top: 2px;
+          }
+      }
+  }
+  .setName {
+    width: 306px;
+    height: 174px;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 5px;
+    padding-top: 22px;
+    .title {
+      font-size: 15px;
+      text-align: center;
+      position: relative;
+      img {
+        width: 14px;
+        height: 14px;
+        position: absolute;
+        right: 31px;
+        top: 0;
+      }
+    }
+    input {
+      width: 235px;
+      height: 40px;
+      background: rgba(255, 255, 255, 1);
+      border: 1px solid rgba(153, 153, 153, 1);
+      border-radius: 2px;
+      display: block;
+      margin: 0 auto;
+      margin-top: 22px;
+      padding: 0 10px;
+      font-size: 14px;
+    }
+    .height {
+      width: 210px;
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 25px;
+    }
+    & > span {
+      line-height: 40px;
+      display: inline-block;
+      vertical-align: middle;
+      padding-top: 20px;
+      margin-left: 5px;
+    }
+    .submit {
+      width: 100px;
+      line-height: 38px;
+      background: rgba(252, 84, 40, 1);
+      border-radius: 2px;
+      text-align: center;
+      font-size: 15px;
+      color: rgba(255, 255, 255, 1);
+      margin: 0 auto;
+      margin-top: 22px;
+    }
+  }
+}
