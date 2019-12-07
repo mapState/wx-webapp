@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import area from "../../../utils/area";
+import area from "@/utils/area";
 export default {
   data() {
     return {
