@@ -4,6 +4,12 @@ import Router from 'vue-router'
 
 // 商家
 const come = () => import("@/views/business/come")
+const cards = () => import("@/views/business/cards")
+const login = () => import("@/views/business/login")
+const workbench = () => import("@/views/business/workbench")
+const bussOrder = () => import("@/views/business/bussOrder")
+const bussOrderDetail = () => import("@/views/business/bussOrderDetail")
+const split = () => import("@/views/business/split")
 
 
 
@@ -41,11 +47,12 @@ Vue.use(Router)
 export default new Router({
 	routes: [
 		{ path: '/come', component: come, meta: { title: '商家入驻' } },
-
-
-
-
-
+		{ path: '/split', component: split, meta: { title: '订单拆分' } },
+		{ path: '/bussOrder', component: bussOrder, meta: { title: '订单管理' } },
+		{ path: '/bussOrderDetail', component: bussOrderDetail, meta: { title: '订单详情' } },
+		{ path: '/cards', component: cards, meta: { title: '商家入驻' } },
+		{ path: '/workbench', component: workbench, meta: { title: '商家工作台' } },
+		{ path: '/login', component: login, meta: { title: '商家登录' } },
 		{ path: '/home', component: home, meta: { title: '众奖联盟' } },
 		{ path: '/speak', component: speak, meta: { title: '发表评价' } },
 		{ path: '/feedback', component: feedback, meta: { title: '我要反馈' } },

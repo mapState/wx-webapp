@@ -1,59 +1,81 @@
 <template>
   <div v-wechat-title="$route.meta.title" class="container">
-    <div class="msg">
-      <div class="info">
-        <van-swipe :autoplay="3000" vertical :show-indicators="false" :touchable="false">
-          <van-swipe-item>
-            <div class="wrap">
-              <div class="item">
-                <img src="@/assets/dui.png" />
-                <span>张三张三3</span>
-                <span>2小时前免单263元</span>
-              </div>
-            </div>
-          </van-swipe-item>
-          <van-swipe-item>
-            <div class="wrap">
-              <div class="item">
-                <img src="@/assets/dui.png" />
-                <span>2333</span>
-                <span>2小时前免单263元</span>
-              </div>
-            </div>
-          </van-swipe-item>
-        </van-swipe>
+    <div class="dataTop">
+      <div class="title">我的数据</div>
+      <div class="item">
+        <div class="inner upDown">
+          <div class="num">1136</div>今日营业额
+        </div>
+      </div>
+      <div class="item">
+        <div class="inner upDown">
+          <div class="num">1136</div>总营业额
+        </div>
+      </div>
+      <div class="item">
+        <div class="inner upDown">
+          <div class="num">1136</div>折扣后收入
+        </div>
+      </div>
+      <div class="item">
+        <div class="inner upDown">
+          <div class="num">1136</div>今日免单奖励
+        </div>
+      </div>
+      <div class="item">
+        <div class="inner upDown">
+          <div class="num">1136</div>已免单总奖励
+        </div>
+      </div>
+      <div class="item">
+        <div class="inner upDown">
+          <div class="num">1136</div>当前抽奖池
+        </div>
+      </div>
+      <div class="item">
+        <div class="inner upDown">
+          <div class="num">1136</div>待取货订单
+        </div>
+      </div>
+      <div class="item">
+        <div class="inner upDown">
+          <div class="num">1136</div>待发货订单
+        </div>
+      </div>
+      <div class="item">
+        <div class="inner upDown">
+          <div class="num">1136</div>总订单数量
+        </div>
       </div>
     </div>
-    <div class="content">
-      <div class="contact">
-        <div class="name">万州烤鱼（嘉里中心店）</div>
-        <div class="labels">
-          <span>美食</span>
-          <span>美食</span>
-        </div>
-        <div class="position">
-          <img src="@/assets/po2.png" class="im1" />
-          <span class="out">杭州市西湖区定安路265号</span>
-          <img src="@/assets/po3.png" class="im2" />
-          <span class="shu"></span>
-          <a href="tel:13512341234">
-            <img src="@/assets/mobile.png" class="im3" />
-          </a>
-
-          <div class="instro out">公告:今日全场8折XXXXXX...</div>
-        </div>
-      </div>
-      <div class="data">
-        <div class="item">
-          <div class="num">1136</div>参与总人次
-          <span></span>
-        </div>
-        <div class="item">
-          <div class="num">1136</div>已免单人次
-          <span></span>
-        </div>
-        <div class="item">
-          <div class="num">1136</div>已免单总奖励
+    <div class="nav">
+      <div class="tools">
+        <div class="title">我的工具</div>
+        <div class="content">
+          <div>
+            <div class="img">
+              <img src="@/assets/sao2.png" />
+            </div>
+            <div>扫码</div>
+          </div>
+          <div>
+            <div class="img">
+              <img src="@/assets/set2.png" />
+            </div>
+            <div>设置</div>
+          </div>
+          <div>
+            <div class="img">
+              <img src="@/assets/ma.png" />
+            </div>
+            <div>商铺二维码</div>
+          </div>
+          <div>
+            <div class="img">
+              <img src="@/assets/money4.png" />
+            </div>
+            <div>收入明细</div>
+          </div>
         </div>
       </div>
       <div class="tab">
@@ -114,35 +136,28 @@
       <div class="inner">
         <div class="money">￥652</div>
         <div class="tip1">今日已累计奖金（元）</div>
-        <div class="tip2">*每日抽奖时间为:18:00-19</div>
-        <div class="tip3">*参与排队中拥有抽奖资格</div>
-        <button type="primary" class="time" :disabled="true">
-          <van-count-down :time="time" format="抽奖倒计时：HH:mm:ss" />
-        </button>
+        <div class="tip2">每日抽奖时间为:18:00-19</div>
+        <div class="tip3">参与排队中拥有抽奖资格</div>
+        <div class="tip3">每日免单奖励超过300，超过部分的10%放入店铺抽奖池，供其它用户抽奖</div>
       </div>
       <div class="line"></div>
     </div>
-    <div class="bottom">
-      <div>
-        <img src="@/assets/return.png" class="leftRight" />
-        <p>返回首页</p>
-      </div>
-      <div>
-        <img src="@/assets/shou.png" class="leftRight" />
-        <p>收藏店铺</p>
-      </div>
-      <div>购买商品</div>
-      <div>支付买单</div>
-    </div>
+    <tabbar :active="1"></tabbar>
   </div>
 </template>
 
 <script>
+import tabbar from "@/components/tabBar";
 export default {
+  components: {
+    tabbar
+  },
   data() {
     return {
       tab: 1,
-      time: 30 * 60 * 60 * 1000
+      time: 30 * 60 * 60 * 1000,
+      show: false,
+      over: true
     };
   },
   methods: {
@@ -167,6 +182,9 @@ export default {
 >>> .van-count-down {
   font-size: 15px;
   font-weight: bold;
-  color: rgba(255, 59, 48, 1);
+  color: #5a3504;
+}
+>>> .van-popup {
+  background: transparent;
 }
 </style>

@@ -22,7 +22,7 @@
         />
       </van-cell-group>
     </div>
-    <div class="item litInput" style="border-bottom:10px solid #f2f2f2">
+    <div class="item litInput" style="border-bottom:10px solid #f2f2f2" @click="address=true">
       <van-field v-model="username" label="店铺地址" placeholder="请选择您的店铺地址" />
       <img src="@/assets/jian.png" class="upDown" />
     </div>
@@ -43,18 +43,60 @@
       <van-field v-model="username" label="支付宝账号" placeholder="请输入商家支付宝账号" />
       <span class="upDown">用于商家支付宝收款</span>
     </div>
-    <van-button type="primary" style="display:block;margin:0 auto;margin-top:20px;width:100px">保存</van-button>
+    <van-button type="primary" style="display:block;margin:0 auto;margin-top:20px;width:290px">保存</van-button>
+    <!-- <van-popup v-model="show">
+      <div class="red">
+        <van-tree-select
+          :items="items"
+          :active-id.sync="activeId"
+          :main-active-index.sync="activeIndex"
+        />
+      </div>
+    </van-popup>-->
+    <van-popup v-model="address">
+      <div class="info">
+        <div class="title" >
+          选择地址
+        </div>
+        <div class="ads" style="border-top: 1px solid #d2d2d2;" @click="areaShow=true">
+          <img src="@/assets/jian.png" alt class="upDown"/>
+          <div class="area">{{'选择地区'}}</div>
+        </div>
+        <div class="ads">
+          <van-cell-group>
+            <van-field
+              v-model="username"
+              rows="2"
+              type="textarea"
+              placeholder="详细地址（如街道、小区、乡镇、村）"
+            />
+          </van-cell-group>
+        </div>
+        <van-button type="danger" class="sub">保存</van-button>
+      </div>
+    </van-popup>
+    <van-popup v-model="areaShow" position="bottom" >
+      <van-area :area-list="areaList" @confirm="chooseArea"/>
+    </van-popup>
   </div>
 </template>
 
 <script>
+import area from "@/utils/area";
 export default {
   data() {
     return {
-      username: ""
+      username: "",
+      areaList: area,
+      show: false,
+      areaShow: false,
+      address: false
     };
   },
   methods: {
+    chooseArea(e){
+      console.log(e)
+    },
     init() {}
   },
 
@@ -75,7 +117,7 @@ export default {
   min-width: 70px;
   font-weight: 500;
   color: #000;
-  margin-right: 10px
+  margin-right: 10px;
 }
 .litInput {
   padding-right: 20px;

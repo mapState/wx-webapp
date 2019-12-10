@@ -1,0 +1,208 @@
+.container {
+  .nav {
+    padding-top: 25px;
+    .tools {
+      padding: 0 17px;
+      .title {
+        font-size: 15px;
+        font-weight: 500;
+        padding-bottom: 14px;
+      }
+      .content {
+        display: flex;
+        justify-content: space-between;
+        & > div {
+          position: relative;
+          font-size: 12px;
+          color: rgba(51, 51, 51, 1);
+          text-align: center;
+          .img {
+            width: 39px;
+            height: 39px;
+            background: #ffe7c7;
+            border-radius: 50%;
+            position: relative;
+            margin: 0 auto;
+            margin-bottom: 8px;
+            img {
+              width: 21px;
+              position: absolute;
+              top: 0;
+              right: 0;
+              left: 0;
+              bottom: 0;
+              margin: auto;
+            }
+          }
+        }
+      }
+    }
+  }
+  .dataTop {
+    .title {
+      font-size: 15px;
+      font-weight: 500;
+      margin: 18px 0;
+    }
+    background-color: #fff;
+    overflow: hidden;
+    padding-left: 14px;
+    border-top: 1px solid #ddd;
+    .item {
+      float: left;
+      width: 114px;
+      height: 64px;
+      background: rgba(255, 231, 199, 1);
+      border-radius: 3px;
+      margin-right: 2px;
+      margin-bottom: 2px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(184, 116, 26, 1);
+      position: relative;
+      .inner {
+        width: 100%;
+      }
+      .num {
+        font-size: 17px;
+        font-weight: bold;
+        color: rgba(108, 69, 17, 1);
+      }
+    }
+  }
+  .tab {
+    font-size: 15px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 1);
+    margin-top: 25px;
+    overflow: hidden;
+    & > div {
+      float: left;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-left: 18px;
+      img {
+        width: 11px;
+        margin-top: 7px;
+      }
+    }
+    .active {
+      color: #b8741a;
+    }
+  }
+  .tabContent {
+    background-color: #f3f3f3;
+    padding-top: 12px;
+    .inner {
+      width: 345px;
+      background: rgba(255, 255, 255, 1);
+      box-shadow: 0px 2px 13px 0px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      margin: 0 auto;
+      .item {
+        line-height: 53px;
+        border-bottom: 1px solid #ddd;
+        font-size: 14px;
+        padding-left: 15px;
+        position: relative;
+        img {
+          width: 28px;
+          height: 28px;
+          border-radius: 50%;
+          left: 40px;
+        }
+        .name {
+          left: 80px;
+          font-size: 12px;
+        }
+        .tip {
+          right: 92px;
+          font-size: 12px;
+        }
+        .right {
+          width: 67px;
+          height: 31px;
+          background: rgba(255, 255, 255, 1);
+          border: 1px solid rgba(184, 116, 26, 1);
+          border-radius: 15px;
+          right: 15px;
+          text-align: center;
+          font-size: 12px;
+          line-height: 12px;
+          color: #b8741a;
+          padding-top: 1px;
+        }
+        .rc{
+          border-color: #ddd;
+          color: #666;
+        }
+      }
+      .last {
+        line-height: 50px;
+        text-align: center;
+        font-size: 12px;
+        font-weight: bold;
+        color: rgba(102, 102, 102, 1);
+      }
+    }
+    .line {
+      height: 100px;
+    }
+  }
+  .tabContent3 {
+    background-color: #f3f3f3;
+    padding-top: 12px;
+    .line {
+      height: 100px;
+    }
+    .inner {
+      margin: 0 auto;
+      width: 345px;
+      height: 207px;
+      background: rgba(255, 255, 255, 1);
+      box-shadow: 0px 2px 13px 0px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      padding-left: 19px;
+      .money {
+        padding-top: 23px;
+        font-size: 25px;
+        font-weight: bold;
+        color: rgba(184, 116, 26, 1);
+      }
+      .tip1 {
+        font-size: 11px;
+        font-weight: bold;
+        color: rgba(184, 116, 26, 1);
+        margin-top: 5px;
+      }
+      .tip2 {
+        font-size: 11px;
+        font-weight: bold;
+        margin-top: 15px;
+        color: #666666;
+        line-height: 15px;
+      }
+      .tip3 {
+        font-size: 11px;
+        font-weight: bold;
+        margin-top: 3px;
+        color: #666666;
+        width: 259px;
+      }
+      .time {
+        width: 290px;
+        height: 44px;
+        border-radius: 5px;
+        border: none;
+        background: rgba(255, 232, 231, 1);
+        margin-top: 15px;
+        font-size: 15px;
+        font-weight: bold;
+        color: rgba(255, 59, 48, 1);
+      }
+    }
+  }
+
+}

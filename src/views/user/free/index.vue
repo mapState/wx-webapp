@@ -37,7 +37,9 @@
           </div>
           <div class="instro out">商家当前累计抽奖池：625元</div>
           <div class="right upDown">
-            <div class="money">80元</div>待奖励
+            <div class="in upDown" style="width:100%">
+              <div class="money">80元</div>待奖励
+            </div>
           </div>
         </div>
         <div class="item">
@@ -49,7 +51,9 @@
           </div>
           <div class="instro out">商家当前累计抽奖池：625元</div>
           <div class="right upDown">
-            <div class="money">80元</div>待奖励
+            <div class="in upDown" style="width:100%">
+              <div class="money">80元</div>待奖励
+            </div>
           </div>
         </div>
       </div>
@@ -62,7 +66,9 @@
           <div class="name">肉蟹煲（湖滨银泰店）</div>
           <div class="instro out">商家当前累计抽奖池：625元</div>
           <div class="right upDown">
-            <div class="money">80元</div>待奖励
+            <div class="in upDown" style="width:100%">
+              <div class="money">80元</div>待奖励
+            </div>
           </div>
         </div>
       </div>

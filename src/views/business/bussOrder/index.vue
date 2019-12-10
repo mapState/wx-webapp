@@ -1,9 +1,10 @@
 <template>
   <div v-wechat-title="$route.meta.title" class="container">
     <div class="filter">
-      <van-tabs v-model="active" title-active-color="#B8741A" title-inactive-color="#000">
+      <van-tabs v-model="active" title-active-color="#B8741A" title-inactive-color="#000" :swipe-threshold="5">
         <van-tab title="全部"></van-tab>
         <van-tab title="待自取"></van-tab>
+        <van-tab title="待发货"></van-tab>
         <van-tab title="待收货"></van-tab>
         <van-tab title="已完成"></van-tab>
       </van-tabs>
