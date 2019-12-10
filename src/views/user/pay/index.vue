@@ -19,8 +19,8 @@
         </div>
       </div>
       <div class="input">
-        <span>支付余额:</span>
-        <input placeholder="请输入支付余额" />
+        <span>支付金额:</span>
+        <input placeholder="请输入支付金额" />
       </div>
       <div class="ways">
         <van-radio-group v-model="ways">

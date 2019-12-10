@@ -158,14 +158,7 @@ export function coby(val, that) {
             message: "复制成功"
         });
     }
-    if (device().kdtk) {
-        if (device().ios) {
-            window.location.href = 'weixin://'
-        }
-    } else {
-        window.location.href = 'weixin://'
-    }
-    window.location.href = 'weixin://'
+
     document.body.removeChild(input);
     document.body.scrollTop = scrollTop;
     window.scrollTo(scrollTop, scrollTop);

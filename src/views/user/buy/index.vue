@@ -1,7 +1,7 @@
 <template>
   <div v-wechat-title="$route.meta.title" class="container">
     <div class="search">
-      <img src="@/assets/left.png" class="upDown" />
+      <img src="@/assets/left.png" class="upDown" @click="$router.go(-1)"/>
       <van-search placeholder="商品名称" background="#fff" />
     </div>
     <div class="filter">

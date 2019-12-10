@@ -8,7 +8,7 @@
     </div>
     <div class="content">
       <div class="data">
-        <div class="item">
+        <div class="item" @click="toNext('/myMarchants')">
           <div class="num">1136</div>收藏的商家
           <span></span>
         </div>
@@ -27,28 +27,28 @@
       <div class="items">
         <div class="title">我的钱包</div>
         <div class="flex">
-          <div class="itm">
+          <div class="itm" @click="toNext('/detail')">
             <div class="img">
               <img src="@/assets/money3.png" />
               <div class="dot">99</div>
             </div>
             <br />余额明细
           </div>
-          <div class="itm">
+          <div class="itm" @click="toNext('/recharge')">
             <div class="img">
               <img src="@/assets/money2.png" />
               <div class="dot">99</div>
             </div>
             <br />充值
           </div>
-          <div class="itm">
+          <div class="itm" @click="toNext('/tiXian')">
             <div class="img">
               <img src="@/assets/money1.png" />
               <div class="dot">99</div>
             </div>
             <br />提现
           </div>
-          <div class="itm">
+          <div class="itm" @click="toNext('/record')">
             <div class="img">
               <img src="@/assets/record.png" />
               <div class="dot">99</div>
@@ -60,28 +60,28 @@
       <div class="items">
         <div class="title">我的订单</div>
         <div class="flex">
-          <div class="itm">
+          <div class="itm" @click="toNext('/order',0)">
             <div class="img">
               <img src="@/assets/order.png" />
               <div class="dot">99</div>
             </div>
             <br />全部订单
           </div>
-          <div class="itm">
+          <div class="itm" @click="toNext('/order',1)">
             <div class="img">
               <img src="@/assets/go.png" />
               <div class="dot">99</div>
             </div>
             <br />待自取
           </div>
-          <div class="itm">
+          <div class="itm" @click="toNext('/order',2)">
             <div class="img">
               <img src="@/assets/wuliu.png" />
               <div class="dot">99</div>
             </div>
             <br />待收货
           </div>
-          <div class="itm">
+          <div class="itm" @click="toNext('/order',3)">
             <div class="img">
               <img src="@/assets/done.png" />
               <div class="dot">99</div>
@@ -130,14 +130,14 @@
             </div>
             <br />帮助中心
           </div>
-          <div class="itm">
+          <div class="itm" @click="join=true">
             <div class="img">
               <img src="@/assets/group.png" />
               <div class="dot">99</div>
             </div>
             <br />二维码加群
           </div>
-          <div class="itm">
+          <div class="itm" @click="toNext('/feedback')">
             <div class="img">
               <img src="@/assets/words.png" />
               <div class="dot">99</div>
@@ -154,6 +154,18 @@
         </div>
       </div>
     </div>
+    <van-popup v-model="join">
+      <div class="join">
+        <img src="@/assets/cover.png" />
+        <div class="tip">二维码加群XXXXXXXXX</div>
+      </div>
+    </van-popup>
+    <van-popup v-model="show">
+      <div class="join">
+        <img src="@/assets/cover.png" />
+        <div class="tip">将此二维码展示给商家</div>
+      </div>
+    </van-popup>
     <tabbar :active="3"></tabbar>
   </div>
 </template>
@@ -165,9 +177,20 @@ export default {
     tabbar
   },
   data() {
-    return {};
+    return {
+      join: false,
+      show: false
+    };
   },
   methods: {
+    toNext(msg,active) {
+      this.$router.push({
+        path: msg,
+        query:{
+          active
+        }
+      });
+    },
     init() {}
   },
 
@@ -180,4 +203,7 @@ export default {
 @import "./style/index.scss";
 </style>
 <style scoped>
+>>> .van-popup {
+  background: transparent;
+}
 </style>

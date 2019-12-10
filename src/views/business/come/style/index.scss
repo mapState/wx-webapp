@@ -1,0 +1,21 @@
+.container {
+  .banner {
+    img {
+      display: block;
+      width: 100%;
+    }
+  }
+  .item {
+    border-bottom: 1px solid #ddd;
+    position: relative;
+    img {
+      width: 9px;
+      right: 13px;
+    }
+    span {
+      right: 13px;
+      font-size: 10px;
+      color: rgba(255, 59, 48, 1);
+    }
+  }
+}
