@@ -4,17 +4,25 @@ import Router from 'vue-router'
 
 // 商家
 const come = () => import("@/views/business/come")
+const addGoods = () => import("@/views/business/addGoods")
+const cates = () => import("@/views/business/cates")
 const cards = () => import("@/views/business/cards")
 const login = () => import("@/views/business/login")
 const workbench = () => import("@/views/business/workbench")
 const bussOrder = () => import("@/views/business/bussOrder")
 const bussOrderDetail = () => import("@/views/business/bussOrderDetail")
 const split = () => import("@/views/business/split")
+const send = () => import("@/views/business/send")
+const bussSet = () => import("@/views/business/bussSet")
+const psd = () => import("@/views/business/psd")
+const bussDetail = () => import("@/views/business/bussDetail")
+const goodsManage = () => import("@/views/business/goodsManage")
 
 
 
 // 用户
 const home = () => import("@/views/user/home")
+const search = () => import("@/views/user/search")
 const feedback = () => import("@/views/user/feedback")
 const speak = () => import("@/views/user/speak")
 const success = () => import("@/views/user/success")
@@ -46,6 +54,14 @@ const merchantsDetail = () => import("@/views/user/merchantsList/merchantsDetail
 Vue.use(Router)
 export default new Router({
 	routes: [
+		{ path: '/send', component: send, meta: { title: '我要发货' } },
+		{ path: '/search', component: search, meta: { title: '众奖联盟' } },
+		{ path: '/addGoods', component: addGoods, meta: { title: '商品管理' } },
+		{ path: '/cates', component: cates, meta: { title: '商品管理' } },
+		{ path: '/goodsManage', component: goodsManage, meta: { title: '商品管理' } },
+		{ path: '/bussDetail', component: bussDetail, meta: { title: '收入明细' } },
+		{ path: '/psd', component: psd, meta: { title: '修改密码' } },
+		{ path: '/bussSet', component: bussSet, meta: { title: '商家工作台' } },
 		{ path: '/come', component: come, meta: { title: '商家入驻' } },
 		{ path: '/split', component: split, meta: { title: '订单拆分' } },
 		{ path: '/bussOrder', component: bussOrder, meta: { title: '订单管理' } },

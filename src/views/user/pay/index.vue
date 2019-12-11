@@ -17,6 +17,7 @@
             <img src="@/assets/mobile.png" class="im3" />
           </a>
         </div>
+        <img src="@/assets/shou.png" class="shou" />
       </div>
       <div class="input">
         <span>支付金额:</span>

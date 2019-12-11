@@ -37,7 +37,7 @@
     </div>
     <div class="tabContent">
       <div class="inner">
-        <div class="item">
+        <!-- <div class="item">
           <span>1</span>
           <img src="@/assets/dui.png" class="upDown" />
           <div class="name upDown">玩大嘴爱</div>
@@ -61,7 +61,8 @@
             100元
           </div>
         </div>
-        <div class="last">点击加载更多</div>
+        <div class="last">点击加载更多</div> -->
+        <empty msg="暂无数据"/>
       </div>
       <div class="line"></div>
     </div>
@@ -88,16 +89,18 @@
 
 <script>
 import tabbar from "@/components/tabBar";
+import empty from "@/components/empty";
 export default {
   components: {
-    tabbar
+    tabbar,
+    empty
   },
   data() {
     return {
       tab: 1,
       time: 30 * 60 * 60 * 1000,
       show:false,
-      over:true,
+      over:false,
     };
   },
   methods: {

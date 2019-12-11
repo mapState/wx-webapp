@@ -58,19 +58,19 @@
             </div>
             <div>扫码</div>
           </div>
-          <div>
+          <div @click="toNext('/bussSet')">
             <div class="img">
               <img src="@/assets/set2.png" />
             </div>
             <div>设置</div>
           </div>
-          <div>
+          <div @click="show=true">
             <div class="img">
               <img src="@/assets/ma.png" />
             </div>
             <div>商铺二维码</div>
           </div>
-          <div>
+          <div @click="toNext('/bussDetail')">
             <div class="img">
               <img src="@/assets/money4.png" />
             </div>
@@ -142,12 +142,26 @@
       </div>
       <div class="line"></div>
     </div>
-    <tabbar :active="1"></tabbar>
+    <van-popup v-model="show">
+      <div class="info">
+        <div class="img">
+          <div class="name">
+            <img src="@/assets/cover.png" />众奖联盟
+          </div>
+          <div class="name2">万州烤鱼（嘉里中心店）</div>
+          <img src="@/assets/cover.png" class="content"/>
+
+        </div>
+        <div class="tip">长按图片保存</div>
+        
+      </div>
+    </van-popup>
+    <tabbar :active="0"></tabbar>
   </div>
 </template>
 
 <script>
-import tabbar from "@/components/tabBar";
+import tabbar from "@/components/bussTabBar";
 export default {
   components: {
     tabbar
@@ -157,10 +171,14 @@ export default {
       tab: 1,
       time: 30 * 60 * 60 * 1000,
       show: false,
-      over: true
     };
   },
   methods: {
+    toNext(msg,active) {
+      this.$router.push({
+        path: msg
+      });
+    },
     chooseTab(e) {
       this.tab = e;
     },

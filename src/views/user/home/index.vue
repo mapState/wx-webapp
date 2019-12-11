@@ -33,7 +33,7 @@
     <div class="cates">
       <van-swipe @change="swipeChange" :show-indicators="false">
         <van-swipe-item>
-          <div class="item" v-for="(item,i) in 8" :key="i">
+          <div class="item" v-for="(item,i) in 8" :key="i" @click="toNext('/merchantsList')">
             <div class="img" :class="'bg'+i">
               <img src="@/assets/sao.png" alt />
             </div>
@@ -50,7 +50,12 @@
     <div class="report">
       <span>入驻公告</span>
       <span>|</span>
-      <span class="out">特辣火锅等你品尝你品你品你品你品你品</span>
+      <span class="out">
+        <van-swipe :autoplay="2000" vertical :show-indicators="false" :touchable="false">
+          <van-swipe-item><div class="out">特辣火锅等你品尝你品你品你品你品你品</div></van-swipe-item>
+          <van-swipe-item><div class="out">特辣火锅等你品尝你品你品你品你品你品</div></van-swipe-item>
+        </van-swipe>
+      </span>
       <span>立即入驻</span>
     </div>
     <div class="nav">
@@ -72,7 +77,7 @@
       </div>
     </div>
     <div class="list">
-      <div class="item">
+      <div class="item" @click="toNext('/merchantsList/merchantsDetail')">
         <img src="@/assets/cover.png" class="cover" />
         <img src="@/assets/tuijian.png" class="tuijian" />
         <div class="name">肉蟹煲（湖滨银泰店）</div>
@@ -113,6 +118,14 @@ export default {
     };
   },
   methods: {
+    toNext(msg, active) {
+      this.$router.push({
+        path: msg,
+        query: {
+          active
+        }
+      });
+    },
     swipeChange(e) {
       console.log(e);
     },

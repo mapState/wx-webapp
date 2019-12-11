@@ -1,0 +1,83 @@
+.container {
+  .photos {
+    padding-left: 16px;
+    padding-bottom: 16px;
+    border-bottom: 10px solid #f2f2f2;
+    .title {
+      font-size: 14px;
+      font-weight: bold;
+      padding-top: 18px;
+      padding-bottom: 21px;
+    }
+    .upload {
+      width: 80px;
+      line-height: 65px;
+      background: rgba(242, 242, 242, 1);
+      border-radius: 5px;
+      text-align: center;
+    }
+  }
+  .input {
+    padding: 18px 16px;
+    border-bottom: 10px solid #f2f2f2;
+    position: relative;
+    .right {
+      right: 16px;
+      z-index: 3000;
+      font-size: 15px;
+      font-weight: 500;
+      color: rgba(255, 59, 48, 1);
+    }
+    .title {
+      font-size: 14px;
+      font-weight: bold;
+      padding-bottom: 16px;
+    }
+  }
+  .reset {
+    line-height: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    border-bottom: 10px solid #f2f2f2;
+    & > div {
+      padding-left: 16px;
+      position: relative;
+      .mobile {
+        right: 34px;
+      }
+    }
+
+    img {
+      width: 9px;
+      right: 16px;
+    }
+  }
+  .get {
+    position: relative;
+    line-height: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    padding-left: 16px;
+    .right {
+      right: 16px;
+      line-height: 12px;
+    }
+  }
+  .btn {
+    background-color: #f2f2f2;
+    overflow: hidden;
+    .sub {
+      width: 305px;
+      line-height: 44px;
+      background: rgba(231, 203, 155, 1);
+      border-radius: 5px;
+      text-align: center;
+      margin: 0 auto;
+      margin-top: 35px;
+      margin-bottom: 55px;
+      font-size: 16px;
+      font-weight: 500;
+      color: rgba(61, 40, 0, 1);
+    }
+  }
+}

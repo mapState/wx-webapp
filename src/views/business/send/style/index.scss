@@ -11,19 +11,7 @@
       left: 16px;
     }
   }
-  .add {
-    position: relative;
-    padding-left: 175px;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 50px;
 
-    img {
-      width: 20px;
-      left: 148px;
-    }
-    border-bottom: 10px solid #f2f2f2;
-  }
   .get {
     line-height: 49px;
     font-size: 14px;
@@ -51,7 +39,6 @@
     background-color: #f2f2f2;
   }
   .address {
-    border-bottom: 1px solid #ddd;
     .item {
       .left {
         width: 19px;
@@ -182,94 +169,21 @@
     }
     border-top: 10px solid #f2f2f2;
   }
-  .end{
-    line-height: 50px;
-    padding: 0 17px;
-    font-size: 14px;
-    font-weight: 500;
-    span {
-      float: right;
-    }
-    border-top: 1px solid #ddd;
-  }
-  .bai{
-    height: 20px;
-  }
-  .line {
-    height: 150px;
+  .btn {
     background-color: #f2f2f2;
-  }
-  .bottom {
-    width: 100%;
-    bottom: 0;
-    position: fixed;
-    left: 0;
-    background-color: #fff;
-    line-height: 44px;
-    font-size: 14px;
-    font-weight: bold;
-    text-align: center;
-    &>div{
-      float: left;
-      &:nth-of-type(1){
-        width: 84px;
-        background-color: #fff;
-        color:rgba(255,59,48,1);
-      }
-      &:nth-of-type(2){
-        width: 76px;
-        background-color: #ddd;
-        color:#000;
-      }
-      &:nth-of-type(3){
-        width: 108px;
-        background-color: #E7CB9B;
-        color:#3D2800;
-      }
-    }
-    .right {
-      width: 107px;
+    overflow: hidden;
+    .sub {
+      width: 305px;
       line-height: 44px;
-      background: rgba(17, 17, 19, 1);
-      float: right;
-      font-size: 15px;
-      font-weight: bold;
-      color: rgba(250, 214, 166, 1);
-    }
-  }
-  .bottom2 {
-    width: 100%;
-    bottom: 0;
-    position: fixed;
-    left: 0;
-    background-color: #fff;
-    line-height: 44px;
-    font-size: 14px;
-    font-weight: bold;
-    text-align: center;
-    &>div{
-      float: left;
-      &:nth-of-type(1){
-        width: 160px;
-        background-color: #fff;
-        color:rgba(255,59,48,1);
-        text-align: left;
-        padding-left: 17px;
-      }
-      &:nth-of-type(2){
-        width: 108px;
-        background-color: #E7CB9B;
-        color:#3D2800;
-      }
-    }
-    .right {
-      width: 107px;
-      line-height: 44px;
-      background: rgba(17, 17, 19, 1);
-      float: right;
-      font-size: 15px;
-      font-weight: bold;
-      color: rgba(250, 214, 166, 1);
+      background: rgba(231, 203, 155, 1);
+      border-radius: 5px;
+      text-align: center;
+      margin: 0 auto;
+      margin-top: 35px;
+      margin-bottom: 55px;
+      font-size: 16px;
+      font-weight: 500;
+      color: rgba(61, 40, 0, 1);
     }
   }
 }

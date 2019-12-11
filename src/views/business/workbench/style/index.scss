@@ -134,7 +134,7 @@
           color: #b8741a;
           padding-top: 1px;
         }
-        .rc{
+        .rc {
           border-color: #ddd;
           color: #666;
         }
@@ -204,5 +204,46 @@
       }
     }
   }
-
+  .info {
+    .img {
+      width: 305px;
+      height: 404px;
+      background-image: url("../../../assets/square.png");
+      background-size: 100%;
+      .name {
+        text-align: center;
+        font-size: 15px;
+        font-weight: bold;
+        color: rgba(255, 255, 255, 1);
+        padding-top: 20px;
+        img {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          margin-right: 5px;
+        }
+      }
+      .name2 {
+        font-size: 17px;
+        font-weight: bold;
+        color: rgba(255, 255, 255, 1);
+        text-align: center;
+        margin-top: 10px;
+      }
+      .content {
+        width: 254px;
+        height: 254px;
+        display: block;
+        margin: 0 auto;
+        margin-top: 11px;
+      }
+    }
+    .tip {
+      font-size: 17px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 1);
+      text-align: center;
+      margin-top: 30px;
+    }
+  }
 }

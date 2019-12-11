@@ -68,10 +68,15 @@ export default {
 >>> .van-uploader__preview-image {
   width: 128px;
   height: 72px;
+  margin-right: 10px
 }
 .litInput2 {
   padding-right: 110px;
   border-bottom: 10px solid #f3f3f3 !important;
   border-top: 1px solid #ddd;
+}
+>>> .van-uploader__preview-delete{
+  color: #FF3B30;
+  right: 0px;
 }
 </style>

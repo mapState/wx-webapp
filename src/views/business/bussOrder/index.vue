@@ -69,12 +69,17 @@
         <div class="btn" @click="coby">一键复制</div>
       </div>
     </van-popup>
+    <tabbar :active="1"></tabbar>
   </div>
 </template>
 
 <script>
 import { coby } from "@/utils/utils";
+import tabbar from "@/components/bussTabBar";
 export default {
+  components: {
+    tabbar
+  },
   data() {
     return {
       show: false,
@@ -82,6 +87,11 @@ export default {
     };
   },
   methods: {
+    toNext(msg,active) {
+      this.$router.push({
+        path: msg
+      });
+    },
     coby() {
       coby("11", this);
     },

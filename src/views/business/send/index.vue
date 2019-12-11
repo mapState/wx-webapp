@@ -1,5 +1,11 @@
 <template>
   <div v-wechat-title="$route.meta.title" class="container">
+    <div class="item" style="border-bottom:1px solid #ddd">
+      <van-field v-model="username" label="快递公司：" placeholder="请输入快递公司" />
+    </div>
+    <div class="item" style="border-bottom:10px solid #f2f2f2">
+      <van-field v-model="username" label="快递单号：" placeholder="请输入快递单号" />
+    </div>
     <div class="address">
       <div class="item">
         <img src="@/assets/position.png" class="left upDown" />
@@ -15,8 +21,6 @@
         </div>
       </div>
     </div>
-    <div class="time" style="border-bottom:1px solid #ddd">到店自取消费</div>
-    <div class="time">自取消费时间 <span>2019-10-08  18:30</span></div>
     <div class="kone"></div>
     <div class="goods">
       <div class="owner">
@@ -37,7 +41,7 @@
         <div class="right">X1</div>
       </div>
     </div>
-    <div class="total">
+    <div class="total" style="border:none">
       运费：￥0.00
       <div class="right">
         <span>
@@ -50,37 +54,13 @@
         </span>
       </div>
     </div>
-    
-    <van-cell-group>
-      <van-field
-        v-model="message"
-        rows="1"
-        autosize
-        label="买家留言"
-        disabled
-        type="textarea"
-        maxlength="50"
-        placeholder="50字以内（选填）"
-      />
-    </van-cell-group>
     <div class="orderNum">
-      订单编号 <span>1234567890000000</span>
+      订单编号
+      <span>1234567890000000</span>
     </div>
-    <div class="end">完成时间 <span>2019-10-08  18:30</span></div>
-    <div class="bai"></div>
-    <div class="kone"></div>
-    <div class="line"></div>
-    <div class="bottom">
-      <div>待发货</div>
-      <div>退款</div>
-      <div>快递发货</div>
-      <div class="right">确定购买</div>
+    <div class="btn">
+      <div class="sub">确定发货</div>
     </div>
-    <div class="bottom2">
-      <div>已完成</div>
-      <div>快递发货</div>
-      <div class="right">确定购买</div>
-    </div>  
   </div>
 </template>
 
@@ -112,13 +92,14 @@ export default {
 <style scoped>
 >>> .van-field__label {
   width: auto;
-  margin-right: 15px;
+  font-size: 14px;
+  font-weight: bold;
 }
 >>> .van-hairline--top-bottom::after,
 .van-hairline-unset--top-bottom::after {
   border: none;
 }
->>> .van-field__control:disabled{
+>>> .van-field__control:disabled {
   color: #000;
   -webkit-text-fill-color: #000;
 }
