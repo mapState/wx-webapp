@@ -1,361 +1,46 @@
 .container {
   .searchTop {
-    width: 80%;
-    margin: 0 auto;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin-bottom: 60px;
-    border: 1px solid #ddd;
-    text-align: center;
-    font-size: 16px;
-  }
-  .tabs {
-    margin-top: 30px;
-    margin-bottom: 15px;
-  }
-  .filter {
-    display: flex;
-    justify-content: space-around;
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    img {
-      width: 8px;
-    }
-    .active {
-      color: #b8741a;
-    }
-  }
-  .msg {
-    height: 90px;
-    background-color: #ccc;
-    .info {
-      padding-left: 15px;
-      padding-top: 12px;
-    }
-    .wrap {
-      overflow: hidden;
-      margin-top: 5px;
-      margin-bottom: 5px;
-      .item {
-        float: left;
-        height: 20px;
-        line-height: 20px;
-        padding: 0 5px;
-        background: rgba(0, 0, 0, 0.4);
-        font-size: 12px;
-        border-radius: 9px;
-        overflow: hidden;
-        position: relative;
-        padding-left: 25px;
-        color: #fff;
-
-        img {
-          height: 20px;
-          position: absolute;
-          left: 0;
-          top: 0;
-        }
-        .out {
-          max-width: 60px;
-          display: inline-block;
-          vertical-align: middle;
-          margin-top: -2%;
-        }
-      }
-    }
-  }
-  .content {
     background-color: #fff;
-    .contact {
-      width: 345px;
-      height: 128px;
-      background: rgba(255, 255, 255, 1);
-      box-shadow: 0px 2px 13px 0px rgba(0, 0, 0, 0.1);
-      border-radius: 5px;
-      margin: 0 auto;
-      position: relative;
-      top: -30px;
-      padding-left: 15px;
-      padding-top: 13px;
-      .name {
-        font-size: 16px;
-        font-weight: bold;
-        color: rgba(0, 0, 0, 1);
-      }
-      .labels {
-        span {
-          padding: 3px 6px;
-          background: rgba(238, 238, 238, 1);
-          border-radius: 2px;
-          display: inline-block;
-          font-size: 12px;
-          margin-right: 8px;
-          color: #666;
-        }
-      }
-      .position {
-        line-height: 19px;
-        height: 19px;
-        margin-top: 5px;
-        .out {
-          width: 215px;
-          display: inline-block;
-          vertical-align: middle;
-          font-size: 12px;
-        }
-        .im1 {
-          width: 9px;
-          margin-right: 8px;
-        }
-        .im2 {
-          width: 18px;
-          margin-right: 24px;
-        }
-        .shu {
-          display: inline-block;
-          width: 1px;
-          background: rgba(193, 193, 193, 1);
-          height: 17px;
-          vertical-align: middle;
-          margin-right: 21px;
-        }
-        .im3 {
-          width: 15px;
-        }
-      }
-      .instro {
-        font-size: 13px;
-        color: rgba(255, 59, 48, 1);
-        width: 240px;
-        margin-top: 5px;
-      }
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-bottom: 10px;
+    position: relative;
+    & > img {
+      width: 9px;
+      left: 15px;
     }
-    .data {
-      width: 345px;
-      height: 55px;
-      background: rgba(255, 161, 0, 0.1);
-      border-radius: 5px;
-      display: flex;
-      justify-content: space-around;
-      margin: 0 auto;
-      margin-top: -10px;
-      .item {
-        width: 33.3%;
-        text-align: center;
-        font-size: 11px;
-        color: rgba(51, 51, 51, 1);
-        position: relative;
-        span {
-          position: absolute;
-          width: 1px;
-          height: 18px;
-          background: rgba(193, 193, 193, 1);
-          right: 0;
-          top: 50%;
-          transform: translateY(-50%);
-        }
-        .num {
-          font-size: 15px;
-          font-weight: bold;
-          color: rgba(0, 0, 0, 1);
-          padding-top: 10px;
-        }
-        // background-color: #ccc;
-      }
-    }
-    .tab {
-      display: flex;
-      justify-content: space-around;
-      font-size: 15px;
-      font-weight: bold;
-      color: rgba(0, 0, 0, 1);
-      margin-top: 25px;
-      & > div {
-        width: 33.3%;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-        div {
-          margin-bottom: -7px;
-        }
-        img {
-          width: 11px;
-          margin-top: 7px;
-        }
-      }
-      .active {
-        color: #b8741a;
-      }
-    }
+    z-index: 3000;
   }
-  .tabContent {
-    background-color: #f3f3f3;
-    padding-top: 12px;
-    .inner {
-      width: 345px;
-      background: rgba(255, 255, 255, 1);
-      box-shadow: 0px 2px 13px 0px rgba(0, 0, 0, 0.1);
-      border-radius: 5px;
-      margin: 0 auto;
-      .item {
-        line-height: 53px;
-        border-bottom: 1px solid #ddd;
-        font-size: 14px;
-        padding-left: 15px;
-        position: relative;
-        img {
-          width: 28px;
-          height: 28px;
-          border-radius: 50%;
-          left: 40px;
-        }
-        .name {
-          left: 80px;
-          font-size: 12px;
-        }
-        .tip {
-          right: 92px;
-          font-size: 12px;
-        }
-        .right {
-          width: 67px;
-          height: 31px;
-          background: rgba(255, 255, 255, 1);
-          border: 1px solid rgba(184, 116, 26, 1);
-          border-radius: 15px;
-          right: 15px;
-          text-align: center;
-          font-size: 12px;
-          line-height: 12px;
-          color: #b8741a;
-          padding-top: 1px;
-        }
-        .rc{
-          border-color: #ddd;
-          color: #666;
-        }
+  .history {
+    padding: 0 20px;
+    padding-top: 65px;
+    font-size: 14px;
+    .right {
+      float: right;
+      position: relative;
+      padding-left: 18px;
+      img {
+        width: 11px;
+        left: 0;
       }
-      .last {
-        line-height: 50px;
+    }
+    .title{
+      padding-bottom: 20px;
+    }
+    .content {
+      min-height: 200px;
+      overflow: hidden;
+      .it {
+        padding: 0 8px;
+        line-height: 20px;
+        background: rgba(238, 238, 238, 1);
+        border-radius: 10px;
         text-align: center;
+        float: left;
+        margin-right: 10px;
+        margin-bottom: 10px;
         font-size: 12px;
-        font-weight: bold;
-        color: rgba(102, 102, 102, 1);
       }
-    }
-    .line {
-      height: 100px;
-    }
-  }
-  .tabContent3 {
-    background-color: #f3f3f3;
-    padding-top: 12px;
-    .line {
-      height: 100px;
-    }
-    .inner {
-      margin: 0 auto;
-      width: 345px;
-      height: 207px;
-      background: rgba(255, 255, 255, 1);
-      box-shadow: 0px 2px 13px 0px rgba(0, 0, 0, 0.1);
-      border-radius: 5px;
-      text-align: center;
-      .money {
-        padding-top: 23px;
-        font-size: 25px;
-        font-weight: bold;
-        color: rgba(184, 116, 26, 1);
-      }
-      .tip1 {
-        font-size: 11px;
-        font-weight: bold;
-        color: rgba(184, 116, 26, 1);
-        margin-top: 5px;
-      }
-      .tip2 {
-        font-size: 11px;
-        font-weight: bold;
-        margin-top: 15px;
-        color: rgba(0, 0, 0, 1);
-      }
-      .tip3 {
-        font-size: 11px;
-        font-weight: bold;
-        margin-top: 3px;
-        color: rgba(0, 0, 0, 1);
-      }
-      .time {
-        width: 290px;
-        height: 44px;
-        border-radius: 5px;
-        border: none;
-        background: rgba(255, 232, 231, 1);
-        margin-top: 15px;
-        font-size: 15px;
-        font-weight: bold;
-        color: rgba(255, 59, 48, 1);
-      }
-    }
-  }
-  .bottom {
-    height: 44px;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    div {
-      text-align: center;
-    }
-    div:nth-of-type(1) {
-      width: 79px;
-      height: 100%;
-      border-right: 1px solid #ddd;
-      border-top: 1px solid #ddd;
-      background-color: #fff;
-      float: left;
-      position: relative;
-      img {
-        width: 19px;
-        top: 5px;
-      }
-    }
-    p {
-      font-size: 12px;
-      width: 100%;
-      padding-top: 22px;
-    }
-    div:nth-of-type(2) {
-      position: relative;
-      img {
-        width: 15px;
-        top: 5px;
-      }
-      width: 80px;
-      height: 100%;
-      float: left;
-      border-top: 1px solid #ddd;
-      background-color: #fff;
-    }
-    div:nth-of-type(3) {
-      width: 108px;
-      height: 100%;
-      line-height: 44px;
-      float: left;
-      background: rgba(231, 203, 155, 1);
-      font-size: 15px;
-      font-weight: bold;
-      color: #3d2800;
-    }
-    div:nth-of-type(4) {
-      width: 108px;
-      height: 100%;
-      float: left;
-      line-height: 44px;
-      background: rgba(17, 17, 19, 1);
-      font-size: 15px;
-      font-weight: bold;
-      color: rgba(250, 214, 166, 1);
     }
   }
 }
