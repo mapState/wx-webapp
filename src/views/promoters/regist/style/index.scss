@@ -1,0 +1,82 @@
+.container {
+  .tip {
+    padding-top: 18px;
+    padding-left: 14px;
+    font-size: 12px;
+    color: rgba(102, 102, 102, 1);
+  }
+  .input {
+    width: 345px;
+    margin: 0 auto;
+    .item {
+      border-bottom: 1px solid #ddd;
+    }
+    .item2 {
+      line-height: 50px;
+      font-weight: 500;
+      font-size: 14px;
+      border-bottom: 1px solid #ddd;
+      span {
+        margin-left: 40px;
+        font-size: 13px;
+        color: rgba(85, 85, 85, 1);
+        position: relative;
+        img {
+          width: 15px;
+          left: -18px;
+        }
+      }
+      .right {
+        float: right;
+        padding-right: 16px;
+        position: relative;
+        img {
+          width: 9px;
+          right: 0;
+        }
+      }
+    }
+    .card {
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 18px;
+      .title {
+        line-height: 50px;
+        font-weight: 500;
+        font-size: 14px;
+        span {
+          font-size: 16px;
+          color: #ff3b30;
+        }
+      }
+    }
+  }
+  .xieyi {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 1);
+    margin-top: 15px;
+    padding-left: 14px;
+    position: relative;
+    .upDown {
+      left: -25px;
+    }
+    span {
+      color: #ff3b30;
+    }
+    .left {
+      float: left;
+      margin-right: 5px;
+    }
+  }
+  .sub {
+    width: 290px;
+    line-height: 44px;
+    margin: 0 auto;
+    background: rgba(231, 203, 155, 1);
+    border-radius: 5px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 50px;
+    margin-bottom: 40px;
+  }
+}

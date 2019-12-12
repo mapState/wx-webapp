@@ -1,0 +1,47 @@
+.container {
+  .person {
+    width: 346px;
+    height: 68px;
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(221, 221, 221, 1);
+    border-radius: 3px;
+    margin: 0 auto;
+    overflow: hidden;
+    margin-bottom: 10px;
+    & > div {
+      height: 100%;
+      float: left;
+      &:first-of-type {
+        width: 73px;
+        border-right: 1px solid #ddd;
+        overflow: hidden;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 500;
+        img {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          display: block;
+          margin: 0 auto;
+          margin-top: 11px;
+          margin-bottom: 1px;
+        }
+      }
+      &:last-of-type {
+        width: 271px;
+        display: flex;
+        justify-content: space-around;
+        font-size: 15px;
+        font-weight: bold;
+        text-align: center;
+        padding-top: 17px;
+        .name {
+          font-size: 12px;
+          font-weight: 400;
+          color: rgba(102, 102, 102, 1);
+        }
+      }
+    }
+  }
+}

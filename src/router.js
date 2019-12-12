@@ -2,6 +2,19 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 
+// 创客
+const dHome = () => import("@/views/promoters/dHome")
+const regist = () => import("@/views/promoters/regist")
+const totalMoney = () => import("@/views/promoters/totalMoney")
+const totalBuss = () => import("@/views/promoters/totalBuss")
+const team = () => import("@/views/promoters/team")
+const cDetail = () => import("@/views/promoters/cDetail")
+const tHome = () => import("@/views/promoters/tHome")
+
+
+
+
+
 // 商家
 const come = () => import("@/views/business/come")
 const addGoods = () => import("@/views/business/addGoods")
@@ -54,6 +67,13 @@ const merchantsDetail = () => import("@/views/user/merchantsList/merchantsDetail
 Vue.use(Router)
 export default new Router({
 	routes: [
+		{ path: '/team', component: team, meta: { title: '团队人员' } },
+		{ path: '/cDetail', component: cDetail, meta: { title: '分红提现记录' } },
+		{ path: '/totalMoney', component: totalMoney, meta: { title: '总营业额' } },
+		{ path: '/dHome', component: dHome, meta: { title: '创客登录' } },
+		{ path: '/tHome', component: tHome, meta: { title: '创客登录' } },
+		{ path: '/totalBuss', component: totalBuss, meta: { title: '店铺详情' } },
+		{ path: '/regist', component: regist, meta: { title: '创客注册' } },
 		{ path: '/send', component: send, meta: { title: '我要发货' } },
 		{ path: '/search', component: search, meta: { title: '众奖联盟' } },
 		{ path: '/addGoods', component: addGoods, meta: { title: '商品管理' } },
