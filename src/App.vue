@@ -4,8 +4,26 @@
   </div>
 </template>
 
+<script>
+import wx from "weixin-js-sdk";
+import { wechatSign } from "@/api/common";
+export default {
+  data() {
+    return {};
+  },
+  methods: {
+    init() {}
+  },
+
+  mounted() {
+    this.init();
+  }
+};
+</script>
+
 <style>
-html,body {
+html,
+body {
   background-color: #fff;
   font-family: sans-serif;
   height: 100%;
@@ -14,7 +32,6 @@ html,body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  
 }
 img {
   vertical-align: middle;
@@ -24,17 +41,17 @@ img {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.little{
-  transform: scale(0.8)
+.little {
+  transform: scale(0.8);
 }
-.upDown{
+.upDown {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%)
+  transform: translateY(-50%);
 }
-.leftRight{
+.leftRight {
   position: absolute;
   left: 50%;
-  transform: translateX(-50%)
+  transform: translateX(-50%);
 }
 </style>

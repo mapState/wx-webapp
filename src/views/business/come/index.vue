@@ -1,13 +1,13 @@
 <template>
   <div v-wechat-title="$route.meta.title" class="container">
     <div class="banner">
-      <img src="@/assets/banner.png" />
+      <img :src="imgPath" @click="toAd()"/>
     </div>
     <div class="item">
       <van-field v-model="username" label="商家名称" placeholder="请输入您的商户名称" />
     </div>
-    <div class="item litInput">
-      <van-field v-model="username" label="经营范围" placeholder="请选择您的经营范围" />
+    <div class="item litInput" @click="rankShow=true">
+      <van-field v-model="formData.businessScope" label="经营范围" placeholder="请选择您的经营范围" />
       <img src="@/assets/jian.png" class="upDown" />
     </div>
     <div class="item">
@@ -44,60 +44,87 @@
       <span class="upDown">用于商家支付宝收款</span>
     </div>
     <van-button type="primary" style="display:block;margin:0 auto;margin-top:20px;width:290px">保存</van-button>
-    <!-- <van-popup v-model="show">
-      <div class="red">
-        <van-tree-select
-          :items="items"
-          :active-id.sync="activeId"
-          :main-active-index.sync="activeIndex"
-        />
-      </div>
-    </van-popup>-->
     <van-popup v-model="address">
       <div class="info">
-        <div class="title" >
-          选择地址
-        </div>
+        <div class="title">选择地址</div>
         <div class="ads" style="border-top: 1px solid #d2d2d2;" @click="areaShow=true">
-          <img src="@/assets/jian.png" alt class="upDown"/>
+          <img src="@/assets/jian.png" alt class="upDown" />
           <div class="area">{{'选择地区'}}</div>
         </div>
         <div class="ads">
           <van-cell-group>
-            <van-field
-              v-model="username"
-              rows="2"
-              type="textarea"
-              placeholder="详细地址（如街道、小区、乡镇、村）"
-            />
+            <van-field v-model="username" rows="2" type="textarea" placeholder="详细地址（如街道、小区、乡镇、村）" />
           </van-cell-group>
         </div>
         <van-button type="danger" class="sub">保存</van-button>
       </div>
     </van-popup>
-    <van-popup v-model="areaShow" position="bottom" >
-      <van-area :area-list="areaList" @confirm="chooseArea"/>
+    <van-popup v-model="rankShow">
+      <div class="rank">
+        <van-tree-select
+        :items="items"
+        :active-id.sync="activeId"
+        :main-active-index.sync="activeIndex"
+        @click-item="chooseRank"
+      />
+      </div>
+    </van-popup>
+    <van-popup v-model="areaShow" position="bottom">
+      <van-area :area-list="areaList" @confirm="chooseArea" />
     </van-popup>
   </div>
 </template>
 
 <script>
 import area from "@/utils/area";
+import {UPLOAD_DOMAIN} from "@/utils/const";
+import { getGoodType,advert } from "@/api/bussiness";
 export default {
   data() {
     return {
       username: "",
+      imgUrl: "",
+      imgPath: "",
       areaList: area,
       show: false,
+      rankShow: false,
       areaShow: false,
-      address: false
+      address: false,
+      items: [],
+      activeId: 0,
+      activeIndex: 0,
+      formData:{
+        address:'',
+        alipayAccount:'',
+        alipayName:'',
+        businessScope:'',
+        name:'',
+        name:'',
+        name:'',
+        name:'',
+      }
     };
   },
   methods: {
-    chooseArea(e){
-      console.log(e)
+    chooseArea(e) {
+      console.log(e);
     },
-    init() {}
+    chooseRank(e){
+      this.formData.businessScope=e.ptext+'-'+e.text;
+      this.rankShow=false
+    },
+    toAd(){
+      location.href=this.imgUrl
+    },
+    init() {
+      getGoodType().then(res=>{
+        this.items=res.data
+      })
+      advert().then(res=>{
+        this.imgUrl=res.data.url
+        this.imgPath=UPLOAD_DOMAIN+res.data.image
+      })
+    }
   },
 
   mounted() {
