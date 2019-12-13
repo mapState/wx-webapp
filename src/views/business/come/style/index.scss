@@ -1,4 +1,11 @@
 .container {
+  .upload {
+    width: 128px;
+    line-height: 72px;
+    background: rgba(242, 242, 242, 1);
+    border-radius: 5px;
+    text-align: center;
+  }
   .banner {
     img {
       display: block;
@@ -69,5 +76,48 @@
   }
   .rank{
     width: 330px;
+  }
+  .photos {
+    padding: 19px 14px;
+    border-bottom: 1px solid #ddd;
+    .title {
+      font-size: 14px;
+      padding-bottom: 19px;
+      font-weight: 500;
+    }
+    img {
+      width: 128px;
+      height: 72px;
+      border-radius: 2px;
+    }
+  }
+  .xieyi {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 1);
+    margin-top: 15px;
+    padding-left: 14px;
+    position: relative;
+    .upDown {
+      left: -25px;
+    }
+    span {
+      color: #ff3b30;
+    }
+    .left {
+      float: left;
+      margin-right: 5px;
+    }
+  }
+  .sub {
+    width: 290px;
+    line-height: 44px;
+    margin: 0 auto;
+    background: rgba(231, 203, 155, 1);
+    border-radius: 5px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 40px;
+    margin-bottom: 40px;
   }
 }

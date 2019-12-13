@@ -6,7 +6,8 @@
 
 <script>
 import wx from "weixin-js-sdk";
-import { wechatSign } from "@/api/common";
+
+import { weChatAuth } from "@/utils/weChatPay";
 export default {
   data() {
     return {};
@@ -16,6 +17,7 @@ export default {
   },
 
   mounted() {
+    weChatAuth()
     this.init();
   }
 };

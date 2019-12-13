@@ -8,7 +8,7 @@ const HOST = monitor ? PRODUCT : DEVELOP;
 export function weChatAuth() {
     let d = device();
     if (d.weChat && GetCookie('_wxoid') === null) {
-        location.href = `${HOST}/wechat/authorize.htm?url=${window.encodeURIComponent(location.href)}`;
+        location.href = `http://1w745589u6.iask.in:37685/prize/front/cus/auth?url=${window.encodeURIComponent(location.href)}`;
     }
     else {
         return null;

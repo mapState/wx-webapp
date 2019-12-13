@@ -2,6 +2,7 @@
 import axios from 'axios';
 import store from '../store';
 import { Toast } from 'vant';
+import router from '../router'
 
 // create an axios instance
 const service = axios.create({
@@ -10,22 +11,25 @@ const service = axios.create({
   timeout: 5000 // request timeout
 })
 
-
 // response interceptor
 service.interceptors.response.use(
   response => {
     const res = response.data
 
     if (res.code != 200) {
-      if (res.msg) {
-        if (res.msg == '请登录') {
-        } else {
-          Toast({
-            message: res.msg,
-            duration: 1000
-          });
-        }
+      if (res.code == 300) {
+        Toast({
+          message: res.message,
+          duration: 1000
+        });
       }
+      // Toast({
+      //   message: res.message,
+      //   duration: 1000
+      // });
+      // router.app.$router.push({
+      //   path: '/login'
+      // });
       return res
       // return Promise.reject(new Error(res.msg || 'Error'))
     } else {

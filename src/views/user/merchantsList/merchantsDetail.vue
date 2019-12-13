@@ -114,12 +114,19 @@
       <div class="inner">
         <div class="money">￥652</div>
         <div class="tip1">今日已累计奖金（元）</div>
-        <div class="tip2">*每日抽奖时间为:18:00-19</div>
+        <div class="tip2">*每日抽奖时间为:18:00-19:00</div>
         <div class="tip3">*参与排队中拥有抽奖资格</div>
-        <button type="primary" class="time" :disabled="true">
+        <button type="primary" class="time" :disabled="true" v-if="time<-3600000">
+          抽奖结束
+        </button>
+        <button type="primary" class="time active" v-else-if="time>-3600000&&time<0">
+          开始抽奖
+        </button>
+        <button type="primary" class="time" :disabled="true" v-else>
           <van-count-down :time="time" format="抽奖倒计时：HH:mm:ss" />
         </button>
       </div>
+
       <div class="line"></div>
     </div>
     <div class="bottom">
@@ -142,14 +149,24 @@ export default {
   data() {
     return {
       tab: 1,
-      time: 30 * 60 * 60 * 1000
+      time: 0
     };
   },
   methods: {
     chooseTab(e) {
       this.tab = e;
     },
-    init() {}
+    init() {
+      var mid = new Date(
+        new Date(new Date().toLocaleDateString()).getTime() +
+          18 * 60 * 60 * 1000
+      ).getTime();
+      var end = new Date(
+        new Date(new Date().toLocaleDateString()).getTime() +
+          19 * 60 * 60 * 1000
+      ).getTime();
+      this.time = mid - new Date().getTime();
+    }
   },
 
   mounted() {

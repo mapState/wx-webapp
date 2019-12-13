@@ -1,4 +1,11 @@
 .container {
+  .upload {
+    width: 128px;
+    line-height: 72px;
+    background: rgba(242, 242, 242, 1);
+    border-radius: 5px;
+    text-align: center;
+  }
   .item {
     border-bottom: 1px solid #ddd;
     position: relative;

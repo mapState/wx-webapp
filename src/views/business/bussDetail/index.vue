@@ -3,26 +3,16 @@
     <div class="data" @click="show=true">
       2019年10月
       <img src="@/assets/xia.png" />
-      <div class="out">支出:262</div>
-      <div class="in">收入:262</div>
+      <div class="out">收入:{{total}}</div>
     </div>
     <div class="list">
-      <div class="item">
-        <img src="@/assets/cover.png" class="cover" />
-        <div class="name">张三-消费</div>
-        <div class="instro out">时间 2019-10-20 19:30:56</div>
+      <div class="item" v-for="(item,i) in list" :key="i">
+        <img :src="url+item.image" class="cover" />
+        <div class="name">{{item.name}}</div>
+        <div class="instro out">时间 {{item.createDate}}</div>
         <div class="right upDown">
-          +118元
-          <div class="tip">原价120元，折扣20</div>
-        </div>
-      </div>
-      <div class="item">
-        <img src="@/assets/cover.png" class="cover" />
-        <div class="name">张三-消费</div>
-        <div class="instro out">时间 2019-10-20 19:30:56</div>
-        <div class="right upDown">
-          +118元
-          <div class="tip">原价120元，折扣20</div>
+          +{{item.money/100-item.discountMoney/100}}元
+          <div class="tip">原价{{item.money/100}}元，折扣{{item.discountMoney/100}}</div>
         </div>
       </div>
       <van-popup v-model="show" position="bottom">
@@ -31,6 +21,8 @@
           type="year-month"
           :min-date="minDate"
           :formatter="formatter"
+          @confirm="busiIncomeDetails"
+          @cancel="show=false"
         />
       </van-popup>
     </div>
@@ -38,12 +30,17 @@
 </template>
 
 <script>
+import { busiIncomeDetails } from "@/api/bussiness";
+import { UPLOAD_DOMAIN } from "@/utils/const";
 export default {
   data() {
     return {
       show: false,
       currentDate: new Date(),
-      minDate: new Date(2000, 10, 1)
+      minDate: new Date(2000, 10, 1),
+      url:UPLOAD_DOMAIN,
+      list:[],
+      total:0
     };
   },
   methods: {
@@ -55,7 +52,16 @@ export default {
       }
       return value;
     },
-    init() {}
+    busiIncomeDetails(){
+      busiIncomeDetails({date:this.currentDate.getFullYear()+''+(this.currentDate.getMonth()+1)}).then(res=>{
+        this.list=res.data.data
+        this.total=res.data.total/100
+        this.show=false
+      })
+    },
+    init() {
+      this.busiIncomeDetails()
+    }
   },
 
   mounted() {

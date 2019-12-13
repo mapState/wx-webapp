@@ -1,8 +1,14 @@
 
-//下载APP
-export function toApp() {
-    location.href =
-        "http://a.app.qq.com/o/simple.jsp?pkgname=com.yunti.kdtk#opened";
+
+//表单验证
+export function ruleValidate(obj) {
+    let subDis = true;
+    for (var i in obj) {
+        if (!obj[i]) {
+            subDis = false;
+        }
+    }
+    return subDis;
 }
 //保存cookie
 export function SetCookie(name, value, min) {
@@ -186,19 +192,3 @@ export function formatDate(shijianchuo, type) {
     }
 }
 
-export function formatUrl(url) {
-    const dev = "http://embed.koudaitiku.net";
-    const pro = "http://embed.koudaitiku.com";
-    const pre = "http://preembed.koudaitiku.net";
-    const proFlag = location.href.match("koudaitiku.com");
-    const preFlag = location.href.match("preembed");
-    let host = "";
-    if (proFlag) {
-        host = pro;
-    } else if (preFlag) {
-        host = pre;
-    } else {
-        host = dev;
-    }
-    return host + '#' + url
-}
