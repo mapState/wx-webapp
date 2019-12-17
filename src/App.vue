@@ -7,7 +7,8 @@
 <script>
 import wx from "weixin-js-sdk";
 
-import { weChatAuth } from "@/utils/weChatPay";
+// import { weChatAuth } from "@/utils/weChatPay";
+import { login } from "@/api/user";
 export default {
   data() {
     return {};
@@ -17,7 +18,12 @@ export default {
   },
 
   mounted() {
-    weChatAuth()
+    // weChatAuth()
+    login({
+      openId: "123456789",
+      name: "zxx",
+      logoUrl: "dfdf"
+    });
     this.init();
   }
 };

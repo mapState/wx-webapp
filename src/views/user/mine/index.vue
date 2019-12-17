@@ -9,19 +9,19 @@
     <div class="content">
       <div class="data">
         <div class="item" @click="toNext('/myMarchants')">
-          <div class="num">1136</div>收藏的商家
+          <div class="num">{{detail.detailA}}</div>收藏的商家
           <span></span>
         </div>
         <div class="item">
-          <div class="num">1136</div>抽奖奖励
+          <div class="num">{{(detail.detailB/100).toFixed(2)}}</div>抽奖奖励
           <span></span>
         </div>
         <div class="item">
-          <div class="num">1136</div>免单奖励
+          <div class="num">{{(detail.detailC/100).toFixed(2)}}</div>免单奖励
           <span></span>
         </div>
         <div class="item">
-          <div class="num">1136</div>余额
+          <div class="num">{{(detail.detailD/100).toFixed(2)}}</div>余额
         </div>
       </div>
       <div class="items">
@@ -172,6 +172,8 @@
 
 <script>
 import tabbar from "@/components/tabBar";
+import { console } from "@/api/user";
+import { UPLOAD_DOMAIN } from "@/utils/const";
 export default {
   components: {
     tabbar
@@ -179,7 +181,10 @@ export default {
   data() {
     return {
       join: false,
-      show: false
+      show: false,
+      detail:{
+
+      }
     };
   },
   methods: {
@@ -191,7 +196,14 @@ export default {
         }
       });
     },
-    init() {}
+    getConsole(){
+      console().then(res=>{
+        this.detail=res.data
+      })
+    },
+    init() {
+      this.getConsole()
+    }
   },
 
   mounted() {

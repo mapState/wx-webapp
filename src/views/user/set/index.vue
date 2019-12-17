@@ -4,24 +4,24 @@
       <div class="item">
         头像
         <div class="img">
-          <img src="@/assets/cover.png" />
+          <img :src="url+detail.image" />
         </div>
       </div>
     </van-uploader>
     <div class="item" @click="nameShow=true">
       昵称
-      <span>张三三</span>
+      <span>{{detail.name}}</span>
     </div>
     <div class="item" @click="toNext('/mobile')">
       手机号码
-      <span>130****0130 <img src="@/assets/jian.png" /></span>
+      <span>{{detail.phone}} <img src="@/assets/jian.png" /></span>
     </div>
     <div class="item" @click="toNext('/addressList')">
       收货地址
       <span><img src="@/assets/jian.png" /></span>
       <div class="right">
-        杭州市江干区九和路
-        <div>默认地址</div>
+        {{detail.regionAddress+detail.address}}
+        <div v-show="detail.addressId">默认地址</div>
       </div>
     </div>
     <van-popup v-model="nameShow">
@@ -43,10 +43,14 @@
 </template>
 
 <script>
+import { consoleDetail } from "@/api/user";
+import { UPLOAD_DOMAIN } from "@/utils/const";
 export default {
   data() {
     return {
       nameShow:false,
+      url:UPLOAD_DOMAIN,
+      detail:{},
       name:''
     };
   },
@@ -59,7 +63,11 @@ export default {
         }
       });
     },
-    init() {}
+    init() {
+      consoleDetail().then(res=>{
+        this.detail=res.data
+      })
+    }
   },
 
   mounted() {

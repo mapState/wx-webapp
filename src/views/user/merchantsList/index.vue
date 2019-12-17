@@ -1,82 +1,131 @@
 <template>
   <div v-wechat-title="$route.meta.title" class="container">
     <div class="search">
-      <van-search placeholder="商家名称" background="#fff" />
+      <van-search placeholder="商家名称" background="#fff" v-model="name" @search="searchName" />
     </div>
     <div class="tabs">
-      <van-tabs :swipe-threshold="5" title-inactive-color="#333" title-active-color="#000">
-        <van-tab title="标签 1"></van-tab>
-        <van-tab title="标签 2"></van-tab>
-        <van-tab title="标签 3"></van-tab>
-        <van-tab title="标签 4"></van-tab>
-        <van-tab title="标签 4"></van-tab>
-        <van-tab title="标签 4"></van-tab>
-        <van-tab title="标签 4"></van-tab>
+      <van-tabs
+        :swipe-threshold="5"
+        title-inactive-color="#333"
+        title-active-color="#000"
+        @click="chooseTab"
+      >
+        <van-tab :title="item.name" v-for="(item,i) in tabs" :key="i" :name="item.id"></van-tab>
       </van-tabs>
     </div>
     <div class="filter">
-      <div :class="{active:sort==1}" @click="chooseSort(1)">
-        推荐
-        <img src="@/assets/uda.png" v-if="sort==1"/>
-        <img src="@/assets/ud.png" v-else/>
-      </div>
+      <div :class="{active:sort==1}" @click="chooseSort(1)">推荐</div>
       <div :class="{active:sort==2}" @click="chooseSort(2)">
         距离
-        <img src="@/assets/uda.png" v-if="sort==2"/>
-        <img src="@/assets/ud.png" v-else/>
+        <img src="@/assets/shang2.png" v-if="sort==2&&search.type2===1" />
+        <img src="@/assets/xia2.png" v-else-if="sort==2&&search.type2===0" />
+        <img src="@/assets/ud.png" v-else />
       </div>
       <div :class="{active:sort==3}" @click="chooseSort(3)">
         人气
-        <img src="@/assets/uda.png" v-if="sort==3"/>
-        <img src="@/assets/ud.png" v-else/>
+        <img src="@/assets/shang2.png" v-if="sort==3&&search.type3===1" />
+        <img src="@/assets/xia2.png" v-else-if="sort==3&&search.type3===0" />
+        <img src="@/assets/ud.png" v-else />
       </div>
       <div :class="{active:sort==4}" @click="chooseSort(4)">
         优惠
-        <img src="@/assets/uda.png" v-if="sort==4"/>
-        <img src="@/assets/ud.png" v-else/>
+        <img src="@/assets/shang2.png" v-if="sort==4&&search.type4===1" />
+        <img src="@/assets/xia2.png" v-else-if="sort==4&&search.type4===0" />
+        <img src="@/assets/ud.png" v-else />
       </div>
     </div>
-    <div class="list">
-      <div class="item">
-        <img src="@/assets/cover.png" class="cover" />
-        <img src="@/assets/tuijian.png" class="tuijian" />
-        <div class="name">肉蟹煲（湖滨银泰店）</div>
+    <div class="list" style="background:#fff">
+      <div
+        class="item"
+        @click="toNext('/merchantsList/merchantsDetail',item.id)"
+        v-for="(item,i) in list"
+        :key="i"
+      >
+        <img :src="url+item.storeImageUrl" class="cover" />
+        <div class="name">{{item.name}}</div>
         <div class="labels">
-          <div>美食</div>
-          <div>可奖励20元</div>
-          <div>抽奖池50元</div>
+          <div>{{item.typeName}}</div>
+          <div>可奖励{{item.money/100}}元</div>
+          <div>抽奖池{{item.bonusCount/100}}元</div>
         </div>
-        <div class="instro out">今日8折，肥美大闸蟹，快来吃吧快来快来快来快来</div>
-        <div class="num">600m</div>
+        <div class="instro out">{{item.firm}}</div>
+        <div class="num">{{(item.juli/1000).toFixed(1)}}km</div>
       </div>
-      <div class="item">
-        <img src="@/assets/cover.png" class="cover" />
-        <img src="@/assets/tuijian.png" class="tuijian" />
-        <div class="name">肉蟹煲（湖滨银泰店）</div>
-        <div class="labels">
-          <div>美食</div>
-          <div>可奖励20元</div>
-          <div>抽奖池50元</div>
-        </div>
-        <div class="instro out">今日8折，肥美大闸蟹，快来吃吧快来快来快来快来</div>
-        <div class="num">600m</div>
-      </div>
+      <empty msg="暂无数据" v-show="list.length==0" />
     </div>
   </div>
 </template>
 
 <script>
+import { typeB, typeSearch } from "@/api/user";
+import { UPLOAD_DOMAIN } from "@/utils/const";
+import empty from "@/components/empty";
 export default {
+  components: {
+    empty
+  },
   data() {
     return {
-      sort:1
+      url: UPLOAD_DOMAIN,
+      sort: 1,
+      list: [],
+      tabs: [],
+      search: {
+        type: 1
+      },
+      name: "",
+      typeId: ""
     };
   },
   methods: {
-    chooseSort(e){
-      this.sort=e
+    toNext(msg, id) {
+      this.$router.push({
+        path: msg,
+        query: {
+          id
+        }
+      });
     },
-    init() {}
+    searchName() {
+      this.search.name = this.name;
+      this.getList();
+    },
+    chooseTab(e) {
+      this.typeId = e;
+      this.getList();
+    },
+    chooseSort(e) {
+      this.sort = e;
+      if (e == 2 || e == 3 || e == 4) {
+        this.search["type" + e] = Number(!this.search["type" + e]);
+      } else {
+        this.search.type1 = 1;
+      }
+
+      this.show = false;
+      let obj = {};
+      obj["type" + e] = this.search["type" + e];
+      this.search = { ...obj, name: this.name };
+      this.getList();
+    },
+    getList(e) {
+      typeSearch({
+        page: 1,
+        size: 100,
+        lat: 100,
+        lon: 100,
+        ...this.search,
+        typeId: this.typeId
+      }).then(res => {
+        this.list = res.data.data;
+      });
+    },
+    init() {
+      typeB({ id: this.$route.query.id }).then(res => {
+        this.tabs = res.data;
+      });
+      this.getList();
+    }
   },
 
   mounted() {

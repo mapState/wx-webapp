@@ -2,22 +2,22 @@
   <div v-wechat-title="$route.meta.title" class="container">
     <div class="nav">
       <div class="data">
-        <div class="item">
-          <div class="num">1136</div>消费过的商家
+        <div class="item" @click="toNext('/freeList')">
+          <div class="num">{{detail.freeDetailA}}</div>消费过的商家
         </div>
         <div class="item">
-          <div class="num">1136</div>消费次数
+          <div class="num">{{detail.freeDetailB}}</div>消费次数
         </div>
         <div class="item">
-          <div class="num">1136</div>总免单(元)
+          <div class="num">{{detail.freeDetailC/100}}</div>总免单(元)
         </div>
         <div class="item">
-          <div class="num">1136</div>待免单(元)
+          <div class="num">{{detail.freeDetailD/100}}</div>待免单(元)
         </div>
       </div>
       <div class="tab">
         <div @click="chooseTab(1)" :class="{active:tab==1}">
-          <div>待免单奖励</div> 
+          <div>待免单奖励</div>
           <img src="@/assets/up.png" v-show="tab==1" />
         </div>
         <div @click="chooseTab(2)" :class="{active:tab==2}">
@@ -28,22 +28,8 @@
     </div>
     <div class="tabContent" v-show="tab==1">
       <div class="list">
-        <div class="item">
-          <img src="@/assets/cover.png" class="cover" />
-          <div class="name">肉蟹煲（湖滨银泰店）</div>
-          <div class="labels">
-            <div>1天前消费</div>
-            <div>免单排名第8名</div>
-          </div>
-          <div class="instro out">商家当前累计抽奖池：625元</div>
-          <div class="right upDown">
-            <div class="in upDown" style="width:100%">
-              <div class="money">80元</div>待奖励
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <img src="@/assets/cover.png" class="cover" />
+        <div class="item" v-for="(item,i) in list" :key="i">
+          <img :src="url+item.image" class="cover" />
           <div class="name">肉蟹煲（湖滨银泰店）</div>
           <div class="labels">
             <div>1天前消费</div>
@@ -64,7 +50,7 @@
         <div class="item">
           <img src="@/assets/cover.png" class="cover" />
           <div class="name">肉蟹煲（湖滨银泰店）</div>
-          <div class="instro out">商家当前累计抽奖池：625元</div>
+          <div class="instro out">2019-10-20 15:00 免单成功</div>
           <div class="right upDown">
             <div class="in upDown" style="width:100%">
               <div class="money">80元</div>待奖励
@@ -80,23 +66,52 @@
 
 <script>
 import tabbar from "@/components/tabBar";
+import empty from "@/components/empty";
+import { freeDetail, freeRecord } from "@/api/user";
+import { UPLOAD_DOMAIN } from "@/utils/const";
 export default {
   components: {
-    tabbar
+    tabbar,
+    empty
   },
   data() {
     return {
+      url:UPLOAD_DOMAIN,
       tab: 1,
       time: 30 * 60 * 60 * 1000,
       show: false,
-      over: true
+      over: true,
+      detail: {}
     };
   },
   methods: {
+    toNext(msg, id) {
+      this.$router.push({
+        path: msg,
+        query: {
+          id
+        }
+      });
+    },
     chooseTab(e) {
       this.tab = e;
+      this.getFreeRecord(e)
     },
-    init() {}
+    getFreeRecord(e){
+      freeRecord({
+        page: 1,
+        size: 1000,
+        type:e
+      }).then(res=>{
+        this.list=res.data.data
+      });
+    },
+    init() {
+      freeDetail().then(res => {
+        this.detail = res.data;
+      });
+      this.getFreeRecord(1)
+    }
   },
 
   mounted() {

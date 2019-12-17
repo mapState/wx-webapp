@@ -1,23 +1,27 @@
 <template>
   <div v-wechat-title="$route.meta.title" class="container">
-    <div class="msg"></div>
+    <div class="msg">
+      <img :src="url+detail.storeImageUrl" alt />
+    </div>
     <div class="content">
       <div class="contact">
-        <div class="name">万州烤鱼（嘉里中心店）</div>
+        <div class="name">{{detail.name}}</div>
         <div class="labels">
-          <span>美食</span>
-          <span>美食</span>
+          <span>{{detail.typeName}}</span>
+          <span>可奖励{{detail.money/100}}元</span>
+          <span>抽奖池{{detail.bonusDay/100}}元</span>
         </div>
         <div class="position">
           <img src="@/assets/po2.png" class="im1" />
-          <span class="out">杭州市西湖区定安路265号</span>
+          <span class="out">{{detail.regionAddress+' '+ detail.address}}</span>
           <img src="@/assets/po3.png" class="im2" />
           <span class="shu"></span>
-          <a href="tel:13512341234">
+          <a :href="'tel:'+detail.phone">
             <img src="@/assets/mobile.png" class="im3" />
           </a>
         </div>
-        <img src="@/assets/shou.png" class="shou" />
+        <img src="@/assets/shou.png" class="shou" v-if="status==0" @click="collect"/>
+        <img src="@/assets/starA.png" class="shou" v-else @click="collect"/>
       </div>
       <div class="input">
         <span>支付金额:</span>
@@ -25,12 +29,9 @@
       </div>
       <div class="ways">
         <van-radio-group v-model="ways">
-         
           <div class="item" @click="ways='1'">
             <img src="@/assets/way1.png" class="upDown" />余额支付
-            <div class="upDown mid">
-              剩余200
-            </div>
+            <div class="upDown mid">剩余{{detail.money/100}}</div>
             <div class="upDown right">
               <van-radio name="1"></van-radio>
             </div>
@@ -55,19 +56,39 @@
 </template>
 
 <script>
+import { payDetail,collectStatus, collect } from "@/api/user";
+import { UPLOAD_DOMAIN } from "@/utils/const";
 export default {
   data() {
     return {
       tab: 1,
+      status: 1,
       time: 30 * 60 * 60 * 1000,
-      ways:'1'
+      ways: "1",
+      url: UPLOAD_DOMAIN,
+      detail: {}
     };
   },
   methods: {
     chooseTab(e) {
       this.tab = e;
     },
-    init() {}
+    collect() {
+      collect({ busiUserId: this.$route.query.id }).then(res=>{
+        this.collectStatus()
+      })
+    },
+    collectStatus() {
+      collectStatus({ busiUserId: this.$route.query.id }).then(res => {
+        this.status = res.data;
+      });
+    },
+    init() {
+      payDetail({ busiUserId: this.$route.query.id }).then(res => {
+        this.detail = res.data;
+      });
+      this.collectStatus()
+    }
   },
 
   mounted() {

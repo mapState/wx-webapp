@@ -2,7 +2,13 @@
   <div v-wechat-title="$route.meta.title" class="container">
     <div class="search">
       <img src="@/assets/left.png" class="upDown" @click="$router.go(-1)" />
-      <van-search placeholder="商品名称" background="#fff" v-model="name" @search="searchName(name)" @clear="searchName(name)"/>
+      <van-search
+        placeholder="商品名称"
+        background="#fff"
+        v-model="name"
+        @search="searchName(name)"
+        @clear="searchName(name)"
+      />
     </div>
     <div class="filter">
       <div :class="{active:sort==1}" @click="chooseSort(1)">全部</div>
@@ -30,7 +36,7 @@
     <div class="line"></div>
     <div class="list">
       <div class="bai"></div>
-          
+
       <div class="item" v-for="(item,i) in goodsList" :key="i" @click="toNext('/addGoods',item.id)">
         <div class="img">
           <img :src="url+item.image" />
@@ -48,9 +54,8 @@
           </div>
         </div>
       </div>
-      
     </div>
-    <empty msg="暂无数据" v-show="goodsList.length==0"/>
+    <empty msg="暂无数据" v-show="goodsList.length==0" />
     <div class="bottom">
       <div @click="toNext('/cates')">分类管理</div>
       <div @click="toNext('/addGoods')">新增商品</div>
@@ -89,9 +94,7 @@ export default {
       name: "",
       url: UPLOAD_DOMAIN,
       cates: [],
-      search: {
-
-      },
+      search: {},
       goodsList: []
     };
   },
@@ -108,7 +111,7 @@ export default {
         this.show = false;
         let obj = {};
         obj["type" + e] = this.search["type" + e];
-        this.search={...obj,name:this.name};
+        this.search = { ...obj, name: this.name };
         this.getGoodsList(this.search);
       }
     },
@@ -124,16 +127,15 @@ export default {
       this.cate = e;
     },
     searchCate(e) {
-      this.search={ type6: this.cate,name:this.name }
+      this.search = { type6: this.cate, name: this.name };
       this.getGoodsList(this.search);
       this.show = false;
     },
     searchName(name) {
-      this.search.name=name
+      this.search.name = name;
       this.getGoodsList(this.search);
     },
     getGoodsList(e) {
-
       goodsList({ page: 1, size: 10, ...e }).then(res => {
         this.goodsList = res.data.data;
         console.log(this.goodsList);

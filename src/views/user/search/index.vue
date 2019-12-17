@@ -1,41 +1,42 @@
 <template>
   <div v-wechat-title="$route.meta.title" class="container">
     <div class="searchTop">
-      <van-search placeholder="商品名称" v-model="msg" @focus="historyShow=true" @blur="historyShow=false" @search="onSearch"/>
-      
+      <van-search
+        placeholder="商品名称"
+        v-model="msg"
+        @focus="historyShow=true"
+        @blur="historyShow=false"
+        @search="onSearch"
+      />
+
       <img src="@/assets/left.png" class="upDown" @click="$router.go(-1)" />
     </div>
 
     <div class="list">
-      <div class="item">
-        <img src="@/assets/cover.png" class="cover" />
-        <div class="name">肉蟹煲（湖滨银泰店）</div>
+      <div
+        class="item"
+        @click="toNext('/merchantsList/merchantsDetail',item.id)"
+        v-for="(item,i) in list"
+        :key="i"
+      >
+        <img :src="url+item.storeImageUrl" class="cover" />
+        <div class="name">{{item.name}}</div>
         <div class="labels">
-          <div>美食</div>
-          <div>可奖励20元</div>
-          <div>抽奖池50元</div>
+          <div>{{item.typeName}}</div>
+          <div>可奖励{{item.money/100}}元</div>
+          <div>抽奖池{{item.bonusCount/100}}元</div>
         </div>
-        <div class="instro out">今日8折，肥美大闸蟹，快来吃吧快来快来快来快来</div>
-        <div class="num">600m</div>
+        <div class="instro out">{{item.firm}}</div>
+        <div class="num">{{(item.juli/1000).toFixed(1)}}km</div>
       </div>
-      <div class="item">
-        <img src="@/assets/cover.png" class="cover" />
-        <div class="name">肉蟹煲（湖滨银泰店）</div>
-        <div class="labels">
-          <div>美食</div>
-          <div>可奖励20元</div>
-          <div>抽奖池50元</div>
-        </div>
-        <div class="instro out">今日8折，肥美大闸蟹，快来吃吧快来快来快来快来</div>
-        <div class="num">600m</div>
-      </div>
+      <empty msg="暂无数据" v-show="list.length==0" />
     </div>
     <van-popup v-model="historyShow" position="top">
       <div class="history">
         <div class="title">
           搜索记录
           <div class="right" @click="clear">
-            <img src="@/assets/del.png" class="upDown"/>
+            <img src="@/assets/del.png" class="upDown" />
             清空
           </div>
         </div>
@@ -48,38 +49,59 @@
 </template>
 
 <script>
-import { SetCookie,GetCookie } from "@/utils/utils";
+import { SetCookie, GetCookie } from "@/utils/utils";
+import { UPLOAD_DOMAIN } from "@/utils/const";
+import { indexSearch } from "@/api/user";
+import empty from "@/components/empty";
 export default {
+  components: {
+    empty
+  },
   data() {
     return {
+      url:UPLOAD_DOMAIN,
       sort: 1,
       msg: "",
       historyShow: false,
-      historyList:[]
+      list:[],
+      historyList: []
     };
   },
   methods: {
     chooseSort(e) {
       this.sort = e;
     },
-    onSearch(){
-      this.historyList.push(this.msg)
-      SetCookie('history',this.historyList.toString())
+    toNext(msg, id) {
+      this.$router.push({
+        path: msg,
+        query: {
+          id
+        }
+      });
     },
-    textIn(t){
-      this.msg=t;
-      this.onSearch()
+    onSearch() {
+      this.historyList.push(this.msg);
+      SetCookie("history", this.historyList.toString());
+      this.getList(this.msg)
     },
-    clear(){
-      this.historyList=[]
-      SetCookie('history',this.historyList.toString())
+    textIn(t) {
+      this.msg = t;
+      this.onSearch();
+    },
+    clear() {
+      this.historyList = [];
+      SetCookie("history", this.historyList.toString());
+    },
+    getList(name){
+      indexSearch({page:1,size:100,name,lat:100,lon:100}).then(res=>{
+        this.list=res.data.data
+      })
     },
     init() {
       try {
-        this.historyList=GetCookie('history').split(',')
-      } catch (error) {
-        
-      }
+        this.historyList = GetCookie("history").split(",");
+      } catch (error) {}
+      this.getList();
     }
   },
 

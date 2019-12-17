@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function login(data) {
     return request({
-        url: '/login.htm',
+        url: '/front/cus/login',
         method: 'post',
         data
     })
@@ -17,14 +17,21 @@ export function advert(params) {
 }
 export function platBonusDetail(params) {
     return request({
-        url: '/front/cus/all/platBonusDetail',
+        url: '/front/cus/platBonusDetail',
         method: 'get',
         params
     })
 }
-export function bonusPool(params) {
+export function rankYesterday(params) {
     return request({
-        url: '/front/cus/bonusPool',
+        url: '/front/cus/yesterday/platBonusDetail',
+        method: 'get',
+        params
+    })
+}
+export function totalRank(params) {
+    return request({
+        url: '/front/cus/all/platBonusDetail',
         method: 'get',
         params
     })
@@ -113,9 +120,23 @@ export function detailSet(data) {
         data
     })
 }
+export function indexSearch(data) {
+    return request({
+        url: '/front/cus/index/search',
+        method: 'post',
+        data
+    })
+}
 export function sendPhone(data) {
     return request({
         url: '/front/cus/console/phone/sendPhone',
+        method: 'post',
+        data
+    })
+}
+export function typeSearch(data) {
+    return request({
+        url: '/front/cus/type/search',
         method: 'post',
         data
     })
@@ -125,6 +146,13 @@ export function phoneSet(data) {
         url: '/front/cus/console/phone/set',
         method: 'post',
         data
+    })
+}
+export function getBusiInfo(params) {
+    return request({
+        url: '/front/cus/getBusiInfo',
+        method: 'get',
+        params
     })
 }
 export function prizeRecord(data) {
@@ -156,6 +184,27 @@ export function copywriting(params) {
         params
     })
 }
+export function typeA(params) {
+    return request({
+        url: '/front/cus/typeA',
+        method: 'get',
+        params
+    })
+}
+export function typeB(params) {
+    return request({
+        url: '/front/cus/typeB',
+        method: 'get',
+        params
+    })
+}
+export function notice(params) {
+    return request({
+        url: '/front/cus/notice',
+        method: 'get',
+        params
+    })
+}
 export function evaluateList(params) {
     return request({
         url: '/front/cus/evaluate/list',
@@ -166,6 +215,76 @@ export function evaluateList(params) {
 export function publish(params) {
     return request({
         url: '/front/cus/evaluate/publish',
+        method: 'get',
+        params
+    })
+}
+export function freeOrder(params) {
+    return request({
+        url: '/front/cus/freeOrder',
+        method: 'get',
+        params
+    })
+}
+export function lineOrder(params) {
+    return request({
+        url: '/front/cus/lineOrder',
+        method: 'get',
+        params
+    })
+}
+export function bonusRollData(params) {
+    return request({
+        url: '/front/cus/bonusRollData',
+        method: 'get',
+        params
+    })
+}
+export function bonusPool(params) {
+    return request({
+        url: '/front/cus/bonusPool',
+        method: 'get',
+        params
+    })
+}
+export function payDetail(params) {
+    return request({
+        url: '/front/cus/payDetail',
+        method: 'get',
+        params
+    })
+}
+export function collect(params) {
+    return request({
+        url: '/front/cus/collect',
+        method: 'get',
+        params
+    })
+}
+export function platBonus(params) {
+    return request({
+        url: '/front/cus/plat/bonus',
+        method: 'get',
+        params
+    })
+}
+export function collectStatus(params) {
+    return request({
+        url: '/front/cus/collect/status',
+        method: 'get',
+        params
+    })
+}
+export function freeDetail(params) {
+    return request({
+        url: '/front/cus/free/detail',
+        method: 'get',
+        params
+    })
+}
+export function freeRecord(params) {
+    return request({
+        url: '/front/cus/free/record',
         method: 'get',
         params
     })
