@@ -6,7 +6,7 @@ import router from '../router'
 
 // create an axios instance
 const service = axios.create({
-  baseURL: 'http://192.168.1.112:8080', // url = base url + request url
+  baseURL: 'http://192.168.1.112:8080/prize', // url = base url + request url
   withCredentials: true,// send cookies when cross-domain requests
   timeout: 5000 // request timeout
 })
@@ -23,16 +23,20 @@ service.interceptors.response.use(
           duration: 1000
         });
       }
+      if (res.code == 400) {
+        router.app.$router.push({
+          path: '/login'
+        });
+      }
       // Toast({
       //   message: res.message,
       //   duration: 1000
       // });
-      // router.app.$router.push({
-      //   path: '/login'
-      // });
+
       return res
       // return Promise.reject(new Error(res.msg || 'Error'))
     } else {
+
       return res
     }
   },

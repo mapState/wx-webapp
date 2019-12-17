@@ -38,16 +38,16 @@ export default {
     return {
       icon: [
         {
-          active: "http://q0y16l1rk.bkt.clouddn.com/FvN7Uvdh9sIl2u3072xnAG_SnUoW",
-          inactive: "http://q0y16l1rk.bkt.clouddn.com/Fq0o0pK2V9MYX-5TGvqGSU5lDV4h"
+          active: "http://cdn.pike8.top/FvN7Uvdh9sIl2u3072xnAG_SnUoW",
+          inactive: "http://cdn.pike8.top/Fq0o0pK2V9MYX-5TGvqGSU5lDV4h"
         },
         {
-          active: "http://q0y16l1rk.bkt.clouddn.com/Fm5UebUpM7MAEksFvuuvfPClcRBx",
-          inactive: "http://q0y16l1rk.bkt.clouddn.com/FuyQ_cGQH8gh8npdvLJLAV4OmeRG"
+          active: "http://cdn.pike8.top/Fm5UebUpM7MAEksFvuuvfPClcRBx",
+          inactive: "http://cdn.pike8.top/FuyQ_cGQH8gh8npdvLJLAV4OmeRG"
         },
         {
-          active: "http://q0y16l1rk.bkt.clouddn.com/FjRAwXXIE3U3AwbUgCwbwujhrgZw",
-          inactive: "http://q0y16l1rk.bkt.clouddn.com/FjRAwXXIE3U3AwbUgCwbwujhrgZw"
+          active: "http://cdn.pike8.top/FjRAwXXIE3U3AwbUgCwbwujhrgZw",
+          inactive: "http://cdn.pike8.top/FjRAwXXIE3U3AwbUgCwbwujhrgZw"
         }
       ],
       nav:this.active

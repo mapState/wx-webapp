@@ -12,11 +12,11 @@
       昵称
       <span>张三三</span>
     </div>
-    <div class="item">
+    <div class="item" @click="toNext('/mobile')">
       手机号码
       <span>130****0130 <img src="@/assets/jian.png" /></span>
     </div>
-    <div class="item">
+    <div class="item" @click="toNext('/addressList')">
       收货地址
       <span><img src="@/assets/jian.png" /></span>
       <div class="right">
@@ -51,6 +51,14 @@ export default {
     };
   },
   methods: {
+    toNext(msg,active) {
+      this.$router.push({
+        path: msg,
+        query:{
+          active
+        }
+      });
+    },
     init() {}
   },
 

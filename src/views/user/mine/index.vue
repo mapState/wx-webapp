@@ -4,7 +4,7 @@
       <img src="@/assets/cover.png" class="photo" />
       <div class="name">张三三</div>
       <div class="mobile">130****0130</div>
-      <img src="@/assets/set.png" class="set" />
+      <img src="@/assets/set.png" class="set" @click="toNext('/set')"/>
     </div>
     <div class="content">
       <div class="data">

@@ -7,18 +7,19 @@ export function login(data) {
         data
     })
 }
-export function passwordSet(data) {
+
+export function passwordSet(params) {
     return request({
         url: '/front/busi/console/password/set',
-        method: 'post',
-        data
+        method: 'get',
+        params
     })
 }
-export function sendPhone(data) {
+export function sendPhone(params) {
     return request({
         url: '/front/busi/console/phone/sendPhone',
-        method: 'post',
-        data
+        method: 'get',
+        params
     })
 }
 export function getGoodType() {
@@ -27,10 +28,11 @@ export function getGoodType() {
         method: 'get'
     })
 }
-export function phoneSet() {
+export function phoneSet(params) {
     return request({
         url: '/front/busi/console/phone/set',
-        method: 'get'
+        method: 'get',
+        params
     })
 }
 export function advert() {
@@ -109,18 +111,12 @@ export function orderSplit(params) {
         params
     })
 }
-export function removeGoodType(params) {
-    return request({
-        url: '/front/busi/removeGoodType',
-        method: 'get',
-        params
-    })
-}
-export function addGood(params) {
+
+export function addGood(data) {
     return request({
         url: '/front/busi/addGood',
-        method: 'get',
-        params
+        method: 'post',
+        data
     })
 }
 export function selfGoods(params) {
@@ -137,13 +133,58 @@ export function sendGoods(params) {
         params
     })
 }
-export function updateBusiInfo(params) {
+
+export function updateBusiInfo(data) {
     return request({
         url: '/front/busi/updateBusiInfo',
+        method: 'post',
+        data
+    })
+}
+export function refund(params) {
+    return request({
+        url: '/front/busi/refund',
         method: 'get',
         params
     })
 }
+export function getAllGoodType(params) {
+    return request({
+        url: '/front/busi/getAllGoodType',
+        method: 'get',
+        params
+    })
+}
+export function addGoodType(params) {
+    return request({
+        url: '/front/busi/addGoodType',
+        method: 'get',
+        params
+    })
+}
+
+export function goodDetail(params) {
+    return request({
+        url: '/front/busi/goodDetail',
+        method: 'get',
+        params
+    })
+}
+export function removeGoodType(params) {
+    return request({
+        url: '/front/busi/removeGoodType',
+        method: 'get',
+        params
+    })
+}
+export function goodsList(data) {
+    return request({
+        url: '/front/busi/good/list',
+        method: 'post',
+        data
+    })
+}
+
 export function busiQrcode() {
     return request({
         url: '/front/busi/qrcode',

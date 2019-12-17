@@ -23,8 +23,10 @@
       padding-right: 10px;
       border-bottom: 1px solid #ddd;
       padding-bottom: 14px;
+      line-height: 16px;
       img {
         width: 20px;
+        height: 20px;
         left: 10px;
       }
       span {
@@ -32,6 +34,7 @@
         color: #ff3b30;
         font-size: 12px;
         font-weight: 500;
+        line-height: 16px;
       }
     }
     .goods {

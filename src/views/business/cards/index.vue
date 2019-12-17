@@ -28,7 +28,7 @@
     <div class="photos">
       <div class="title">营业执照</div>
       <van-uploader :after-read="(file)=>onRead(file,'businessLicenseUrl')">
-        <img :src="formData.businessLicenseUrl" alt v-if="formData.businessLicenseUrl" />
+        <img :src="url+formData.businessLicenseUrl" alt v-if="formData.businessLicenseUrl" />
         <div class="upload" v-else>
           <van-icon name="plus" />
         </div>
@@ -37,7 +37,7 @@
     <div class="photos">
       <div class="title">门店形象图</div>
       <van-uploader :after-read="(file)=>onRead(file,'storeImageUrl')">
-        <img :src="formData.storeImageUrl" alt v-if="formData.storeImageUrl" />
+        <img :src="url+formData.storeImageUrl" alt v-if="formData.storeImageUrl" />
         <div class="upload" v-else>
           <van-icon name="plus" />
         </div>
@@ -54,10 +54,12 @@
 <script>
 import { busiAuth } from "@/api/bussiness";
 import { uploadImg } from "@/utils/upload";
+import { UPLOAD_DOMAIN } from "@/utils/const";
 import { ruleValidate } from "@/utils/utils";
 export default {
   data() {
     return {
+      url:UPLOAD_DOMAIN,
       formData: {
         concessionDiscount: "",
         legalName: "",

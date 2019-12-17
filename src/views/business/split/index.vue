@@ -2,7 +2,7 @@
   <div v-wechat-title="$route.meta.title" class="container">
     <div class="item">
       免单总金额:
-      <span>￥200</span>
+      <span>￥{{detail.totalMoney/100}}</span>
     </div>
     <div class="item">
       拆分笔数
@@ -12,36 +12,58 @@
     </div>
     <div class="item" style="border-bottom:10px solid #f2f2f2">
       每笔奖励
-      <span class="num">￥100</span>
+      <span class="num">￥{{detail.totalMoney/100/value}}</span>
     </div>
     <div class="item">
       免单用户
       <div class="user">
-        <img src="@/assets/cover.png" class="upDown" />
-        玩大嘴爱
+        <img :src="url+detail.userLogo" class="upDown" />
+        {{detail.userName}}
       </div>
     </div>
     <div class="item" style="font-weight:500;">
       订单编号
-      <span class="time">1234567890000000</span>
+      <span class="time">{{detail.orderId}}</span>
     </div>
     <div class="item" style="font-weight:500;border:none">
       完成时间
-      <span class="time">2019-10-08  18:30</span>
+      <span class="time">{{detail.updateDate}}</span>
     </div>
-    <div class="sub">确定拆分</div>
+    <div class="sub" @click="orderSplit">确定拆分</div>
   </div>
 </template>
 
 <script>
+import { orderDetail,orderSplit } from "@/api/bussiness";
+import { UPLOAD_DOMAIN } from "@/utils/const";
 export default {
   data() {
     return {
-      value: 1
+      value: 1,
+      url: UPLOAD_DOMAIN,
+      detail: {
+        list: []
+      },
     };
   },
   methods: {
-    init() {}
+    orderSplit(){
+      orderSplit({orderId: this.$route.query.orderId,count:this.value}).then(res=>{
+        this.$toast({
+          message: res.message
+        });
+      })
+    },
+    init() {
+      orderDetail({ orderId: this.$route.query.orderId }).then(res => {
+        this.detail = res.data;
+        let sum=0;
+        for (let j = 0; j < this.detail.list.length; j++) {
+          sum += this.detail.list[j].count;
+        }
+        this.detail.totalNum = sum;
+      });
+    }
   },
 
   mounted() {

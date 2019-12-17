@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { addressList } from "@/api/user";
 export default {
   data() {
     return {
@@ -24,7 +25,12 @@ export default {
     };
   },
   methods: {
-    init() {}
+    getAddressList(){
+      addressList()
+    },
+    init() {
+      this.getAddressList()
+    }
   },
 
   mounted() {

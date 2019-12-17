@@ -10,42 +10,90 @@
         <img src="@/assets/user.png" class="upDown" />
         <div class="shu upDown"></div>
         <div class="mid upDown">
-          <van-field v-model="username" placeholder="请输入您的手机号码" />
+          <van-field v-model="phone" placeholder="请输入您的手机号码" />
         </div>
       </div>
       <div class="item" v-if="type==1">
         <img src="@/assets/lock.png" class="upDown" />
         <div class="shu upDown"></div>
         <div class="mid upDown">
-          <van-field v-model="username" placeholder="请输入验证码" />
+          <van-field v-model="code" placeholder="请输入验证码" />
         </div>
-        <span class="upDown">获取验证码</span>
+        <span
+          class="upDown"
+          @click="getCode"
+          :class="{active:timeShow}"
+        >{{timeShow?this.time:'获取验证码'}}</span>
       </div>
       <div class="item" v-else>
         <img src="@/assets/lock.png" class="upDown" />
         <div class="shu upDown"></div>
         <div class="mid upDown">
-          <van-field v-model="username" placeholder="请输入密码" type="password"/>
+          <van-field v-model="password" placeholder="请输入密码" type="password" />
         </div>
       </div>
     </div>
-    <div class="btn">登录</div>
-    <div class="btm"><van-checkbox v-model="checked" class="upDown"></van-checkbox>我已阅读并同意<span>《用户服务协议》</span></div>
+    <div class="btn" @click="login">登录</div>
+    <div class="btm">
+      <van-checkbox v-model="checked" class="upDown"></van-checkbox>我已阅读并同意
+      <span>《用户服务协议》</span>
+    </div>
   </div>
 </template>
 
 <script>
+import { login, sendPhone } from "@/api/bussiness";
 export default {
   data() {
     return {
-      username: "",
-      checked:false,
-      type:1
+      loginType: "",
+      phone: "",
+      password: "",
+      code: "",
+      timeShow: false,
+      time: 60,
+      checked: false,
+      type: 1
     };
   },
   methods: {
-    chooseType(e){
-      this.type=e
+    chooseType(e) {
+      this.type = e;
+    },
+    login() {
+      login({
+        loginType: this.type,
+        password: this.password,
+        phone: this.phone,
+        code: this.code
+      }).then(res => {
+        this.$router.push({
+          path: "/workbench"
+        });
+      });
+    },
+    getCode() {
+      if (this.phone) {
+        if (!this.timeShow) {
+          sendPhone({ phone: this.phone }).then(res => {
+            if (res.code == 200) {
+              this.timeShow = true;
+              var timer = window.setInterval(() => {
+                this.time--;
+                if (this.time < 0) {
+                  window.clearInterval(timer);
+                  this.timeShow = false;
+                  this.time = 60;
+                }
+              }, 1000);
+            }
+          });
+        }
+      } else {
+        this.$toast({
+          message: "请输入手机号"
+        });
+      }
     },
     init() {}
   },

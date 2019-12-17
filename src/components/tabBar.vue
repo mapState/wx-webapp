@@ -46,20 +46,20 @@ export default {
     return {
       icon: [
         {
-          active: "http://q0y16l1rk.bkt.clouddn.com/Fqzd5sV7vy8pLUovJv9xIW7G5Mkk",
-          inactive: "http://q0y16l1rk.bkt.clouddn.com/FghkEfI0np6jTKzXtBL49RcSv22w"
+          active: "http://cdn.pike8.top/Fqzd5sV7vy8pLUovJv9xIW7G5Mkk",
+          inactive: "http://cdn.pike8.top/FghkEfI0np6jTKzXtBL49RcSv22w"
         },
         {
-          active: "http://q0y16l1rk.bkt.clouddn.com/FkaUskcUdSOaPY-71JVtoRJYGoNS",
-          inactive: "http://q0y16l1rk.bkt.clouddn.com/FkLnMwYADSR1dFNAt-G01XwWkAR_"
+          active: "http://cdn.pike8.top/FkaUskcUdSOaPY-71JVtoRJYGoNS",
+          inactive: "http://cdn.pike8.top/FkLnMwYADSR1dFNAt-G01XwWkAR_"
         },
         {
-          active: "http://q0y16l1rk.bkt.clouddn.com/Fo5M88hHWQBf5SXv_b77kwMldLjZ",
-          inactive: "http://q0y16l1rk.bkt.clouddn.com/Fmadj8cxXMCcFxF_n3Sg8BPTyCAH"
+          active: "http://cdn.pike8.top/Fo5M88hHWQBf5SXv_b77kwMldLjZ",
+          inactive: "http://cdn.pike8.top/Fmadj8cxXMCcFxF_n3Sg8BPTyCAH"
         },
         {
-          active: "http://q0y16l1rk.bkt.clouddn.com/FvJuZIG6EpUU66dAo-Or_wrFgbfB",
-          inactive: "http://q0y16l1rk.bkt.clouddn.com/FkPM8Pr7KsE3_dFsBYQvv1JTPnA2"
+          active: "http://cdn.pike8.top/FvJuZIG6EpUU66dAo-Or_wrFgbfB",
+          inactive: "http://cdn.pike8.top/FkPM8Pr7KsE3_dFsBYQvv1JTPnA2"
         }
       ],
       nav:this.active

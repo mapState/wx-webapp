@@ -57,11 +57,11 @@ export function console(params) {
         params
     })
 }
-export function addressList(data) {
+export function addressList(params) {
     return request({
         url: '/front/cus/console/address/list',
-        method: 'post',
-        data
+        method: 'get',
+        params
     })
 }
 export function addressUpdate(data) {
@@ -141,13 +141,7 @@ export function cusConsume(params) {
         params
     })
 }
-export function cusConsume(params) {
-    return request({
-        url: '/front/cus/consume',
-        method: 'get',
-        params
-    })
-}
+
 export function consumeSearch(params) {
     return request({
         url: '/front/cus/consume/search',
@@ -165,13 +159,6 @@ export function copywriting(params) {
 export function evaluateList(params) {
     return request({
         url: '/front/cus/evaluate/list',
-        method: 'get',
-        params
-    })
-}
-export function publish(params) {
-    return request({
-        url: '/front/cus/evaluate/publish',
         method: 'get',
         params
     })

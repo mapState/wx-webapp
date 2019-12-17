@@ -3,6 +3,13 @@
   width: 100%;
   height: 100%;
   background-color: #f2f2f2;
+  .upload {
+    width: 55px;
+    line-height: 55px;
+    background: rgba(242, 242, 242, 1);
+    border-radius: 5px;
+    text-align: center;
+  }
   .nav {
     line-height: 50px;
     padding-left: 40px;

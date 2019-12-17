@@ -71,7 +71,7 @@
     <div class="photos">
       <div class="title">营业执照</div>
       <van-uploader :after-read="(file)=>onRead(file,'businessLicenseUrl')">
-        <img :src="uploadImg+formData.businessLicenseUrl" alt v-if="formData.businessLicenseUrl" />
+        <img :src="url+formData.businessLicenseUrl" alt v-if="formData.businessLicenseUrl" />
         <div class="upload" v-else>
           <van-icon name="plus" />
         </div>
@@ -80,7 +80,7 @@
     <div class="photos">
       <div class="title">门店形象图</div>
       <van-uploader :after-read="(file)=>onRead(file,'storeImageUrl')">
-        <img :src="uploadImg+formData.storeImageUrl" alt v-if="formData.storeImageUrl" />
+        <img :src="url+formData.storeImageUrl" alt v-if="formData.storeImageUrl" />
         <div class="upload" v-else>
           <van-icon name="plus" />
         </div>
@@ -138,6 +138,7 @@ export default {
     return {
       imgUrl: "",
       imgPath: "",
+      url:UPLOAD_DOMAIN,
       addressMsg: "",
       addressDetail: "",
       areaList: area,

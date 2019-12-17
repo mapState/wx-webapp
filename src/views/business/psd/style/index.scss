@@ -17,6 +17,10 @@
       color: rgba(16, 16, 16, 1);
       right: 15px;
     }
+    .active {
+      background: rgba(242, 242, 242, 1);
+      border: 1px solid rgba(221, 221, 221, 1);
+    }
   }
   .sub {
     width: 290px;

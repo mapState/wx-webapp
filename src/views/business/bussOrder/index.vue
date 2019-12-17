@@ -1,7 +1,13 @@
 <template>
   <div v-wechat-title="$route.meta.title" class="container">
     <div class="filter">
-      <van-tabs v-model="active" title-active-color="#B8741A" title-inactive-color="#000" :swipe-threshold="5">
+      <van-tabs
+        v-model="active"
+        title-active-color="#B8741A"
+        title-inactive-color="#000"
+        :swipe-threshold="5"
+        @click="getOrderList"
+      >
         <van-tab title="全部"></van-tab>
         <van-tab title="待自取"></van-tab>
         <van-tab title="待发货"></van-tab>
@@ -10,56 +16,36 @@
       </van-tabs>
     </div>
     <div class="list">
-      <div class="item">
+      <div class="item" v-for="(item,i) in orderList" :key="i" @click="toNext('/bussOrderDetail',item.orderId)">
         <div class="name">
-          <img src="@/assets/market2.png" class="upDown" />华莱士
-          <span>待自取</span>
+          <img :src="url+item.userLogo" class="upDown" style="border-radius:50%" />
+          {{item.userName}}
+          <span>{{item.orderStatus==1?'待支付':item.orderStatus==2?'待发货':item.orderStatus==3?'待自取':item.orderStatus==4?'待收货':item.orderStatus==5?'已完成':'已退款'}}</span>
         </div>
         <div class="goodsWrap">
-          <div class="goods">
-            <img src="@/assets/cover.png" class="upDown" />
-            <div class="title">香辣鸡腿堡</div>
-            <div class="size">规格:5分甜 总价:￥24</div>
-            <div class="right">X1</div>
-          </div>
-          <div class="goods">
-            <img src="@/assets/cover.png" class="upDown" />
-            <div class="title">香辣鸡腿堡</div>
-            <div class="size">规格:5分甜 总价:￥24</div>
-            <div class="right">X1</div>
+          <div class="goods" v-for="(goods,g) in item.orderDetail" :key="g">
+            <img :src="url+goods.image" class="upDown" />
+            <div class="title">{{goods.goodName}}</div>
+            <div class="size">规格:{{goods.goodDetailName}} 总价:￥{{goods.money/100*goods.count}}</div>
+            <div class="right">X{{goods.count}}</div>
           </div>
         </div>
-        <div class="total">下单时间：2019-10-21 19:30:56 <span>共3件商品，合计126元</span></div>
+        <div class="total">
+          下单时间：{{item.createDate}}
+          <span>共{{item.totalNum}}件商品，合计{{(item.totalMoney/100).toFixed(2)}}元</span>
+        </div>
         <div class="btns">
-          <div>查看单号</div>
-          <div>确认收货</div>
+          <div @click.stop="toNext('/bussOrderDetail',item.orderId)" v-show="item.orderStatus==2||item.orderStatus==3||item.orderStatus==3">退款</div>
+          <div @click.stop="toNext('/send',item.orderId)" v-show="item.orderStatus==2">快递发货</div>
+          
+          <div @click.stop="toNext('/bussOrderDetail',item.orderId)" v-show="item.orderStatus==3">自取发货</div>
+          <div @click.stop="toNext('/split',item.orderId)" v-show="item.orderStatus==5">免单拆分</div>
+          <div @click.stop="true">
+            <a :href="'tel:'+item.userPhone" style="color:#B8741A">联系买家</a> 
+          </div>
         </div>
       </div>
-      <div class="item">
-        <div class="name">
-          <img src="@/assets/market2.png" class="upDown" />华莱士
-          <span>待自取</span>
-        </div>
-        <div class="goodsWrap">
-          <div class="goods">
-            <img src="@/assets/cover.png" class="upDown" />
-            <div class="title">香辣鸡腿堡</div>
-            <div class="size">规格:5分甜 总价:￥24</div>
-            <div class="right">X1</div>
-          </div>
-          <div class="goods">
-            <img src="@/assets/cover.png" class="upDown" />
-            <div class="title">香辣鸡腿堡</div>
-            <div class="size">规格:5分甜 总价:￥24</div>
-            <div class="right">X1</div>
-          </div>
-        </div>
-        <div class="total">下单时间：2019-10-21 19:30:56 <span>共3件商品，合计126元</span></div>
-        <div class="btns">
-          <div>查看单号</div>
-          <div>确认收货</div>
-        </div>
-      </div>
+      <empty msg="暂无数据" v-show="orderList.length==0"/>
     </div>
     <van-popup v-model="show">
       <div class="kuaidi">
@@ -75,27 +61,51 @@
 
 <script>
 import { coby } from "@/utils/utils";
+import { orderList } from "@/api/bussiness";
 import tabbar from "@/components/bussTabBar";
+import empty from "@/components/empty";
+import { UPLOAD_DOMAIN } from "@/utils/const";
 export default {
   components: {
-    tabbar
+    tabbar,
+    empty
   },
   data() {
     return {
       show: false,
+      url: UPLOAD_DOMAIN,
+      orderList: [],
       active: 0 || this.$route.query.active
     };
   },
   methods: {
-    toNext(msg,active) {
+    toNext(msg, orderId) {
+      console.log(orderId)
       this.$router.push({
-        path: msg
+        path: msg,
+        query:{
+          orderId
+        }
       });
     },
     coby() {
       coby("11", this);
     },
-    init() {}
+    getOrderList(e) {
+      orderList({ page: 1, size: 100, type: e + 1 || 1 }).then(res => {
+        this.orderList = res.data.data;
+        for (let i = 0; i < this.orderList.length; i++) {
+          let sum = 0;
+          for (let j = 0; j < this.orderList[i].orderDetail.length; j++) {
+            sum += this.orderList[i].orderDetail[j].count;
+          }
+          this.orderList[i].totalNum = sum;
+        }
+      });
+    },
+    init() {
+      this.getOrderList();
+    }
   },
 
   mounted() {
@@ -117,7 +127,7 @@ export default {
 >>> .van-tab--active {
   font-weight: 600;
 }
->>> .van-tabs__line{
-  background-color: #B8741A;
+>>> .van-tabs__line {
+  background-color: #b8741a;
 }
 </style>

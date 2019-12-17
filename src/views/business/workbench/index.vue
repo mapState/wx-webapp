@@ -106,6 +106,7 @@
             </div>
           </div>
         </div>
+        <empty msg="暂无数据" v-show="sortList.length==0"/>
         <div class="last" v-show="sortList.length<totalSort" @click="changePage(1)">点击加载更多</div>
       </div>
       <div class="line"></div>
@@ -123,6 +124,7 @@
             </div>
           </div>
         </div>
+        <empty msg="暂无数据" v-show="freeList.length==0"/>
         <div class="last" v-show="freeList.length<totalFree" @click="changePage(2)">点击加载更多</div>
       </div>
       <div class="line"></div>
@@ -155,11 +157,13 @@
 
 <script>
 import tabbar from "@/components/bussTabBar";
+import empty from "@/components/empty";
 import { UPLOAD_DOMAIN } from "@/utils/const";
 import { busiConsole, busiQrcode,busiLineOrder,busiFreeOrder,busiBonusPool } from "@/api/bussiness";
 export default {
   components: {
-    tabbar
+    tabbar,
+    empty
   },
   data() {
     return {

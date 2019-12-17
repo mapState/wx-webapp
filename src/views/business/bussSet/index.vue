@@ -2,8 +2,8 @@
   <div v-wechat-title="$route.meta.title" class="container">
     <div class="photos">
       <div class="title">门店形象图</div>
-      <van-uploader>
-        <img :src="url+detail.image"  v-if="detail.image"/>
+      <van-uploader :after-read="onRead">
+        <img :src="url+detail.storeImageUrl" v-if="detail.storeImageUrl" />
         <div class="upload" v-else>
           <van-icon name="plus" />
         </div>
@@ -13,7 +13,7 @@
       <div class="title">公告内容：</div>
       <van-cell-group>
         <van-field
-          v-model="message"
+          v-model="detail.firm"
           rows="1"
           autosize
           type="textarea"
@@ -25,11 +25,11 @@
       <div class="title">折扣让利：</div>
       <div class="right upDown">{{detail.concessionDiscount}}</div>
       <van-cell-group>
-        <van-field v-model="detail.concessionDiscount" placeholder="当前让利比例不能少于80%" />
+        <van-field v-model="detail.concessionDiscount" placeholder="当前让利比例不能少于80%" type="number" />
       </van-cell-group>
     </div>
     <div class="reset">
-      <div style="border-bottom:1px solid #ddd" @click="toNext('/mobile')">
+      <div style="border-bottom:1px solid #ddd" @click="toNext('/mobile',1)">
         修改手机号
         <div class="mobile upDown">{{detail.phone}}</div>
         <img src="@/assets/jian.png" class="upDown" />
@@ -52,44 +52,62 @@
       </div>
     </div>
     <div class="btn">
-      <div class="sub">确定保存</div>
+      <div class="sub" @click="updateBusiInfo">确定保存</div>
     </div>
   </div>
 </template>
 
 <script>
-import { getBusiInfo } from "@/api/bussiness";
+import { getBusiInfo, updateBusiInfo } from "@/api/bussiness";
 import { UPLOAD_DOMAIN } from "@/utils/const";
+import { uploadImg } from "@/utils/upload";
 export default {
   data() {
     return {
       message: "",
       checked: false,
-      url:UPLOAD_DOMAIN,
-      detail:{
-        image:'',
-        concessionDiscount:'',
-        phone:'',
-        supportExpress:1,
-        supportStore:1,
+      url: UPLOAD_DOMAIN,
+      detail: {
+        storeImageUrl: "",
+        concessionDiscount: "",
+        phone: "",
+        firm: "",
+        supportExpress: 1,
+        supportStore: 1
       }
     };
   },
   methods: {
-    toNext(msg,active) {
+    toNext(msg, active) {
       this.$router.push({
         path: msg
       });
     },
-    getBusiInfo(){
-
+    async onRead(file) {
+      let url = await uploadImg(file);
+      this.detail.storeImageUrl = url;
     },
+    updateBusiInfo() {
+      let obj = this.detail;
+      obj.supportExpress = Number(obj.supportExpress);
+      obj.supportStore = Number(obj.supportStore);
+      updateBusiInfo(obj).then(res => {
+        this.$toast({
+          message: res.message
+        });
+        this.getBusiInfo();
+      });
+    },
+    getBusiInfo() {
+      getBusiInfo().then(res => {
+        this.detail = res.data;
+        this.detail.supportExpress = Boolean(this.detail.supportExpress);
+        this.detail.supportStore = Boolean(this.detail.supportStore);
+      });
+    },
+
     init() {
-      getBusiInfo().then(res=>{
-        this.detail=res.data
-        this.detail.supportExpress=Boolean(this.detail.supportExpress)
-        this.detail.supportStore=Boolean(this.detail.supportStore)
-      })
+      this.getBusiInfo();
     }
   },
 
