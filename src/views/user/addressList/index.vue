@@ -1,32 +1,44 @@
 <template>
   <div v-wechat-title="$route.meta.title" class="container">
-    <div class="item">
-      <div class="name">廖强 <span>13034020130</span></div>
-      <div class="detail"><span>默认</span> 浙江省 杭州市 西湖区 大都风情文苑大都风情文苑</div>
-      <div class="right upDown">编辑</div>
+    <div class="item" v-for="(item,i) in list" :key="i" @click="detailSet(item.id)">
+      <div class="name">{{item.name}} <span>{{item.phone}}</span></div>
+      <div class="detail"><span v-show="item.moren">默认</span> {{item.regionAddress+' '+item.address}}</div>
+      <div class="right upDown" @click.stop="toNext('/addressChange',item.id)">编辑</div>
     </div>
-    <div class="item">
-      <div class="name">廖强 <span>13034020130</span></div>
-      <div class="detail"><span>默认</span> 浙江省 杭州市 西湖区 大都风情文苑大都风情文苑</div>
-      <div class="right upDown">编辑</div>
-    </div>
-    <div class="sub">确定</div>
+
+    <div class="sub" @click="toNext('/addressChange')">新增地址</div>
   </div>
 </template>
 
 <script>
 import { addressList } from "@/api/user";
+import { consoleDetail, detailSet } from "@/api/user";
 export default {
   data() {
     return {
       old: "",
-      code: "",
+      list: [],
       new: ""
     };
   },
   methods: {
+    toNext(msg, id) {
+      this.$router.push({
+        path: msg,
+        query: {
+          id
+        }
+      });
+    },
     getAddressList(){
-      addressList()
+      addressList().then(res=>{
+        this.list=res.data
+      })
+    },
+    detailSet(addressId) {
+      detailSet({ addressId }).then(res => {
+        this.$router.go(-1)
+      });
     },
     init() {
       this.getAddressList()

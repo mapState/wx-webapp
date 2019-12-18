@@ -39,6 +39,7 @@ export default {
     };
   },
   methods: {
+    
     cusConsume(){
       cusConsume({page:1,size:1000,name:this.name}).then(res=>{
         this.list=res.data.data

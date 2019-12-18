@@ -1,7 +1,7 @@
 <template>
   <div v-wechat-title="$route.meta.title" class="container">
     <div class="data" @click="show=true">
-      2019年10月
+      {{msg}}
       <img src="@/assets/xia.png" />
       <div class="out">收入:{{total}}</div>
     </div>
@@ -14,6 +14,7 @@
           +{{item.money/100-item.discountMoney/100}}元
           <div class="tip">原价{{item.money/100}}元，折扣{{item.discountMoney/100}}</div>
         </div>
+        <empty msg="暂无数据" v-show="list.length==0" />
       </div>
       <van-popup v-model="show" position="bottom">
         <van-datetime-picker
@@ -32,7 +33,11 @@
 <script>
 import { busiIncomeDetails } from "@/api/bussiness";
 import { UPLOAD_DOMAIN } from "@/utils/const";
+import empty from "@/components/empty";
 export default {
+  components: {
+    empty
+  },
   data() {
     return {
       show: false,
@@ -40,7 +45,8 @@ export default {
       minDate: new Date(2000, 10, 1),
       url:UPLOAD_DOMAIN,
       list:[],
-      total:0
+      total:0,
+      msg:''
     };
   },
   methods: {
@@ -57,9 +63,11 @@ export default {
         this.list=res.data.data
         this.total=res.data.total/100
         this.show=false
+        this.msg=this.currentDate.getFullYear()+'年'+(this.currentDate.getMonth()+1)+'月'
       })
     },
     init() {
+      this.msg=this.currentDate.getFullYear()+'年'+(this.currentDate.getMonth()+1)+'月'
       this.busiIncomeDetails()
     }
   },

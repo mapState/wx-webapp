@@ -33,7 +33,7 @@
     position: relative;
     z-index: 3000;
     img {
-      width: 8px;
+      height: 14px;
     }
     .active {
       color: #b8741a;
@@ -55,8 +55,9 @@
       margin-bottom: 10px;
       padding: 10px;
       position: relative;
-      img {
+      &>img {
         width: 100%;
+        height: 146px;
       }
       .name {
         margin-top: 8px;
@@ -158,14 +159,18 @@
       width: 78px;
       line-height: 34px;
       background: rgba(255, 255, 255, 1);
-      border: 1px solid rgba(255, 59, 48, 1);
+      
       border-radius: 4px;
       text-align: center;
       font-size: 14px;
-      color: rgba(255, 59, 48, 1);
+      border:1px solid rgba(153,153,153,1);
       margin-right: 10px;
       margin-bottom: 10px;
       float: left;
+    }
+    .active{
+      color: rgba(255, 59, 48, 1);
+      border: 1px solid rgba(255, 59, 48, 1);
     }
     
   }

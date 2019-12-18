@@ -1,52 +1,61 @@
 <template>
   <div v-wechat-title="$route.meta.title" class="container">
     <div class="search">
-      <van-search placeholder="商家名称" background="#fff" />
+      <van-search placeholder="商家名称" background="#fff" @search="collectSearch" v-model="name"/>
     </div>
 
     <div class="list">
-      <div class="item">
-        <img src="@/assets/cover.png" class="cover" />
-        <div class="name">肉蟹煲（湖滨银泰店）</div>
+      <div class="item" v-for="(item,i) in list" :key="i">
+        <img :src="url+item.storeImageUrl" class="cover" />
+        <div class="name">{{item.name}}</div>
         <div class="labels">
-          <div>美食</div>
-          <div>可奖励20元</div>
-          <div>抽奖池50元</div>
+          <div>{{item.typeName}}</div>
+          <div>可奖励{{item.money/100}}元</div>
+          <div>抽奖池{{item.bonusCount/100}}元</div>
         </div>
-        <div class="instro out">今日8折，肥美大闸蟹，快来吃吧快来快来快来快来</div>
-        <div class="num">
-          <img src="@/assets/shou.png" />
-        </div>
-      </div>
-      <div class="item">
-        <img src="@/assets/cover.png" class="cover" />
-        <div class="name">肉蟹煲（湖滨银泰店）</div>
-        <div class="labels">
-          <div>美食</div>
-          <div>可奖励20元</div>
-          <div>抽奖池50元</div>
-        </div>
-        <div class="instro out">今日8折，肥美大闸蟹，快来吃吧快来快来快来快来</div>
-        <div class="num">
+        <div class="instro out">{{item.firm}}</div>
+        <div class="num" @click.stop="collect(item.id)">
           <img src="@/assets/starA.png" />
         </div>
       </div>
+      <empty msg="暂无数据" v-show="list.length==0" />
     </div>
   </div>
 </template>
 
 <script>
+import { collectStatus, collect,collectSearch } from "@/api/user";
+import { UPLOAD_DOMAIN } from "@/utils/const";
+import empty from "@/components/empty";
 export default {
+  components: {
+    empty
+  },
   data() {
     return {
-      sort: 1
+      url: UPLOAD_DOMAIN,
+      sort: 1,
+      name: '',
+      list:[]
     };
   },
   methods: {
     chooseSort(e) {
       this.sort = e;
     },
-    init() {}
+    collect(busiUserId) {
+      collect({ busiUserId}).then(res=>{
+        this.collectSearch()
+      })
+    },
+    collectSearch(){
+      collectSearch({page:1,size:10000,name:this.name}).then(res=>{
+        this.list=res.data.data
+      })
+    },
+    init() {
+      this.collectSearch()
+    }
   },
 
   mounted() {

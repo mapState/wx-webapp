@@ -125,7 +125,7 @@
         <img src="@/assets/starA.png" class="leftRight" v-else />
         <p>{{status==0?'收藏店铺':'取消收藏'}}</p>
       </div>
-      <div>购买商品</div>
+      <div @click="toNext('/buy',$route.query.id)">购买商品</div>
       <div @click="toNext('/pay',$route.query.id)">支付买单</div>
     </div>
     <van-popup v-model="show">

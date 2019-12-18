@@ -78,18 +78,18 @@ export function addressUpdate(data) {
         data
     })
 }
-export function balance(data) {
+export function balance(params) {
     return request({
         url: '/front/cus/console/balance',
-        method: 'post',
-        data
-    })
-}
-export function balanceCash(params) {
-    return request({
-        url: '/front/cus/console/balanceCash',
         method: 'get',
         params
+    })
+}
+export function balanceCash(data) {
+    return request({
+        url: '/front/cus/console/balanceCash',
+        method: 'post',
+        data
     })
 }
 export function balanceDetails(params) {
@@ -106,20 +106,14 @@ export function consoleDetail(params) {
         params
     })
 }
-export function collectSearch(data) {
+export function collectSearch(params) {
     return request({
         url: '/front/cus/console/collect/search',
-        method: 'post',
-        data
+        method: 'get',
+        params
     })
 }
-export function detailSet(data) {
-    return request({
-        url: '/front/cus/console/detail/set',
-        method: 'post',
-        data
-    })
-}
+
 export function indexSearch(data) {
     return request({
         url: '/front/cus/index/search',
@@ -127,11 +121,11 @@ export function indexSearch(data) {
         data
     })
 }
-export function sendPhone(data) {
+export function sendPhoneU(params) {
     return request({
         url: '/front/cus/console/phone/sendPhone',
-        method: 'post',
-        data
+        method: 'get',
+        params
     })
 }
 export function typeSearch(data) {
@@ -141,11 +135,11 @@ export function typeSearch(data) {
         data
     })
 }
-export function phoneSet(data) {
+export function phoneSetC(params) {
     return request({
         url: '/front/cus/console/phone/set',
-        method: 'post',
-        data
+        method: 'get',
+        params
     })
 }
 export function getBusiInfo(params) {
@@ -155,9 +149,30 @@ export function getBusiInfo(params) {
         params
     })
 }
-export function prizeRecord(data) {
+export function getGoodType(params) {
+    return request({
+        url: '/front/cus/getGoodType',
+        method: 'get',
+        params
+    })
+}
+export function myorder(data) {
+    return request({
+        url: '/front/cus/order/myorder',
+        method: 'post',
+        data
+    })
+}
+export function prizeRecord(params) {
     return request({
         url: '/front/cus/console/prize/record',
+        method: 'get',
+        params
+    })
+}
+export function detailSet(data) {
+    return request({
+        url: '/front/cus/console/detail/set',
         method: 'post',
         data
     })
@@ -170,11 +185,11 @@ export function cusConsume(params) {
     })
 }
 
-export function consumeSearch(params) {
+export function consumeSearch(data) {
     return request({
         url: '/front/cus/consume/search',
-        method: 'get',
-        params
+        method: 'post',
+        data
     })
 }
 export function copywriting(params) {
@@ -285,6 +300,63 @@ export function freeDetail(params) {
 export function freeRecord(params) {
     return request({
         url: '/front/cus/free/record',
+        method: 'get',
+        params
+    })
+}
+export function phoneAuth(params) {
+    return request({
+        url: '/front/cus/console/phone/auth',
+        method: 'get',
+        params
+    })
+}
+export function recordWait(params) {
+    return request({
+        url: '/front/cus/free/record/wait',
+        method: 'get',
+        params
+    })
+}
+export function recordAlready(params) {
+    return request({
+        url: '/front/cus/free/record/already',
+        method: 'get',
+        params
+    })
+}
+export function addressFindById(params) {
+    return request({
+        url: '/front/cus/console/address/findById',
+        method: 'get',
+        params
+    })
+}
+export function qrcode(data) {
+    return request({
+        url: '/front/cus/order/qrcode',
+        method: 'post',
+        data,
+        responseType: "arraybuffer"
+    })
+}
+export function goodConfirm(params) {
+    return request({
+        url: '/front/cus/good/confirm',
+        method: 'get',
+        params
+    })
+}
+export function goodsList(data) {
+    return request({
+        url: '/front/cus/good/list',
+        method: 'post',
+        data
+    })
+}
+export function getAllGoodType(params) {
+    return request({
+        url: '/front/busi/getAllGoodType',
         method: 'get',
         params
     })

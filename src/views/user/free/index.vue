@@ -28,17 +28,17 @@
     </div>
     <div class="tabContent" v-show="tab==1">
       <div class="list">
-        <div class="item" v-for="(item,i) in list" :key="i">
-          <img :src="url+item.image" class="cover" />
-          <div class="name">肉蟹煲（湖滨银泰店）</div>
+        <div class="item" v-for="(item,i) in recordWait" :key="i">
+          <img :src="url+item.storeImageUrl" class="cover" />
+          <div class="name">{{item.name}}</div>
           <div class="labels">
-            <div>1天前消费</div>
-            <div>免单排名第8名</div>
+            <div>{{item.days}}天前消费</div>
+            <div>免单排名第{{item.id-1}}名</div>
           </div>
-          <div class="instro out">商家当前累计抽奖池：625元</div>
+          <div class="instro out">商家当前累计抽奖池：{{item.bonusCount/100}}元</div>
           <div class="right upDown">
             <div class="in upDown" style="width:100%">
-              <div class="money">80元</div>待奖励
+              <div class="money">{{item.money/100}}元</div>待奖励
             </div>
           </div>
         </div>
@@ -47,13 +47,13 @@
     </div>
     <div class="tabContent2" v-show="tab==2">
       <div class="list">
-        <div class="item">
-          <img src="@/assets/cover.png" class="cover" />
-          <div class="name">肉蟹煲（湖滨银泰店）</div>
-          <div class="instro out">2019-10-20 15:00 免单成功</div>
+        <div class="item" v-for="(item,i) in recordAlready" :key="i">
+          <img :src="url+item.storeImageUrl" class="cover" />
+          <div class="name">{{item.name}}</div>
+          <div class="instro out">{{item.createDate}} 免单成功</div>
           <div class="right upDown">
             <div class="in upDown" style="width:100%">
-              <div class="money">80元</div>待奖励
+              <div class="money">{{item.money/100}}元</div>待奖励
             </div>
           </div>
         </div>
@@ -67,7 +67,7 @@
 <script>
 import tabbar from "@/components/tabBar";
 import empty from "@/components/empty";
-import { freeDetail, freeRecord } from "@/api/user";
+import { freeDetail,recordWait,recordAlready } from "@/api/user";
 import { UPLOAD_DOMAIN } from "@/utils/const";
 export default {
   components: {
@@ -81,7 +81,9 @@ export default {
       time: 30 * 60 * 60 * 1000,
       show: false,
       over: true,
-      detail: {}
+      detail: {},
+      recordWait:[],
+      recordAlready:[],
     };
   },
   methods: {
@@ -95,22 +97,31 @@ export default {
     },
     chooseTab(e) {
       this.tab = e;
-      this.getFreeRecord(e)
     },
-    getFreeRecord(e){
-      freeRecord({
+    getRecordWait(e){
+      recordWait({
         page: 1,
         size: 1000,
         type:e
       }).then(res=>{
-        this.list=res.data.data
+        this.recordWait=res.data.data
+      });
+    },
+    getRecordAlready(e){
+      recordAlready({
+        page: 1,
+        size: 1000,
+        type:e
+      }).then(res=>{
+        this.recordAlready=res.data.data
       });
     },
     init() {
       freeDetail().then(res => {
         this.detail = res.data;
       });
-      this.getFreeRecord(1)
+      this.getRecordWait(1)
+      this.getRecordAlready(1)
     }
   },
 

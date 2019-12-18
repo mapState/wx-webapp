@@ -12,7 +12,7 @@
           <div class="num">{{detail.detailA}}</div>收藏的商家
           <span></span>
         </div>
-        <div class="item">
+        <div class="item" @click="toNext('/chouJiang')">
           <div class="num">{{(detail.detailB/100).toFixed(2)}}</div>抽奖奖励
           <span></span>
         </div>
@@ -20,7 +20,7 @@
           <div class="num">{{(detail.detailC/100).toFixed(2)}}</div>免单奖励
           <span></span>
         </div>
-        <div class="item">
+        <div class="item" @click="toNext('/wallet')">
           <div class="num">{{(detail.detailD/100).toFixed(2)}}</div>余额
         </div>
       </div>
@@ -160,12 +160,7 @@
         <div class="tip">二维码加群XXXXXXXXX</div>
       </div>
     </van-popup>
-    <van-popup v-model="show">
-      <div class="join">
-        <img src="@/assets/cover.png" />
-        <div class="tip">将此二维码展示给商家</div>
-      </div>
-    </van-popup>
+    
     <tabbar :active="3"></tabbar>
   </div>
 </template>

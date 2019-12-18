@@ -55,14 +55,15 @@
       }
       .size {
         font-size: 11px;
-        margin: 5px 0;
+        margin: 5px 0;line-height: 14px;
       }
       .money {
         font-size: 12px;
+        
       }
       .right {
         position: absolute;
-        bottom: 15px;
+        bottom: 18px;
         right: 15px;
         font-size: 14px;
         font-weight: 500;
@@ -123,6 +124,26 @@
       font-size: 15px;
       font-weight: 500;
       color: rgba(253, 173, 48, 1);
+    }
+  }
+  .join {
+    width: 305px;
+    height: 339px;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 5px;
+    img {
+      display: block;
+      width: 256px;
+      height: 256px;
+      margin: 0 auto;
+      padding-top: 17px;
+    }
+    .tip {
+      font-size: 16px;
+      font-weight: bold;
+      color: rgba(255, 59, 48, 1);
+      margin-top: 25px;
+      text-align: center;
     }
   }
 }

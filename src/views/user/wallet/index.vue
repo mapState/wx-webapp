@@ -1,7 +1,7 @@
 <template>
   <div v-wechat-title="$route.meta.title" class="container">
     <img src="@/assets/way1.png" class="top"/>
-    <div class="num">2130.00</div>
+    <div class="num">{{(data/100).toFixed(2)}}</div>
     <div class="tip">余额（元）</div>
     <div class="recharge">充值</div>
     <div class="xian">提现</div>
@@ -9,15 +9,18 @@
 </template>
 
 <script>
+import { balance } from "@/api/user";
 export default {
   data() {
     return {
-
+      data:''
     };
   },
   methods: {
     init() {
-
+      balance().then(res=>{
+        this.data=res.data
+      })
     }
   },
 

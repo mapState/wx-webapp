@@ -189,8 +189,8 @@ export default {
     },
     chooseArea(e) {
       this.formData.province = e[0].code;
-      this.formData.city = e[0].code;
-      this.formData.area = e[0].code;
+      this.formData.city = e[1].code;
+      this.formData.area = e[2].code;
       this.addressMsg = e[0].name + " " + e[1].name + " " + e[2].name;
       this.areaShow = false;
     },

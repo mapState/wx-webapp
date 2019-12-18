@@ -36,6 +36,7 @@ const goodsManage = () => import("@/views/business/goodsManage")
 // 用户
 const home = () => import("@/views/user/home")
 const search = () => import("@/views/user/search")
+const setMobile = () => import("@/views/user/setMobile")
 const feedback = () => import("@/views/user/feedback")
 const speak = () => import("@/views/user/speak")
 const success = () => import("@/views/user/success")
@@ -107,6 +108,7 @@ export default new Router({
 		{ path: '/chouJiang', component: chouJiang, meta: { title: '抽奖奖励' } },
 		{ path: '/wallet', component: wallet, meta: { title: '余额' } },
 		{ path: '/mobile', component: mobile, meta: { title: '更换手机' } },
+		{ path: '/setMobile', component: setMobile, meta: { title: '绑定手机' } },
 		{ path: '/set', component: set, meta: { title: '设置' } },
 		{ path: '/merchantsList', component: merchantsList, meta: { title: '商家列表' } },
 		{ path: '/pay', component: pay, meta: { title: '商家支付' } },

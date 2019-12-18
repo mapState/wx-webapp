@@ -8,14 +8,15 @@
     </div>
     <div class="item">
       <van-field v-model="code" label="验证码：" placeholder="请输入验证码" type="number" />
-      <span class="upDown" @click="getCode">{{timeShow?this.time:'获取'}}</span>
+      <span class="upDown" @click="$route.query.addressId?getCodeU():getCode()">{{timeShow?this.time:'获取'}}</span>
     </div>
-    <div class="sub" @click="phoneSet">确定</div>
+    <div class="sub" @click="$route.query.addressId?phoneSetC():phoneSet()">确定</div>
   </div>
 </template>
 
 <script>
 import { phoneSet, sendPhone } from "@/api/bussiness";
+import { phoneSetC,sendPhoneU } from "@/api/user";
 export default {
   data() {
     return {
@@ -38,10 +39,44 @@ export default {
         });
       });
     },
+    phoneSetC() {
+      phoneSetC({
+        oldPhone: this.oldPhone,
+        newPhone: this.newPhone,
+        code: this.code
+      }).then(res => {
+        this.$toast({
+          message: res.message
+        });
+      });
+    },
     getCode() {
       if (this.newPhone) {
         if (!this.timeShow) {
           sendPhone({ phone: this.newPhone }).then(res => {
+            if (res.code == 200) {
+              this.timeShow = true;
+              var timer = window.setInterval(() => {
+                this.time--;
+                if (this.time < 0) {
+                  window.clearInterval(timer);
+                  this.timeShow = false;
+                  this.time = 60;
+                }
+              }, 1000);
+            }
+          });
+        }
+      } else {
+        this.$toast({
+          message: '请输入手机号'
+        });
+      }
+    },
+    getCodeU() {
+      if (this.newPhone) {
+        if (!this.timeShow) {
+          sendPhoneU({ phone: this.newPhone }).then(res => {
             if (res.code == 200) {
               this.timeShow = true;
               var timer = window.setInterval(() => {
