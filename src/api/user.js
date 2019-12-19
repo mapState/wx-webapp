@@ -361,3 +361,10 @@ export function getAllGoodType(params) {
         params
     })
 }
+export function cartInfo(params) {
+    return request({
+        url: '/front/cus/cart/info',
+        method: 'get',
+        params
+    })
+}

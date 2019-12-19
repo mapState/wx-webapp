@@ -28,7 +28,7 @@
     </div>
     <div class="line"></div>
     <div class="list">
-      <div class="item" v-for="(item,i) in goodsList" :key="i" @click="toNext('/addGoods',item.id)">
+      <div class="item" v-for="(item,i) in goodsList" :key="i" @click="toNext('/goods',item.id)">
         <img :src="url+item.image" />
         <div class="name">{{item.goodName}}</div>
         <div class="price">
@@ -39,13 +39,16 @@
     </div>
     <div class="cart">
       <div>
-        <img src="@/assets/mobile2.png" />
-        <div>联系商家</div>
+        <a :href="'tel:'+phone">
+          <img src="@/assets/mobile2.png" />
+          <div>联系商家</div>
+        </a>
       </div>
       <div>
         <img src="@/assets/cart.png" class="upDown" />
-        ￥50
-        <div class="tip">支持自取，差5元免物流</div>
+        <div class="dot">{{cartDetail.count}}</div>
+        ￥{{cartDetail.total/100}}
+        <div class="tip">{{supportStore?'支持自取':'不支持自取'}}</div>
       </div>
       <div>支付</div>
     </div>
@@ -68,7 +71,7 @@
 </template>
 
 <script>
-import { goodsList, getAllGoodType } from "@/api/user";
+import { goodsList, getAllGoodType, getBusiInfo,cartInfo } from "@/api/user";
 import empty from "@/components/empty";
 import { UPLOAD_DOMAIN } from "@/utils/const";
 export default {
@@ -83,8 +86,10 @@ export default {
       name: "",
       url: UPLOAD_DOMAIN,
       cates: [],
+      supportStore:"",
       search: {},
-      goodsList: []
+      goodsList: [],
+      cartDetail:{}
     };
   },
   methods: {
@@ -116,7 +121,7 @@ export default {
       this.cate = e;
     },
     searchCate(e) {
-      this.search = { type6: this.cate, name: this.name };
+      this.search = { type4: this.cate, name: this.name };
       this.getGoodsList(this.search);
       this.show = false;
     },
@@ -139,6 +144,13 @@ export default {
       getAllGoodType().then(res => {
         this.cates = res.data;
       });
+      getBusiInfo({ busiUserId: this.$route.query.id }).then(res => {
+        this.phone = res.data.phone;
+        this.supportStore = res.data.supportStore;
+      });
+      cartInfo({ busiUserId: this.$route.query.id }).then(res=>{
+        this.cartDetail=res.data;
+      })
       this.getGoodsList();
     }
   },
