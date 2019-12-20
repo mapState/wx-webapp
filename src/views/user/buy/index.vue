@@ -33,9 +33,10 @@
         <div class="name">{{item.goodName}}</div>
         <div class="price">
           ￥{{item.money/100}}
-          <img src="@/assets/cart.png" />
+          <img src="@/assets/cart.png" @click.stop="toNext('/goods',item.id,1)"/>
         </div>
       </div>
+      <empty msg="暂无数据" v-show="goodsList.length==0"/>
     </div>
     <div class="cart">
       <div>
@@ -45,12 +46,12 @@
         </a>
       </div>
       <div>
-        <img src="@/assets/cart.png" class="upDown" />
+        <img src="@/assets/cart.png" class="upDown" @click="toNext('/carts',$route.query.id)"/>
         <div class="dot">{{cartDetail.count}}</div>
         ￥{{cartDetail.total/100}}
         <div class="tip">{{supportStore?'支持自取':'不支持自取'}}</div>
       </div>
-      <div>支付</div>
+      <div @click="toNext('/carts',id)">支付</div>
     </div>
     <van-popup v-model="show" position="top">
       <div class="cates">
@@ -84,6 +85,8 @@ export default {
       show: false,
       cate: "",
       name: "",
+      id: "",
+      phone: "",
       url: UPLOAD_DOMAIN,
       cates: [],
       supportStore:"",
@@ -109,11 +112,13 @@ export default {
         this.getGoodsList(this.search);
       }
     },
-    toNext(msg, id) {
+    toNext(msg, id,where) {
       this.$router.push({
         path: msg,
         query: {
-          id
+          id,
+          where,
+          busiUserId:this.$route.query.id
         }
       });
     },
@@ -129,6 +134,21 @@ export default {
       this.search.name = name;
       this.getGoodsList(this.search);
     },
+    // submit() {
+    //   if (this.result.length > 0) {
+    //     this.$router.push({
+    //       path: "/orderDetail",
+    //       query: {
+    //         ids: JSON.stringify(this.result),
+    //         busiUserId:this.$route.query.busiUserId
+    //       }
+    //     });
+    //   } else {
+    //     this.$toast({
+    //       message: "请选择商品"
+    //     });
+    //   }
+    // },
     getGoodsList(e) {
       goodsList({
         page: 1,
@@ -137,7 +157,6 @@ export default {
         busiUserId: this.$route.query.id
       }).then(res => {
         this.goodsList = res.data.data;
-        console.log(this.goodsList);
       });
     },
     init() {
@@ -147,6 +166,7 @@ export default {
       getBusiInfo({ busiUserId: this.$route.query.id }).then(res => {
         this.phone = res.data.phone;
         this.supportStore = res.data.supportStore;
+        this.id = res.data.id;
       });
       cartInfo({ busiUserId: this.$route.query.id }).then(res=>{
         this.cartDetail=res.data;

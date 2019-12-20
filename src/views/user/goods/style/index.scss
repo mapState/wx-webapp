@@ -3,6 +3,7 @@
     height: 45px;
     background-color: #fff;
     position: fixed;
+    z-index: 10;
     width: 100%;
     .left {
       width: 9px;
@@ -52,6 +53,9 @@
           width: 11px;
           bottom: 0;
         }
+      }
+      .active{
+        color: #B8741A;
       }
     }
   }
@@ -190,7 +194,7 @@
         left: 16px;
         top: -20px;
       }
-      .num {
+      .nums {
         font-size: 15px;
         font-weight: bold;
         color: rgba(255, 59, 48, 1);

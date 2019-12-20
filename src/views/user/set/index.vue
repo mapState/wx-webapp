@@ -19,7 +19,7 @@
         <img src="@/assets/jian.png" />
       </span>
     </div>
-    <div class="item" @click="toNext('/addressList',detail.addressId)">
+    <div class="item" @click="toNext('/addressList')">
       收货地址
       <span>
         <img src="@/assets/jian.png" />

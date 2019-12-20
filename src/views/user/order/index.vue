@@ -35,7 +35,7 @@
           <div @click.stop="qrcode(item.orderId)" v-show="item.orderStatus==3">我要取货</div>
           <div
             @click.stop="toNext('/speak',item.orderId)"
-            v-show="item.orderStatus==5&&item.evaluateId"
+            v-show="item.orderStatus==5&&!item.evaluateId"
           >评价</div>
           <div
             @click.stop="toNext('/merchantsList/merchantsDetail',item.busiUserId)"

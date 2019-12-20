@@ -188,7 +188,18 @@ export function formatDate(shijianchuo, type) {
     } else if (type == 2) {
         return y + "/" + add0(m) + "/" + add0(d);
     } else {
-        return y + "年" + add0(m) + "月" + add0(d) + "日";
+        return y +
+            "-" +
+            add0(m) +
+            "-" +
+            add0(d) +
+            " " +
+            add0(h) +
+            ":" +
+            add0(mm) +
+            ":" +
+            add0(s)
+            ;
     }
 }
 

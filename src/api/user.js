@@ -43,11 +43,11 @@ export function bonus(params) {
         params
     })
 }
-export function cartGetByIds(params) {
+export function cartGetByIds(data) {
     return request({
         url: '/front/cus/cart/cartGetByIds',
-        method: 'get',
-        params
+        method: 'post',
+        data
     })
 }
 export function getGoodByDetailId(params) {
@@ -117,6 +117,13 @@ export function collectSearch(params) {
 export function indexSearch(data) {
     return request({
         url: '/front/cus/index/search',
+        method: 'post',
+        data
+    })
+}
+export function orderCreate(data) {
+    return request({
+        url: '/front/cus/order/create',
         method: 'post',
         data
     })
@@ -220,11 +227,11 @@ export function notice(params) {
         params
     })
 }
-export function evaluateList(params) {
+export function evaluateList(data) {
     return request({
         url: '/front/cus/evaluate/list',
-        method: 'get',
-        params
+        method: 'post',
+        data
     })
 }
 export function publish(params) {
@@ -364,6 +371,48 @@ export function getAllGoodType(params) {
 export function cartInfo(params) {
     return request({
         url: '/front/cus/cart/info',
+        method: 'get',
+        params
+    })
+}
+export function goodDetail(params) {
+    return request({
+        url: '/front/cus/good/detail',
+        method: 'get',
+        params
+    })
+}
+export function cartAdd(params) {
+    return request({
+        url: '/front/cus/good/cart/add',
+        method: 'get',
+        params
+    })
+}
+export function goodCart(params) {
+    return request({
+        url: '/front/cus/good/cart',
+        method: 'get',
+        params
+    })
+}
+export function updateCount(params) {
+    return request({
+        url: '/front/cus/good/cart/updateCount',
+        method: 'get',
+        params
+    })
+}
+export function cartDel(data) {
+    return request({
+        url: '/front/cus/good/cart/del',
+        method: 'post',
+        data
+    })
+}
+export function orderDetail(params) {
+    return request({
+        url: '/front/cus/orderDetail',
         method: 'get',
         params
     })
