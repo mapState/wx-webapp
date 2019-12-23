@@ -33,10 +33,10 @@
         <div class="name">{{item.goodName}}</div>
         <div class="price">
           ￥{{item.money/100}}
-          <img src="@/assets/cart.png" @click.stop="toNext('/goods',item.id,1)"/>
+          <img src="@/assets/cart.png" @click.stop="toNext('/goods',item.id,1)" />
         </div>
       </div>
-      <empty msg="暂无数据" v-show="goodsList.length==0"/>
+      <empty msg="暂无数据" v-show="goodsList.length==0" />
     </div>
     <div class="cart">
       <div>
@@ -46,7 +46,7 @@
         </a>
       </div>
       <div>
-        <img src="@/assets/cart.png" class="upDown" @click="toNext('/carts',$route.query.id)"/>
+        <img src="@/assets/cart.png" class="upDown" @click="toNext('/carts',$route.query.id)" />
         <div class="dot">{{cartDetail.count}}</div>
         ￥{{cartDetail.total/100}}
         <div class="tip">{{supportStore?'支持自取':'不支持自取'}}</div>
@@ -72,7 +72,7 @@
 </template>
 
 <script>
-import { goodsList, getAllGoodType, getBusiInfo,cartInfo } from "@/api/user";
+import { goodsList, getAllGoodType, getBusiInfo, cartInfo } from "@/api/user";
 import empty from "@/components/empty";
 import { UPLOAD_DOMAIN } from "@/utils/const";
 export default {
@@ -89,10 +89,10 @@ export default {
       phone: "",
       url: UPLOAD_DOMAIN,
       cates: [],
-      supportStore:"",
+      supportStore: "",
       search: {},
       goodsList: [],
-      cartDetail:{}
+      cartDetail: {}
     };
   },
   methods: {
@@ -112,13 +112,13 @@ export default {
         this.getGoodsList(this.search);
       }
     },
-    toNext(msg, id,where) {
+    toNext(msg, id, where) {
       this.$router.push({
         path: msg,
         query: {
           id,
           where,
-          busiUserId:this.$route.query.id
+          busiUserId: this.$route.query.id
         }
       });
     },
@@ -157,6 +157,11 @@ export default {
         busiUserId: this.$route.query.id
       }).then(res => {
         this.goodsList = res.data.data;
+        try {
+          for (let i = 0; i < this.goodsList.length; i++) {
+            this.goodsList[i].image = this.goodsList[i].image.split(",")[0];
+          }
+        } catch (error) {}
       });
     },
     init() {
@@ -168,9 +173,9 @@ export default {
         this.supportStore = res.data.supportStore;
         this.id = res.data.id;
       });
-      cartInfo({ busiUserId: this.$route.query.id }).then(res=>{
-        this.cartDetail=res.data;
-      })
+      cartInfo({ busiUserId: this.$route.query.id }).then(res => {
+        this.cartDetail = res.data;
+      });
       this.getGoodsList();
     }
   },

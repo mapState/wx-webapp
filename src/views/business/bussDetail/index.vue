@@ -14,8 +14,9 @@
           +{{item.money/100-item.discountMoney/100}}元
           <div class="tip">原价{{item.money/100}}元，折扣{{item.discountMoney/100}}</div>
         </div>
-        <empty msg="暂无数据" v-show="list.length==0" />
+        
       </div>
+        <empty msg="暂无数据" v-show="list.length<1" />
       <van-popup v-model="show" position="bottom">
         <van-datetime-picker
           v-model="currentDate"
@@ -69,6 +70,7 @@ export default {
     init() {
       this.msg=this.currentDate.getFullYear()+'年'+(this.currentDate.getMonth()+1)+'月'
       this.busiIncomeDetails()
+      console.log(this.list)
     }
   },
 

@@ -184,7 +184,13 @@ export function goodsList(data) {
         data
     })
 }
-
+export function logout(data) {
+    return request({
+        url: '/front/busi/logout',
+        method: 'post',
+        data
+    })
+}
 export function busiQrcode() {
     return request({
         url: '/front/busi/qrcode',

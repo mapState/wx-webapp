@@ -189,24 +189,26 @@ export default {
       getAllGoodType().then(res => {
         this.cates = res.data;
       });
-      goodDetail({ goodId: this.$route.query.id }).then(res => {
-        try {
-          let arr1 = res.data.descImage.split(",");
-          let arr11 = [];
-          for (let i = 0; i < arr1.length; i++) {
-            arr11.push({ url: UPLOAD_DOMAIN + arr1[i], isImage: true });
-          }
-          let arr2 = res.data.image.split(",");
-          let arr22 = [];
-          for (let i = 0; i < arr2.length; i++) {
-            arr22.push({ url: UPLOAD_DOMAIN + arr2[i], isImage: true });
-          }
-          this.formData = { ...res.data };
-          this.formData.descImage = arr11;
-          this.formData.image = arr22;
-          console.log(this.formData);
-        } catch (error) {}
-      });
+      if (this.$route.query.id) {
+        goodDetail({ goodId: this.$route.query.id }).then(res => {
+          try {
+            let arr1 = res.data.descImage.split(",");
+            let arr11 = [];
+            for (let i = 0; i < arr1.length; i++) {
+              arr11.push({ url: UPLOAD_DOMAIN + arr1[i], isImage: true });
+            }
+            let arr2 = res.data.image.split(",");
+            let arr22 = [];
+            for (let i = 0; i < arr2.length; i++) {
+              arr22.push({ url: UPLOAD_DOMAIN + arr2[i], isImage: true });
+            }
+            this.formData = { ...res.data };
+            this.formData.descImage = arr11;
+            this.formData.image = arr22;
+            console.log(this.formData);
+          } catch (error) {}
+        });
+      }
     }
   },
 

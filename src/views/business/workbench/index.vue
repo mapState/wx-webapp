@@ -143,9 +143,9 @@
       <div class="info">
         <div class="img">
           <div class="name">
-            <img src="@/assets/cover.png" />众奖联盟
+            <img src="@/assets/logo.png" />众奖联盟
           </div>
-          <div class="name2">万州烤鱼（嘉里中心店）</div>
+          <div class="name2">{{name}}</div>
           <img :src="imgUrl" class="content" />
         </div>
         <div class="tip">长按图片保存</div>
@@ -159,7 +159,7 @@
 import tabbar from "@/components/bussTabBar";
 import empty from "@/components/empty";
 import { UPLOAD_DOMAIN } from "@/utils/const";
-import { busiConsole, busiQrcode,busiLineOrder,busiFreeOrder,busiBonusPool } from "@/api/bussiness";
+import { busiConsole, busiQrcode,busiLineOrder,busiFreeOrder,busiBonusPool,getBusiInfo } from "@/api/bussiness";
 export default {
   components: {
     tabbar,
@@ -180,7 +180,8 @@ export default {
       totalSort:0,
       totalFree:0,
       sortList:[],
-      freeList:[]
+      freeList:[],
+      name:''
     };
   },
   methods: {
@@ -220,6 +221,9 @@ export default {
       busiConsole().then(res => {
         this.detail = res.data;
       });
+      getBusiInfo().then(res=>{
+        this.name=res.data.name
+      })
       busiBonusPool().then(res => {
         this.totalMoney = res.data.bonusDay;
         this.freeMinMoney = res.data.freeMinMoney;

@@ -20,7 +20,7 @@
         <img src="@/assets/cha.png" />
       </div>
     </div>
-    <div class="add" @click="show=true">+新增分类</div>
+    <div class="add" @click="addCate">+新增分类</div>
     <van-popup v-model="show">
       <div class="new">
         <div class="title">新增分类</div>
@@ -51,6 +51,10 @@ export default {
       getAllGoodType().then(res => {
         this.cates = res.data;
       });
+    },
+    addCate(){
+      this.typeName=''
+      this.show=true
     },
     init() {
       this.getAllGoodType();

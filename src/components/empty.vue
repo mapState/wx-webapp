@@ -1,5 +1,5 @@
 <template>
-  <div v-wechat-title="$route.meta.title" class="container">
+  <div>
     <div class="info">
       <img src="@/assets/empty.png" />
       <div class="tip">{{msg}}</div>

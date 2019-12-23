@@ -6,11 +6,12 @@
         <van-field v-model="message" rows="5" autosize type="textarea" placeholder="请输入留言" />
       </van-cell-group>
     </div>
-    <div class="btn">提交</div>
+    <div class="btn" @click="feedback">提交</div>
   </div>
 </template>
 
 <script>
+import { feedback } from "@/api/user";
 export default {
   data() {
     return {
@@ -18,6 +19,13 @@ export default {
     };
   },
   methods: {
+    feedback() {
+      feedback({ content: this.message }).then(res => {
+        this.$toast({
+          message: res.message
+        });
+      });
+    },
     init() {}
   },
 
@@ -53,7 +61,7 @@ export default {
   position: fixed;
   bottom: 62px;
   left: 50%;
-  transform: translateX(-50%)
+  transform: translateX(-50%);
 }
 </style>
 <style scoped>

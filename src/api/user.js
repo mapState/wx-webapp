@@ -7,7 +7,13 @@ export function login(data) {
         data
     })
 }
-
+export function feedback(data) {
+    return request({
+        url: '/front/cus/feedback',
+        method: 'post',
+        data
+    })
+}
 export function advert(params) {
     return request({
         url: '/front/cus/advert',
@@ -234,11 +240,11 @@ export function evaluateList(data) {
         data
     })
 }
-export function publish(params) {
+export function publish(data,id) {
     return request({
-        url: '/front/cus/evaluate/publish',
-        method: 'get',
-        params
+        url: '/front/cus/evaluate/publish?orderId='+id,
+        method: 'post',
+        data
     })
 }
 export function freeOrder(params) {
@@ -415,5 +421,11 @@ export function orderDetail(params) {
         url: '/front/cus/orderDetail',
         method: 'get',
         params
+    })
+}
+export function platQrcode() {
+    return request({
+        url: '/front/cus/plat/qrcode',
+        method: 'get',
     })
 }

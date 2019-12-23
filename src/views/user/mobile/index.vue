@@ -8,15 +8,18 @@
     </div>
     <div class="item">
       <van-field v-model="code" label="验证码：" placeholder="请输入验证码" type="number" />
-      <span class="upDown" @click="$route.query.addressId?getCodeU():getCode()">{{timeShow?this.time:'获取'}}</span>
+      <span
+        class="upDown"
+        @click="$route.query.addressId?getCodeU():getCode()"
+      >{{timeShow?this.time:'获取'}}</span>
     </div>
     <div class="sub" @click="$route.query.addressId?phoneSetC():phoneSet()">确定</div>
   </div>
 </template>
 
 <script>
-import { phoneSet, sendPhone } from "@/api/bussiness";
-import { phoneSetC,sendPhoneU } from "@/api/user";
+import { phoneSet, sendPhone, logout } from "@/api/bussiness";
+import { phoneSetC, sendPhoneU } from "@/api/user";
 export default {
   data() {
     return {
@@ -34,9 +37,17 @@ export default {
         newPhone: this.newPhone,
         code: this.code
       }).then(res => {
-        this.$toast({
-          message: res.message
-        });
+        if (res.code == 200) {
+          logout().then(res => {
+            this.$router.push({
+              path: "/login"
+            });
+          });
+        } else {
+          this.$toast({
+            message: res.message
+          });
+        }
       });
     },
     phoneSetC() {
@@ -45,9 +56,13 @@ export default {
         newPhone: this.newPhone,
         code: this.code
       }).then(res => {
-        this.$toast({
-          message: res.message
-        });
+        if (res.code == 200) {
+          this.$router.go(-1);
+        } else {
+          this.$toast({
+            message: res.message
+          });
+        }
       });
     },
     getCode() {
@@ -69,7 +84,7 @@ export default {
         }
       } else {
         this.$toast({
-          message: '请输入手机号'
+          message: "请输入手机号"
         });
       }
     },
@@ -92,7 +107,7 @@ export default {
         }
       } else {
         this.$toast({
-          message: '请输入手机号'
+          message: "请输入手机号"
         });
       }
     },

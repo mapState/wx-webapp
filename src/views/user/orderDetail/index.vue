@@ -8,6 +8,7 @@
       class="address"
       @click="toNext('/addressList',$route.query.ids)"
       v-show="busiDetail.supportExpress&&detail"
+      v-if="!checked"
     >
       <div class="item">
         <img src="@/assets/position.png" class="left upDown" />
@@ -16,7 +17,7 @@
           <span>{{detail.phone}}</span>
         </div>
         <div class="detail">
-          <span>默认</span>
+          <span v-show="detail.addressId==addressId||!addressId">默认</span>
           {{detail.regionAddress+' '+detail.address}}
         </div>
         <div class="right upDown">
@@ -27,6 +28,7 @@
     <div
       class="add"
       v-show="busiDetail.supportExpress&&!detail"
+      v-if="!checked"
       @click="toNext('/addressList',$route.query.ids)"
     >
       <img src="@/assets/add.png" class="upDown" />添加地址
@@ -105,7 +107,7 @@
         </div>
       </van-radio-group>
     </div>
-    <div class="line"></div>
+    <div class="line" style="height:300px"></div>
     <div class="bottom">
       需要支付：
       <span>￥{{formData.money}}</span>
@@ -167,6 +169,7 @@ export default {
     },
     chooseData(e) {
       this.time = formatDate(new Date(e).getTime());
+      this.show=false;
     },
     cartGetByIds() {
       cartGetByIds(JSON.parse(this.$route.query.ids)).then(res => {
@@ -182,11 +185,23 @@ export default {
       });
     },
     orderCreate() {
-      if (!this.detail && !this.time) {
-        this.$toast({
-            message: "请设置收货地址或取货时间"
+      let flag = true;
+      if (this.checked) {
+        if (!this.time) {
+          this.flag = false;
+          this.$toast({
+            message: "请设置取货时间"
           });
+        }
       } else {
+        if (!this.detail) {
+          this.flag = false;
+          this.$toast({
+            message: "请设置收货地址"
+          });
+        }
+      }
+      if (flag) {
         orderCreate({
           addressId: this.detail.addressId,
           busiUserId: this.busiDetail.id,
@@ -229,15 +244,14 @@ export default {
       if (this.addressId) {
         addressFindById({ id: this.addressId }).then(res => {
           this.detail = res.data;
-          console.log(this.detail)
+          console.log(this.detail);
         });
       } else {
         consoleDetail().then(res => {
           this.detail = res.data;
-          console.log(this.detail)
+          console.log(this.detail);
         });
       }
-      
     }
   },
 

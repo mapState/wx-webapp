@@ -96,9 +96,13 @@
       position: relative;
       overflow: hidden;
       margin-left: 18px;
+      padding-bottom: 12px;
       img {
         width: 11px;
-        margin-top: 7px;
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
       }
     }
     .active {

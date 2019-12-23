@@ -52,7 +52,7 @@ export default {
       code: "",
       timeShow: false,
       time: 60,
-      checked: false,
+      checked: true,
       type: 1
     };
   },
@@ -61,16 +61,24 @@ export default {
       this.type = e;
     },
     login() {
-      login({
-        loginType: this.type,
-        password: this.password,
-        phone: this.phone,
-        code: this.code
-      }).then(res => {
-        this.$router.push({
-          path: "/workbench"
+      if (this.checked) {
+        login({
+          loginType: this.type,
+          password: this.password,
+          phone: this.phone,
+          code: this.code
+        }).then(res => {
+          if (res.code == 200) {
+            this.$router.push({
+              path: "/workbench"
+            });
+          }
         });
-      });
+      } else {
+        this.$toast({
+          message: "请勾选协议"
+        });
+      }
     },
     getCode() {
       if (this.phone) {

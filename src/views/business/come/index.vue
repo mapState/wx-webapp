@@ -96,7 +96,7 @@
         <div class="title">选择地址</div>
         <div class="ads" style="border-top: 1px solid #d2d2d2;" @click="areaShow=true">
           <img src="@/assets/jian.png" alt class="upDown" />
-          <div class="area">{{addressMsg?addressMsg:'选择地区'}}</div>
+          <div class="area">{{formData.regionAddress?formData.regionAddress:'选择地区'}}</div>
         </div>
         <div class="ads">
           <van-cell-group>
@@ -139,7 +139,7 @@ export default {
       imgUrl: "",
       imgPath: "",
       url:UPLOAD_DOMAIN,
-      addressMsg: "",
+      
       addressDetail: "",
       areaList: area,
       show: false,
@@ -151,6 +151,7 @@ export default {
       activeIndex: 0,
       formData: {
         address: "",
+        regionAddress: "",
         alipayAccount: "",
         intro: "",
         alipayName: "",
@@ -191,7 +192,7 @@ export default {
       this.formData.province = e[0].code;
       this.formData.city = e[1].code;
       this.formData.area = e[2].code;
-      this.addressMsg = e[0].name + " " + e[1].name + " " + e[2].name;
+      this.formData.regionAddress = e[0].name + " " + e[1].name + " " + e[2].name;
       this.areaShow = false;
     },
     chooseRank(e) {
@@ -200,7 +201,7 @@ export default {
       this.rankShow = false;
     },
     chooseAddress() {
-      this.addressDetail =  this.addressMsg+' '+this.formData.address;
+      this.addressDetail =  this.formData.regionAddress+' '+this.formData.address;
       this.address = false;
     },
     submit() {
@@ -210,9 +211,9 @@ export default {
             this.$toast({
               message: res.message
             });
-            // this.$router.push({
-            //   path: "/cards"
-            // });
+            this.$router.push({
+              path: "/login"
+            });
           }
         });
       } else {

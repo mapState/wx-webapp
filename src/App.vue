@@ -20,7 +20,7 @@ export default {
   mounted() {
     // weChatAuth()
     login({
-      openId: "123456789",
+      openId: "56845648456",
       name: "zxx",
       logoUrl: "dfdf"
     });

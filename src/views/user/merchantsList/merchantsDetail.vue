@@ -1,7 +1,10 @@
 <template>
   <div v-wechat-title="$route.meta.title" class="container">
     <div class="msg">
-      <img :src="url+detail.storeImageUrl" alt />
+      <div class="imgTop">
+        <div class="up"></div>
+        <img :src="url+detail.storeImageUrl" alt />
+      </div>
       <div class="info">
         <van-swipe :autoplay="3000" vertical :show-indicators="false" :touchable="false">
           <van-swipe-item v-for="(item,i) in bonusRollData" :key="i">
@@ -20,9 +23,9 @@
       <div class="contact">
         <div class="name">{{detail.name}}</div>
         <div class="labels">
-          <span>{{detail.typeName}}</span>
-          <span>可奖励{{detail.money/100}}元</span>
-          <span>抽奖池{{detail.bonusDay/100}}元</span>
+          <div>{{detail.typeName}}</div>
+          <div>可奖励{{detail.money/100}}元</div>
+          <div>抽奖池{{detail.bonusDay/100}}元</div>
         </div>
         <div class="position">
           <img src="@/assets/po2.png" class="im1" />

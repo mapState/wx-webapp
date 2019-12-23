@@ -25,7 +25,7 @@
     <div class="banner" id="nav1">
       <van-swipe :autoplay="3000" indicator-color="white" @change="onChange">
         <van-swipe-item v-for="(item,i) in goodDetail.image" :key="i">
-          <img :src="url+goodDetail.image" style="width:100%" />
+          <img :src="url+item" style="width:100%" />
         </van-swipe-item>
       </van-swipe>
       <div class="dots">{{current}}/{{goodDetail.image.length}}</div>
@@ -53,7 +53,7 @@
     </div>
     <div class="ruler" style="border:none" id="nav2">图文详情</div>
     <div class="imgDetail">
-      <img :src="url+goodDetail.image" style="width:100%" />
+      <img :src="url+item" style="width:100%" v-for="(item,i) in goodDetail.descImage" :key="i"/>
     </div>
     <div class="line" style="height:150px"></div>
     <div class="bottom">
@@ -189,10 +189,13 @@ export default {
       this.collectStatus();
       goodDetail({ goodId: this.$route.query.id }).then(res => {
         this.goodDetail = res.data;
+        
         try {
           this.goodDetail.image = this.goodDetail.image.split(",");
+          this.goodDetail.descImage = this.goodDetail.descImage.split(",");
         } catch (error) {}
         this.size = res.data.detailList[0];
+        console.log(this.goodDetail)
       });
       cartInfo({ busiUserId: this.$route.query.busiUserId }).then(res => {
         this.cartDetail = res.data;

@@ -1,27 +1,31 @@
 <template>
   <div v-wechat-title="$route.meta.title" class="container">
     <div class="item">
-      <van-field v-model="oldPassword" label="旧密码：" placeholder="请输入旧密码" type="password"/>
+      <van-field v-model="oldPassword" label="旧密码：" placeholder="请输入旧密码" type="password" />
     </div>
     <div class="item">
       <van-field v-model="phone" label="手机号：" placeholder="请输入手机号码" />
     </div>
     <div class="item">
       <van-field v-model="code" label="验证码：" placeholder="请输入验证码" />
-      <span class="upDown" @click="getCode" :class="{active:timeShow}">{{timeShow?this.time+'s':'获取验证码'}}</span>
+      <span
+        class="upDown"
+        @click="getCode"
+        :class="{active:timeShow}"
+      >{{timeShow?this.time+'s':'获取验证码'}}</span>
     </div>
     <div class="item">
-      <van-field v-model="newPassword" label="新密码：" placeholder="请输入新密码" type="password"/>
+      <van-field v-model="newPassword" label="新密码：" placeholder="请输入新密码" type="password" />
     </div>
     <div class="item">
-      <van-field v-model="newPassword2" label="重复密码：" placeholder="请重复密码" type="password"/>
+      <van-field v-model="newPassword2" label="重复密码：" placeholder="请重复密码" type="password" />
     </div>
     <div class="sub" @click="passwordSet">确定</div>
   </div>
 </template>
 
 <script>
-import { passwordSet, sendPhone } from "@/api/bussiness";
+import { passwordSet, sendPhone, logout } from "@/api/bussiness";
 export default {
   data() {
     return {
@@ -47,14 +51,22 @@ export default {
           phone: this.phone,
           code: this.code
         }).then(res => {
-          this.$toast({
-            message: res.message
-          });
+          if (res.code == 200) {
+            logout().then(res => {
+              this.$router.push({
+                path: "/login"
+              });
+            });
+          } else {
+            this.$toast({
+              message: res.message
+            });
+          }
         });
       }
     },
     getCode() {
-      console.log(this.phone)
+      console.log(this.phone);
       if (this.phone) {
         if (!this.timeShow) {
           sendPhone({ phone: this.phone }).then(res => {

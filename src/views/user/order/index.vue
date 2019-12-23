@@ -9,7 +9,7 @@
       </van-tabs>
     </div>
     <div class="list">
-      <div class="item" v-for="(item,i) in list" :key="i" @click="toNext('/orderDetail',item.orderId)">
+      <div class="item" v-for="(item,i) in list" :key="i" @click="toNext('/merchantsList/merchantsDetail',item.busiUserId)">
         <div class="name">
           <img src="@/assets/market2.png" class="upDown" />
           {{item.busiName}}
@@ -53,7 +53,7 @@
         <div class="title">快递单号</div>
         <div class="name">快递公司：{{courierCompany}}</div>
         <div class="num">快递单号：{{courierNumber}}</div>
-        <div class="btn" @click="coby">一键复制</div>
+        <div class="btn" @click="coby(courierNumber)">一键复制</div>
       </div>
     </van-popup>
     <van-popup v-model="er">
@@ -87,8 +87,8 @@ export default {
     };
   },
   methods: {
-    coby() {
-      coby("11", this);
+    coby(val) {
+      coby(val, this);
     },
     toNext(msg, id) {
       this.$router.push({

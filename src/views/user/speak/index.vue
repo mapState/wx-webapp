@@ -12,15 +12,22 @@
         <div class="title">星级评价</div>
         <div class="s">
           <van-rate v-model="formData[i].star" />
-          <span class="upDown">{{value==1||value==2?'差':value==3?'中':'好'}}</span>
+          <span
+            class="upDown"
+          >{{formData[i].star==4||formData[i].star==5?'好':formData[i].star==3?'中':formData[i].star==1||formData[i].star==2?'差':''}}</span>
         </div>
       </div>
       <div class="content">
         <div class="title">商品评价</div>
         <van-cell-group>
-          <van-field v-model="formData[i].content" rows="3" type="textarea" placeholder="对商品还满意吗，说两句吧~" />
+          <van-field
+            v-model="formData[i].content"
+            rows="3"
+            type="textarea"
+            placeholder="对商品还满意吗，说两句吧~"
+          />
         </van-cell-group>
-        <van-uploader v-model="formData[i].image" multiple>
+        <van-uploader v-model="formData[i].imageArr" multiple :after-read="(file)=>onRead(file,i)">
           <div class="camera">
             <img src="@/assets/camera.png" class="leftRight" />
             添加图片
@@ -28,37 +35,66 @@
         </van-uploader>
       </div>
     </div>
-    <div class="btn">发布</div>
+    <div class="btn" v-if="evaluateId">已评价</div>
+    <div class="btn" @click="submit" v-else>发布</div>
   </div>
 </template>
 
 <script>
-import { orderDetail } from "@/api/user";
+import { orderDetail, publish } from "@/api/user";
+import { uploadImg } from "@/utils/upload";
 import { UPLOAD_DOMAIN } from "@/utils/const";
 export default {
   data() {
     return {
-      url:UPLOAD_DOMAIN,
-      value: 3,
-      message: "",
-      fileList: [
-        { url: "https://img.yzcdn.cn/vant/leaf.jpg" },
-        // Uploader 根据文件后缀来判断是否为图片文件
-        // 如果图片 URL 中不包含类型信息，可以添加 isImage 标记来声明
-        { url: "https://cloud-image", isImage: true }
-      ],
+      url: UPLOAD_DOMAIN,
       list: [],
-      formData:[{
-        image:[]
-      }]
+      evaluateId:'',
+      formData: []
     };
   },
   methods: {
+    submit(item) {
+      for (let i in this.formData) {
+        if (!this.formData[i].star || !this.formData[i].content) {
+          this.$toast({
+            message: "请完善评价内容"
+          });
+        } else {
+          let obj = [...this.formData];
+          for (let i = 0; i < obj.length; i++) {
+            obj[i].goodId = this.list[i].goodId;
+            obj[i].goodDetailId = this.list[i].goodDetailId;
+            delete obj[i].imageArr;
+          }
+
+          publish(obj, this.$route.query.id).then(res => {
+            if (res.code == 200) {
+              this.$router.push({
+                path: '/success'
+              });
+            }
+          });
+        }
+      }
+    },
+    async onRead(file, index) {
+      let url = await uploadImg(file);
+      this.formData[index].imageArr[
+        this.formData[index].imageArr.length - 1
+      ].url = url;
+      let arr = [];
+      for (let i = 0; i < this.formData[index].imageArr.length; i++) {
+        arr.push(this.formData[index].imageArr[i].url);
+      }
+      this.formData[index].image = arr.toString();
+    },
     init() {
       orderDetail({ orderId: this.$route.query.id }).then(res => {
         this.list = res.data.list;
-        for(let i in this.list){
-          this.formData.push({})
+        this.evaluateId = res.data.evaluateId;
+        for (let i in this.list) {
+          this.formData.push({});
         }
       });
     }

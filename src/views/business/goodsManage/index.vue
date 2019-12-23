@@ -1,7 +1,7 @@
 <template>
   <div v-wechat-title="$route.meta.title" class="container">
     <div class="search">
-      <img src="@/assets/left.png" class="upDown" @click="$router.go(-1)" />
+      <img src="@/assets/left.png" class="upDown" @click="toNext('/workbench')" />
       <van-search
         placeholder="商品名称"
         background="#fff"
@@ -14,20 +14,20 @@
       <div :class="{active:sort==1}" @click="chooseSort(1)">全部</div>
       <div :class="{active:sort==2}" @click="chooseSort(2)">
         销量
-        <img src="@/assets/shang2.png" v-if="sort==2&&search.type2===1" />
-        <img src="@/assets/xia2.png" v-else-if="sort==2&&search.type2===0" />
+        <img src="@/assets/shang2.png" v-if="sort==2&&search.type2===0" />
+        <img src="@/assets/xia2.png" v-else-if="sort==2&&search.type2===1" />
         <img src="@/assets/ud.png" v-else />
       </div>
       <div :class="{active:sort==3}" @click="chooseSort(3)">
         价格
-        <img src="@/assets/shang2.png" v-if="sort==3&&search.type3===1" />
-        <img src="@/assets/xia2.png" v-else-if="sort==3&&search.type3===0" />
+        <img src="@/assets/shang2.png" v-if="sort==3&&search.type3===0" />
+        <img src="@/assets/xia2.png" v-else-if="sort==3&&search.type3===1" />
         <img src="@/assets/ud.png" v-else />
       </div>
       <div :class="{active:sort==4}" @click="chooseSort(4)">
         库存
-        <img src="@/assets/shang2.png" v-if="sort==4&&search.type4===1" />
-        <img src="@/assets/xia2.png" v-else-if="sort==4&&search.type4===0" />
+        <img src="@/assets/shang2.png" v-if="sort==4&&search.type4===0" />
+        <img src="@/assets/xia2.png" v-else-if="sort==4&&search.type4===1" />
         <img src="@/assets/ud.png" v-else />
       </div>
       <div :class="{active:sort==5}" @click="chooseSort(5)">上架</div>
@@ -104,7 +104,9 @@ export default {
       if (e == 2 || e == 3 || e == 4) {
         this.search["type" + e] = Number(!this.search["type" + e]);
       }
-
+      if(e===5){
+        this.search.type5=1
+      }
       if (e === 6) {
         this.show = true;
       } else {
@@ -138,7 +140,15 @@ export default {
     getGoodsList(e) {
       goodsList({ page: 1, size: 10, ...e }).then(res => {
         this.goodsList = res.data.data;
-        console.log(this.goodsList);
+        
+        try {
+          for(let i=0;i<this.goodsList.length;i++){
+          this.goodsList[i].image=this.goodsList[i].image.split(',')[0]
+        }
+          
+        } catch (error) {
+          
+        }
       });
     },
     init() {

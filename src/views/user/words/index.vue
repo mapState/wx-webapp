@@ -21,6 +21,7 @@
           </div>
         </div>
       </div>
+      <div style="height:100px"></div>
       <div class="bottom">
         <div>
           <img src="@/assets/return.png" class="leftRight" @click="$router.push({path: '/home'});" />
