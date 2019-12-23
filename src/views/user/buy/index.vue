@@ -165,7 +165,7 @@ export default {
       });
     },
     init() {
-      getAllGoodType().then(res => {
+      getAllGoodType({ busiUserId: this.$route.query.id }).then(res => {
         this.cates = res.data;
       });
       getBusiInfo({ busiUserId: this.$route.query.id }).then(res => {

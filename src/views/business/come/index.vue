@@ -6,8 +6,8 @@
     <div class="item">
       <van-field v-model="formData.name" label="商家名称" placeholder="请输入您的商户名称" />
     </div>
-    <div class="item litInput" @click="rankShow=true">
-      <van-field v-model="formData.businessScopeTxt" label="经营范围" placeholder="请选择您的经营范围" style="border:none"/>
+    <div class="litInput item" @click="rankShow=true">
+      <van-field v-model="formData.businessScopeTxt" label="经营范围" placeholder="请选择您的经营范围"/>
       <img src="@/assets/jian.png" class="upDown" />
     </div>
     <div class="item">
@@ -268,6 +268,9 @@ export default {
   border-radius: 2px;
   border: none;
 }
+>>> .van-hairline--top-bottom::after, .van-hairline-unset--top-bottom::after{
+  border:none
+}
 >>> .van-uploader__preview-image {
   width: 128px;
   height: 72px;
@@ -281,5 +284,8 @@ export default {
 >>> .van-uploader__preview-delete {
   color: #ff3b30;
   right: 0px;
+}
+>>> .van-cell:not(:last-child)::after{
+  border:none
 }
 </style>

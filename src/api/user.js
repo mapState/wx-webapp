@@ -369,7 +369,7 @@ export function goodsList(data) {
 }
 export function getAllGoodType(params) {
     return request({
-        url: '/front/busi/getAllGoodType',
+        url: '/front/cus/getAllGoodType',
         method: 'get',
         params
     })

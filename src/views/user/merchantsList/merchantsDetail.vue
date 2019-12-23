@@ -83,7 +83,7 @@
         <empty msg="暂无数据" v-show="lineOrder.length==0" />
         <div class="last" v-show="lineOrder.length<totalLine" @click="changePage(1)">点击加载更多</div>
       </div>
-      <div class="line" style="height:200px"></div>
+      <div class="line" style="height:300px"></div>
     </div>
     <div class="tabContent" v-show="tab==2">
       <div class="inner">
@@ -101,7 +101,7 @@
         <empty msg="暂无数据" v-show="freeOrder.length==0" />
         <div class="last" v-show="freeOrder.length<totalFree" @click="changePage(2)">点击加载更多</div>
       </div>
-      <div class="line" style="height:200px"></div>
+      <div class="line" style="height:300px"></div>
     </div>
     <div class="tabContent3" v-show="tab==3">
       <div class="inner">

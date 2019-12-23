@@ -1,18 +1,19 @@
 <template>
   <div v-wechat-title="$route.meta.title" class="container">
-    <div class="search" @click="toNext('/search')">
+    <div class="search">
       <img src="@/assets/position.png" alt class="position" />
       <span class="city">杭州市</span>
       <div class="input">
         <img src="@/assets/big.png" />
-        <input type="text" placeholder="商户名/地点/菜名" />
+        <div class="name" @click="toNext('/search')">商户名/地点/菜名</div>
+        <!-- <input type="text" placeholder="" /> -->
       </div>
       <img src="@/assets/sao.png" alt class="sao" />
     </div>
     <div class="tips">
       <div class="item" v-for="(item,i) in msgs" :key="i">
-        <img src="@/assets/dui.png" />
-        <span>{{item}}</span>
+        <img src="@/assets/dui.png" class="upDown"/>
+        <div class="txt">{{item}}</div>
       </div>
     </div>
     <div class="banner">
