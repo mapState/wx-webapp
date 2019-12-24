@@ -24,7 +24,7 @@
       <span>
         <img src="@/assets/jian.png" />
       </span>
-      <div class="right">
+      <div class="right out">
         {{detail.regionAddress+detail.address}}
         <div v-show="detail.addressId">默认地址</div>
       </div>

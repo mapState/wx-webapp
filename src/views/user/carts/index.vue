@@ -9,7 +9,7 @@
       <div class="upDown one">
         <van-checkbox
           v-model="checked"
-          checked-color="#B8741A"
+          checked-color="#ffab3c"
           @click="result.length==list.length?$refs.checkboxGroup.toggleAll(false):$refs.checkboxGroup.toggleAll(true)"
         ></van-checkbox>
       </div>
@@ -28,7 +28,7 @@
     <van-checkbox-group
       v-model="result"
       ref="checkboxGroup"
-      checked-color="#B8741A"
+      checked-color="#ffab3c"
       @change="check"
     >
       <div class="item" v-for="(item,i) in list" :key="i">
@@ -51,7 +51,7 @@
       <div class="upDown one">
         <van-checkbox
           v-model="checked"
-          checked-color="#B8741A"
+          checked-color="#ffab3c"
           @click="result.length==2?$refs.checkboxGroup.toggleAll(false):$refs.checkboxGroup.toggleAll(true)"
         ></van-checkbox>
       </div>全选

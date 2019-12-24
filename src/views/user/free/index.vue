@@ -38,7 +38,7 @@
           <div class="instro out">商家当前累计抽奖池：{{item.bonusCount/100}}元</div>
           <div class="right upDown">
             <div class="in upDown" style="width:100%">
-              <div class="money">{{item.money/100}}元</div>待奖励
+              <div class="money"><b>{{item.money/100}}</b>元</div>待奖励
             </div>
           </div>
         </div>
@@ -53,7 +53,7 @@
           <div class="instro out">{{item.createDate}} 免单成功</div>
           <div class="right upDown">
             <div class="in upDown" style="width:100%">
-              <div class="money">{{item.money/100}}元</div>待奖励
+              <div class="money"><b>{{item.money/100}}</b>元</div>待奖励
             </div>
           </div>
         </div>

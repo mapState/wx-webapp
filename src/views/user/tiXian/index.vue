@@ -14,12 +14,12 @@
     <div class="ways">
       <div class="item" @click="chooseWay(1)">
         <img src="@/assets/way2.png" /> 提现到微信
-        <img src="@/assets/dui.png" class="upDown" v-if="way==1" />
+        <img src="@/assets/dui2.png" class="upDown" v-if="way==1" />
         <img src="@/assets/circle.png" class="upDown" v-else />
       </div>
       <div class="item" @click="chooseWay(2)">
         <img src="@/assets/way3.png" /> 提现到支付宝
-        <img src="@/assets/dui.png" class="upDown" v-if="way==2" />
+        <img src="@/assets/dui2.png" class="upDown" v-if="way==2" />
         <img src="@/assets/circle.png" class="upDown" v-else />
       </div>
       <div class="item" v-show="way==2">
@@ -33,7 +33,7 @@
       </div>
       <div class="item" @click="chooseWay(3)">
         <img src="@/assets/way4.png" /> 提现到银行卡
-        <img src="@/assets/dui.png" class="upDown" v-if="way==3" />
+        <img src="@/assets/dui2.png" class="upDown" v-if="way==3" />
         <img src="@/assets/circle.png" class="upDown" v-else />
       </div>
       <div class="item" v-show="way==3">
