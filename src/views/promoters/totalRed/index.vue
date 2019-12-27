@@ -1,29 +1,30 @@
 <template>
   <div v-wechat-title="$route.meta.title" class="container">
     <div class="titleTop">
-      总营业额(元)
+      已结算总额
     </div>
     <div class="top">
       {{time}}至今
       <div class="right">￥{{sum/100}}</div>
     </div>
-    <div class="title">店铺详情</div>
+    <div class="title">订单明细</div>
     <div class="list">
+      <div class="title">
+        <div>订单编号</div>
+        <div>分红金额(元)</div>
+        <div>分红时间</div>
+      </div>
       <div class="item" v-for="(item,i) in list" :key="i">
-        <img :src="url+item.storeImageUrl" class="upDown" />
-        <div class="mid">
-          <div class="name">{{item.name}}</div>
-          <div class="time">{{item.createDate}}~至今</div>
-          <div class="tip">总营业额(元)</div>
-        </div>
-        <div class="num upDown">￥{{item.money/100}}</div>
+        <div>{{item.orderPayId}}</div>
+        <div>{{item.money/100}}</div>
+        <div>{{item.createDate}}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { turnover } from "@/api/mak";
+import { moneyList } from "@/api/mak";
 import { UPLOAD_DOMAIN } from "@/utils/const";
 export default {
   data() {
@@ -36,8 +37,8 @@ export default {
   },
   methods: {
     init() {
-      turnover().then(res=>{
-        this.list=res.data;
+      moneyList().then(res=>{
+        this.list=res.data.data;
         for(let i=0;i<this.list.length;i++){
           this.sum+=this.list[i].money
         }

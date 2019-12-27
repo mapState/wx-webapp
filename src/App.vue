@@ -19,12 +19,12 @@ export default {
 
   mounted() {
     // weChatAuth()
-    login({
-      openId: "56845648456",
-      name: "zxx",
-      logoUrl: "dfdf"
-    });
-    this.init();
+    // login({
+    //   openId: "56845648456",
+    //   name: "zxx",
+    //   logoUrl: "dfdf"
+    // });
+    // this.init();
   }
 };
 </script>

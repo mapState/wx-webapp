@@ -43,6 +43,7 @@
 
 <script>
 import { login, sendPhone } from "@/api/bussiness";
+import { makLogin } from "@/api/mak";
 export default {
   data() {
     return {
@@ -62,18 +63,33 @@ export default {
     },
     login() {
       if (this.checked) {
-        login({
-          loginType: this.type,
-          password: this.password,
-          phone: this.phone,
-          code: this.code
-        }).then(res => {
-          if (res.code == 200) {
-            this.$router.push({
-              path: "/workbench"
-            });
-          }
-        });
+        if (this.$route.query.where) {
+          makLogin({
+            loginType: this.type,
+            password: this.password,
+            phone: this.phone,
+            code: this.code
+          }).then(res => {
+            if (res.code == 200) {
+              this.$router.push({
+                path: "/dHome"
+              });
+            }
+          });
+        } else {
+          login({
+            loginType: this.type,
+            password: this.password,
+            phone: this.phone,
+            code: this.code
+          }).then(res => {
+            if (res.code == 200) {
+              this.$router.push({
+                path: "/workbench"
+              });
+            }
+          });
+        }
       } else {
         this.$toast({
           message: "请勾选协议"

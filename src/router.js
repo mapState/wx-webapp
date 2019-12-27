@@ -10,6 +10,7 @@ const totalBuss = () => import("@/views/promoters/totalBuss")
 const team = () => import("@/views/promoters/team")
 const cDetail = () => import("@/views/promoters/cDetail")
 const tHome = () => import("@/views/promoters/tHome")
+const totalRed = () => import("@/views/promoters/totalRed")
 
 
 
@@ -68,6 +69,7 @@ const merchantsDetail = () => import("@/views/user/merchantsList/merchantsDetail
 Vue.use(Router)
 export default new Router({
 	routes: [
+		{ path: '/totalRed', component: totalRed, meta: { title: '已结算分红' } },
 		{ path: '/team', component: team, meta: { title: '团队人员' } },
 		{ path: '/cDetail', component: cDetail, meta: { title: '分红提现记录' } },
 		{ path: '/totalMoney', component: totalMoney, meta: { title: '总营业额' } },

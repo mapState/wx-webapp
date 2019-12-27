@@ -20,6 +20,7 @@
       }
     }
     .name {
+      height: 54px;
       line-height: 54px;
       position: relative;
       font-size: 14px;
@@ -32,7 +33,7 @@
         left: 10px;
       }
       .mid {
-        left: 99px;
+        left: 105px;
         span {
           color: #ff1f1f;
         }
@@ -83,5 +84,26 @@
         color: rgba(102, 102, 102, 1);
       }
     }
+  }
+  .join {
+    padding: 15px;
+    // width: 305px;
+    // height: 339px;
+    // background: rgba(255, 255, 255, 1);
+    // border-radius: 5px;
+    // .er {
+    //   display: block;
+    //   width: 256px;
+    //   height: 256px;
+    //   margin: 0 auto;
+    //   padding-top: 17px;
+    // }
+    // .tip {
+    //   font-size: 16px;
+    //   font-weight: bold;
+    //   color: rgba(255, 59, 48, 1);
+    //   margin-top: 25px;
+    //   text-align: center;
+    // }
   }
 }

@@ -1,18 +1,11 @@
 <template>
   <div v-wechat-title="$route.meta.title" class="container">
     <div class="list">
-      <div class="item">
-        <img src="@/assets/cover.png" class="upDown" />
+      <div class="item" v-for="(item,i) in list" :key="i">
+        <img :src="url+item.storeImageUrl" class="upDown" />
         <div class="mid">
-          <div class="name">肉蟹煲（湖滨银泰店）</div>
-          <div class="time">入驻时间：2018-10-05</div>
-        </div>
-      </div>
-      <div class="item">
-        <img src="@/assets/cover.png" class="upDown" />
-        <div class="mid">
-          <div class="name">肉蟹煲（湖滨银泰店）</div>
-          <div class="time">入驻时间：2018-10-05</div>
+          <div class="name">{{item.name}}</div>
+          <div class="time">入驻时间：{{item.createDate}}</div>
         </div>
       </div>
     </div>
@@ -20,12 +13,21 @@
 </template>
 
 <script>
+import { turnover } from "@/api/mak";
+import { UPLOAD_DOMAIN } from "@/utils/const";
 export default {
   data() {
-    return {};
+    return {
+      url: UPLOAD_DOMAIN,
+      list:[]
+    };
   },
   methods: {
-    init() {}
+    init() {
+      turnover().then(res=>{
+        this.list=res.data;
+      })
+    }
   },
 
   mounted() {
