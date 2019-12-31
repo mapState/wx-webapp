@@ -206,6 +206,9 @@ export default {
     },
     submit() {
       if (ruleValidate(this.formData)) {
+        if(this.$route.query.id){
+          this.formData.makerUserId=this.$route.query.id
+        }
         busiAuth(this.formData).then(res => {
           if (res.code == 200) {
             this.$toast({

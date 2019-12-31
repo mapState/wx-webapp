@@ -23,7 +23,7 @@
           class="upDown"
           @click="getCode"
           :class="{active:timeShow}"
-        >{{timeShow?this.time:'获取验证码'}}</span>
+        >{{timeShow?this.time+'s':'获取验证码'}}</span>
       </div>
       <div class="item" v-else>
         <img src="@/assets/lock.png" class="upDown" />

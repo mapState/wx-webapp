@@ -21,6 +21,13 @@ export function makAdd(data) {
         data
     })
 }
+export function balanceCashm(data) {
+    return request({
+        url: '/front/mak/console/balanceCash',
+        method: 'post',
+        data
+    })
+}
 export function console(params) {
     return request({
         url: '/front/mak/console',
@@ -45,6 +52,13 @@ export function moneyList(params) {
 export function cashList(params) {
     return request({
         url: '/front/mak/cash/list',
+        method: 'get',
+        params
+    })
+}
+export function updateImage(params) {
+    return request({
+        url: '/front/mak/updateImage',
         method: 'get',
         params
     })

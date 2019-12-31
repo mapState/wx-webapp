@@ -32,6 +32,10 @@
         border-radius: 50%;
         left: 10px;
       }
+      .img{
+        left: 10px;
+        margin-top: -2px;
+      }
       .mid {
         left: 105px;
         span {
@@ -74,6 +78,12 @@
         left: 50%;
         transform: translateX(-50%);
       }
+      .top{
+        top: 18px;
+      }
+      .top2{
+        top: 14px;
+      }
       .num {
         font-size: 13px;
         font-weight: bold;
@@ -83,6 +93,9 @@
         font-weight: 500;
         color: rgba(102, 102, 102, 1);
       }
+    }
+    .pad{
+      padding-top: 50px;
     }
   }
   .join {

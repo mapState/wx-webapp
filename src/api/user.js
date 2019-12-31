@@ -136,7 +136,7 @@ export function orderCreate(data) {
 }
 export function sendPhoneU(params) {
     return request({
-        url: '/front/cus/console/phone/sendPhone',
+        url: '/front/phone/sendPhone',
         method: 'get',
         params
     })

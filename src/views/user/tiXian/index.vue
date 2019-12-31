@@ -52,6 +52,7 @@
 
 <script>
 import { balance, balanceCash } from "@/api/user";
+import { console, balanceCashm } from "@/api/mak";
 export default {
   data() {
     return {
@@ -76,8 +77,8 @@ export default {
     },
     balanceCash() {
       let flag = true;
-      if(!this.formData.money){
-        flag=false
+      if (!this.formData.money) {
+        flag = false;
       }
       if (this.way == 2) {
         if (
@@ -89,21 +90,36 @@ export default {
         }
       }
       if (this.way == 3) {
-        if (!this.formData.backName || !this.formData.cardNo || !this.formData.realName) {
+        if (
+          !this.formData.backName ||
+          !this.formData.cardNo ||
+          !this.formData.realName
+        ) {
           flag = false;
         }
       }
       if (flag) {
-        let obj={...this.formData}
-        obj.money=obj.money*100
-        balanceCash(obj).then(res => {
-          this.$toast({
-            message: res.message
+        let obj = { ...this.formData };
+        obj.money = obj.money * 100;
+        if (this.$route.query.where) {
+          balanceCashm(obj).then(res => {
+            this.$toast({
+              message: res.message
+            });
+            console().then(res => {
+              this.num = res.data.mak.money;
+            });
           });
-          balance().then(res => {
-            this.num = res.data;
+        } else {
+          balanceCash(obj).then(res => {
+            this.$toast({
+              message: res.message
+            });
+            balance().then(res => {
+              this.num = res.data;
+            });
           });
-        });
+        }
       } else {
         this.$toast({
           message: "信息填写有误"
@@ -111,9 +127,15 @@ export default {
       }
     },
     init() {
-      balance().then(res => {
-        this.num = res.data;
-      });
+      if (this.$route.query.where) {
+        console().then(res => {
+          this.num = res.data.mak.money;
+        });
+      } else {
+        balance().then(res => {
+          this.num = res.data;
+        });
+      }
     }
   },
 

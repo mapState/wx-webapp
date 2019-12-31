@@ -99,13 +99,13 @@
             </div>
             <br />商家登录
           </div>
-          <div class="itm">
+          <div class="itm" @click="toNext('/regist')">
             <div class="img">
               <img src="@/assets/stone.png" />
             </div>
             <br />成为创客
           </div>
-          <div class="itm">
+          <div class="itm" @click="$router.push({path: '/login',query: {where:1}});">
             <div class="img">
               <img src="@/assets/login2.png" />
             </div>

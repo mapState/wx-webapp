@@ -17,7 +17,7 @@ export function passwordSet(params) {
 }
 export function sendPhone(params) {
     return request({
-        url: '/front/busi/console/phone/sendPhone',
+        url: '/front/phone/sendPhone',
         method: 'get',
         params
     })
