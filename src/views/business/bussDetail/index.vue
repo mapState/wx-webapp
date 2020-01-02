@@ -60,7 +60,7 @@ export default {
       return value;
     },
     busiIncomeDetails(){
-      busiIncomeDetails({date:this.currentDate.getFullYear()+''+(this.currentDate.getMonth()+1)}).then(res=>{
+      busiIncomeDetails({date:this.currentDate.getFullYear()+''+(this.currentDate.getMonth()+1>9?this.currentDate.getMonth()+1:'0'+(this.currentDate.getMonth()+1))}).then(res=>{
         this.list=res.data.data
         this.total=res.data.total/100
         this.show=false

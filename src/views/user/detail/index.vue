@@ -76,7 +76,7 @@ export default {
         date:
           this.currentDate.getFullYear() +
           "" +
-          (this.currentDate.getMonth() + 1)
+          (this.currentDate.getMonth()+1>9?this.currentDate.getMonth()+1:'0'+(this.currentDate.getMonth()+1))
       }).then(res => {
         this.balanceDetails = res.data.data;
         this.expend = res.data.expend;

@@ -134,9 +134,11 @@ export default {
       obj.descImage = arr.toString();
       obj.goodStatus = t;
       let flag = true;
-      for (let i = 0; i < obj.list; i++) {
+      for (let i = 0; i < obj.list.length; i++) {
         obj.list[i].money = obj.list[i].money * 100;
       }
+
+      console.log(obj);
       if (!obj.goodTitle || !obj.image || !obj.descImage || !obj.goodType) {
         flag = false;
       }
@@ -150,6 +152,7 @@ export default {
           flag = false;
         }
       }
+
       if (flag) {
         if (t) {
           this.$dialog
@@ -204,6 +207,9 @@ export default {
             }
             this.formData = { ...res.data };
             this.formData.descImage = arr11;
+            for (let i = 0; i < this.formData.list.length; i++) {
+              this.formData.list[i].money = this.formData.list[i].money /100;
+            }
             this.formData.image = arr22;
             console.log(this.formData);
           } catch (error) {}

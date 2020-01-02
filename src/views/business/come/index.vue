@@ -7,7 +7,7 @@
       <van-field v-model="formData.name" label="商家名称" placeholder="请输入您的商户名称" />
     </div>
     <div class="litInput item" @click="rankShow=true">
-      <van-field v-model="formData.businessScopeTxt" label="经营范围" placeholder="请选择您的经营范围"/>
+      <van-field v-model="formData.businessScopeTxt" label="经营范围" placeholder="请选择您的经营范围" />
       <img src="@/assets/jian.png" class="upDown" />
     </div>
     <div class="item">
@@ -138,8 +138,8 @@ export default {
     return {
       imgUrl: "",
       imgPath: "",
-      url:UPLOAD_DOMAIN,
-      
+      url: UPLOAD_DOMAIN,
+
       addressDetail: "",
       areaList: area,
       show: false,
@@ -192,7 +192,8 @@ export default {
       this.formData.province = e[0].code;
       this.formData.city = e[1].code;
       this.formData.area = e[2].code;
-      this.formData.regionAddress = e[0].name + " " + e[1].name + " " + e[2].name;
+      this.formData.regionAddress =
+        e[0].name + " " + e[1].name + " " + e[2].name;
       this.areaShow = false;
     },
     chooseRank(e) {
@@ -201,27 +202,43 @@ export default {
       this.rankShow = false;
     },
     chooseAddress() {
-      this.addressDetail =  this.formData.regionAddress+' '+this.formData.address;
+      this.addressDetail =
+        this.formData.regionAddress + " " + this.formData.address;
       this.address = false;
     },
     submit() {
-      if (ruleValidate(this.formData)) {
-        if(this.$route.query.id){
-          this.formData.makerUserId=this.$route.query.id
-        }
-        busiAuth(this.formData).then(res => {
-          if (res.code == 200) {
-            this.$toast({
-              message: res.message
+      if (
+        this.formData.concessionDiscount > 0 &&
+        this.formData.concessionDiscount < 100
+      ) {
+        if (!this.formData.address) {
+          this.$toast({
+            message: "请完善商铺地址"
+          });
+        } else {
+          if (ruleValidate(this.formData)) {
+            if (this.$route.query.id) {
+              this.formData.makerUserId = this.$route.query.id;
+            }
+            busiAuth(this.formData).then(res => {
+              if (res.code == 200) {
+                this.$toast({
+                  message: res.message
+                });
+                this.$router.push({
+                  path: "/login"
+                });
+              }
             });
-            this.$router.push({
-              path: "/login"
+          } else {
+            this.$toast({
+              message: "请完善入驻信息"
             });
           }
-        });
+        }
       } else {
         this.$toast({
-          message: "请完善入驻信息"
+          message: "让利折扣输入有误"
         });
       }
     },
@@ -271,8 +288,9 @@ export default {
   border-radius: 2px;
   border: none;
 }
->>> .van-hairline--top-bottom::after, .van-hairline-unset--top-bottom::after{
-  border:none
+>>> .van-hairline--top-bottom::after,
+.van-hairline-unset--top-bottom::after {
+  border: none;
 }
 >>> .van-uploader__preview-image {
   width: 128px;
@@ -288,7 +306,7 @@ export default {
   color: #ff3b30;
   right: 0px;
 }
->>> .van-cell:not(:last-child)::after{
-  border:none
+>>> .van-cell:not(:last-child)::after {
+  border: none;
 }
 </style>

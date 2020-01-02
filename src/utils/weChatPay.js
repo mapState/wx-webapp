@@ -7,8 +7,9 @@ const HOST = monitor ? PRODUCT : DEVELOP;
 // 微信授权
 export function weChatAuth() {
     let d = device();
-    if (d.weChat && GetCookie('_wxoid') === null) {
-        location.href = `http://1w745589u6.iask.in:37685/prize/front/cus/auth?url=${window.encodeURIComponent(location.href)}`;
+    if (d.weChat && GetCookie('6E61743132336170692E70696B65382E746F70') === null) {
+      console.log(1)
+        location.href = `http://api.pike8.top/prize/front/cus/auth?url=${window.encodeURIComponent('http://api.pike8.top/acc/#/home')}`;
     }
     else {
         return null;

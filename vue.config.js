@@ -6,6 +6,7 @@ const productionGzipExtensions = ['js', 'css']
 const isProduction = process.env.NODE_ENV === 'production'
 module.exports = {
   productionSourceMap: !isProduction,
+  // publicPath: '/acc/',
   lintOnSave:false,
   configureWebpack: {
     devtool: 'source-map',

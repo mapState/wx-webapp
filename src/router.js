@@ -35,6 +35,7 @@ const goodsManage = () => import("@/views/business/goodsManage")
 
 
 // 用户
+const area = () => import("@/views/user/area")
 const home = () => import("@/views/user/home")
 const search = () => import("@/views/user/search")
 const setMobile = () => import("@/views/user/setMobile")
@@ -70,6 +71,7 @@ Vue.use(Router)
 export default new Router({
 	routes: [
 		{ path: '/totalRed', component: totalRed, meta: { title: '已结算分红' } },
+		{ path: '/area', component: area, meta: { title: '选择城市' } },
 		{ path: '/team', component: team, meta: { title: '团队人员' } },
 		{ path: '/cDetail', component: cDetail, meta: { title: '分红提现记录' } },
 		{ path: '/totalMoney', component: totalMoney, meta: { title: '总营业额' } },

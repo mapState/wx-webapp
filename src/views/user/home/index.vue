@@ -2,7 +2,7 @@
   <div v-wechat-title="$route.meta.title" class="container">
     <div class="search">
       <img src="@/assets/position.png" alt class="position" />
-      <span class="city">杭州市</span>
+      <span class="city" @click="toNext('/area')">{{$route.query.name||'杭州市'}}</span>
       <div class="input">
         <img src="@/assets/big.png" />
         <div class="name" @click="toNext('/search')">商户名/地点/菜名</div>
@@ -75,7 +75,7 @@
           <div>抽奖池{{item.bonusCount/100}}元</div>
         </div>
         <div class="instro out">{{item.firm}}</div>
-        <div class="num">{{(item.juli/1000).toFixed(1)}}km</div>
+        <div class="num">{{item.juli<1000?(item.juli).toFixed(1)+'m':(item.juli/1000).toFixed(1)+'km'}}</div>
       </div>
     </div>
     <tabbar :active="0"></tabbar>
@@ -123,7 +123,7 @@ export default {
       this.getList(e)
     },
     getList(type){
-      indexSearch({page:1,size:100,type,lat:100,lon:100}).then(res=>{
+      indexSearch({page:1,size:100,type,lat:this.$route.query.lat||29.802764,lon:this.$route.query.lng||115.80783}).then(res=>{
         this.list=res.data.data
       })
     },

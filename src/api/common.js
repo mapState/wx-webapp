@@ -17,3 +17,11 @@ export function upload(data,config) {
         config
     })
 }
+
+export function regionGetAll(params) {
+    return request({
+        url: '/region/getAll',
+        method: 'get',
+        params
+    })
+}
