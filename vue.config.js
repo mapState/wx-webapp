@@ -6,8 +6,7 @@ const productionGzipExtensions = ['js', 'css']
 const isProduction = process.env.NODE_ENV === 'production'
 module.exports = {
   productionSourceMap: !isProduction,
-  // publicPath: '/acc/',
-  lintOnSave:false,
+  lintOnSave: false,
   configureWebpack: {
     devtool: 'source-map',
     output: { // 输出重构  打包编译后的 文件名称  【模块名称.版本号.时间戳】
@@ -40,6 +39,6 @@ module.exports = {
       }
     }
   }
-  
+
 
 }

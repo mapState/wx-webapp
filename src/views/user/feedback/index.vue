@@ -56,7 +56,7 @@ export default {
   background: rgba(231, 203, 155, 1);
   border-radius: 5px;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 600;
   text-align: center;
   position: fixed;
   bottom: 62px;

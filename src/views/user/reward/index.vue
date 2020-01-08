@@ -1,6 +1,6 @@
 <template>
   <div v-wechat-title="$route.meta.title" class="container">
-    <div class="top">
+    <div class="top" :style="{backgroundImage:`url('http://img.koudaitiku.com/b0897af2be104ad6a93f4d871d570dc2.jpg')`}">
       <div class="money">￥{{detail.bonusDay/100}}</div>
       <div class="tip1">今日已累计奖金（元）</div>
       <div class="tip2">*抽奖资格：{{detail.bonusCount}}次</div>
@@ -94,6 +94,7 @@ import tabbar from "@/components/tabBar";
 import empty from "@/components/empty";
 import { platBonusDetail,rankYesterday,totalRank,platBonus } from "@/api/user";
 import { UPLOAD_DOMAIN } from "@/utils/const";
+
 export default {
   components: {
     tabbar,
@@ -132,7 +133,7 @@ export default {
     getRankYesterday() {
       rankYesterday({
         page: this.page,
-        size: 1,
+        size: 10,
       }).then(res => {
         this.rankYesterday = [...this.rankYesterday, ...res.data.data];
         this.total1 = res.data.total;
@@ -146,7 +147,7 @@ export default {
     getTotalRank() {
       totalRank({
         page: this.page2,
-        size: 1,
+        size: 10,
       }).then(res => {
         this.totalRank = [...this.totalRank, ...res.data.data];
         this.total2 = res.data.total;

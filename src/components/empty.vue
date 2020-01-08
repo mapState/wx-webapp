@@ -3,7 +3,7 @@
     <div class="info">
       <img src="@/assets/empty.png" />
       <div class="tip">{{msg}}</div>
-      <div class="btn" @click="toNext">去首页</div>
+      <div class="btn" @click="toNext">返回</div>
     </div>
   </div>
 </template>
@@ -16,9 +16,7 @@ export default {
   },
   methods: {
     toNext() {
-      this.$router.push({
-        path: this.path || "/home"
-      });
+      this.$router.go(-1)
     },
     init() {}
   },
@@ -40,7 +38,7 @@ export default {
   .tip {
     text-align: center;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
     color: rgba(51, 51, 51, 1);
     margin-top: 15px;
   }
@@ -52,7 +50,7 @@ export default {
     border-radius: 5px;
     text-align: center;
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 600;
     color: rgba(248, 157, 0, 1);
     margin: 0 auto;
     margin-top: 20px;

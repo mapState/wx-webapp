@@ -18,13 +18,13 @@ export default {
   },
 
   mounted() {
-    // weChatAuth()
+    weChatAuth()
     login({
       openId: "56845648456",
       name: "zxx",
       logoUrl: "dfdf"
     });
-    // this.init();
+    this.init();
   }
 };
 </script>

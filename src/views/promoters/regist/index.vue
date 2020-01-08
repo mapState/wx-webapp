@@ -116,7 +116,7 @@ export default {
 <style scoped>
 >>> .van-field__label {
   width: auto;
-  font-weight: 500;
+  font-weight: 600;
   color: #000;
   margin-right: 10px;
   font-size: 14px;

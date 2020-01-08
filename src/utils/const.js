@@ -1,1 +1,1 @@
-export const UPLOAD_DOMAIN = 'http://192.168.1.112:8080/prize/front/file/view/';
+export const UPLOAD_DOMAIN = 'http://47.111.225.253/prize/front/file/view/';

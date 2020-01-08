@@ -42,6 +42,7 @@
             </div>
           </div>
         </div>
+        <empty msg="暂无数据" v-show="recordWait.length==0" />
       </div>
       <div class="line"></div>
     </div>
@@ -57,6 +58,7 @@
             </div>
           </div>
         </div>
+        <empty msg="暂无数据" v-if="recordAlready.length==0" />
       </div>
       <div class="line"></div>
     </div>

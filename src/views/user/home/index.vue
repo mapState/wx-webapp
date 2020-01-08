@@ -69,8 +69,11 @@
         <img :src="url+item.storeImageUrl" class="cover" />
         <img src="@/assets/tuijian.png" class="tuijian" v-show="item.excPush"/>
         <div class="name">{{item.name}}</div>
+        <div class="labels" style="margin-bottom:10px">
+          <div style="border:none;padding:0;font-size:13px;margin-right:5px">{{item.category}}</div>
+          <div style="border:none;padding:0;font-size:13px;">{{item.typeName}}</div>
+        </div>
         <div class="labels">
-          <div>{{item.typeName}}</div>
           <div>可奖励{{item.money/100}}元</div>
           <div>抽奖池{{item.bonusCount/100}}元</div>
         </div>

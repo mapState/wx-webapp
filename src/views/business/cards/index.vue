@@ -120,7 +120,7 @@ export default {
 >>> .van-field__label {
   width: auto;
   min-width: 70px;
-  font-weight: 500;
+  font-weight: 600;
   color: #000;
   margin-right: 10px;
 }

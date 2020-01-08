@@ -7,7 +7,13 @@ export function wechatSign(data) {
         data
     })
 }
-
+export function getOpenId(data) {
+    return request({
+        url: '/wechat/sign.htm',
+        method: 'post',
+        data
+    })
+}
 
 export function upload(data,config) {
     return request({
