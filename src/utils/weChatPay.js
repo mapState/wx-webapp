@@ -1,16 +1,28 @@
 
 import { GetCookie, device, getUrlParam } from './utils'
+import { consoleDetail } from "@/api/user";
 const monitor = location.href.match(/koudaitiku.com/);
 const DEVELOP = 'http://api4.koudaitiku.net';
 const PRODUCT = 'http://api4.koudaitiku.com';
 const HOST = monitor ? PRODUCT : DEVELOP;
+import router from '../router'
 // 微信授权
 export function weChatAuth() {
   let d = device();
   if (d.weChat&& GetCookie('cusToken') === null) {
-    location.href = `/prize/front/cus/auth?url=${window.encodeURIComponent(location.href)}`;
+    location.href = `http://hxkjzjlm.top/prize/front/cus/auth?url=${window.encodeURIComponent(location.href)}`;
   }
   else {
+    consoleDetail().then(res=>{
+      if(!res.data.phone){
+        router.app.$router.push({
+          path: '/login',
+          query:{
+            url:location.href.split('#')[1]
+          }
+        });
+      }
+    })
     return null;
   }
 }

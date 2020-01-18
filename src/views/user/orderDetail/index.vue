@@ -1,7 +1,7 @@
 <template>
   <div v-wechat-title="$route.meta.title" class="container">
     <div class="nav">
-      <img src="@/assets/left.png" class="upDown" @click="$router.go(-1)" />
+      <img src="@/assets/left.png" class="upDown" @click="$router.go(-1)">
       确定订单
     </div>
     <div
@@ -11,7 +11,7 @@
       v-if="!checked"
     >
       <div class="item">
-        <img src="@/assets/position.png" class="left upDown" />
+        <img src="@/assets/position.png" class="left upDown">
         <div class="name">
           {{detail.name}}
           <span>{{detail.phone}}</span>
@@ -21,7 +21,7 @@
           {{detail.regionAddress+' '+detail.address}}
         </div>
         <div class="right upDown">
-          <img src="@/assets/jian.png" />
+          <img src="@/assets/jian.png">
         </div>
       </div>
     </div>
@@ -31,19 +31,17 @@
       v-if="!checked"
       @click="toNext('/addressList',$route.query.ids)"
     >
-      <img src="@/assets/add.png" class="upDown" />添加地址
+      <img src="@/assets/add.png" class="upDown">添加地址
     </div>
-
-    <div class="get" v-show="busiDetail.supportStore">
-      到店自取消费
+    <div class="get" v-show="busiDetail.supportStore">到店自取消费
       <div class="right upDown">
-        <van-switch v-model="checked" size="20px" />
+        <van-switch v-model="checked" size="20px"/>
       </div>
     </div>
     <div class="time" v-show="checked" @click="show=true">
       自取消费时间
       <span>{{time?time:'选择时间'}}</span>
-      <img src="@/assets/jian.png" class="upDown" />
+      <img src="@/assets/jian.png" class="upDown">
     </div>
     <div class="kone"></div>
     <div class="goods">
@@ -53,20 +51,19 @@
         id:busiDetail.id
       }})"
       >
-        <img :src="url+busiDetail.storeImageUrl" class="upDown two" />
+        <img :src="url+busiDetail.storeImageUrl" class="upDown two">
         {{busiDetail.name}}
-        <img src="@/assets/jian.png" class="upDown three" />
+        <img src="@/assets/jian.png" class="upDown three">
       </div>
       <div class="item" v-for="(item,i) in formData.list" :key="i">
-        <img :src="url+item.image" class="upDown" />
+        <img :src="url+item.image" class="upDown">
         <div class="name">{{item.goodTitle}}</div>
         <div class="size">规格:{{item.name}}</div>
         <div class="money">￥{{item.money/100}}</div>
         <div class="right">X{{item.count}}</div>
       </div>
     </div>
-    <div class="total">
-      运费：￥0.00
+    <div class="total">运费：￥0.00
       <div class="right">
         <span>
           共
@@ -92,15 +89,13 @@
     <div class="kone"></div>
     <div class="ways">
       <van-radio-group v-model="ways">
-        <div class="item" @click="ways='1'">
-          余额支付
+        <div class="item" @click="ways='1'">余额支付
           <div class="upDown mid">剩余{{money/100}}</div>
           <div class="upDown right">
             <van-radio name="1"></van-radio>
           </div>
         </div>
-        <div class="item" @click="ways='2'">
-          微信支付
+        <div class="item" @click="ways='2'">微信支付
           <div class="upDown right">
             <van-radio name="2"></van-radio>
           </div>
@@ -132,6 +127,7 @@ import {
   getGoodByDetailId,
   getBusiInfo,
   orderCreate,
+  orderBalance,
   addressFindById
 } from "@/api/user";
 import { UPLOAD_DOMAIN } from "@/utils/const";
@@ -169,7 +165,7 @@ export default {
     },
     chooseData(e) {
       this.time = formatDate(new Date(e).getTime());
-      this.show=false;
+      this.show = false;
     },
     cartGetByIds() {
       cartGetByIds(JSON.parse(this.$route.query.ids)).then(res => {
@@ -211,9 +207,25 @@ export default {
           selfDate: this.time,
           list: this.formData.list
         }).then(res => {
-          this.$toast({
-            message: res.message
+          console.log(res);
+          orderBalance({
+            orderId: res.data
+          }).then(res => {
+            if (res.code == 200) {
+              this.$toast({
+                message: "支付成功"
+              });
+              balance().then(res => {
+                this.money = res.data;
+              });
+              // payDetail({ busiUserId: this.$route.query.id }).then(res => {
+              //   this.detail = res.data;
+              // });
+            }
           });
+          // this.$toast({
+          //   message: res.message
+          // });
         });
       }
     },

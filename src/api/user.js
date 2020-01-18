@@ -429,3 +429,31 @@ export function platQrcode() {
         method: 'get',
     })
 }
+export function underBalance(params) {
+    return request({
+        url: '/pay/under/balance',
+        method: 'get',
+        params
+    })
+}
+export function wxPay(data) {
+    return request({
+        url: '/order/wxPay',
+        method: 'post',
+        data
+    })
+}
+export function aliPay(data) {
+    return request({
+        url: '/order/aliPay',
+        method: 'post',
+        data
+    })
+}
+export function orderBalance(params) {
+    return request({
+        url: '/pay/order/balance',
+        method: 'get',
+        params
+    })
+}

@@ -1,10 +1,10 @@
 <template>
   <div v-wechat-title="$route.meta.title" class="container">
     <div class="item">
-      <van-field v-model="phone" label="手机：" placeholder="请输入手机号码" type="number" />
+      <van-field v-model="phone" label="手机：" placeholder="请输入手机号码" type="number"/>
     </div>
     <div class="item">
-      <van-field v-model="code" label="验证码：" placeholder="请输入验证码" type="number" />
+      <van-field v-model="code" label="验证码：" placeholder="请输入验证码" type="number"/>
       <span class="upDown" @click="getCode">{{timeShow?this.time:'获取'}}</span>
     </div>
     <div class="sub" @click="phoneAuth">确定</div>
@@ -28,6 +28,11 @@ export default {
         phone: this.phone,
         code: this.code
       }).then(res => {
+        if (this.$route.query.url) {
+          this.$router.push({
+            path: this.$route.query.url
+          });
+        }
         this.$toast({
           message: res.message
         });
@@ -52,7 +57,7 @@ export default {
         }
       } else {
         this.$toast({
-          message: '请输入手机号'
+          message: "请输入手机号"
         });
       }
     },
