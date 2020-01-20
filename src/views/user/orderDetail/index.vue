@@ -7,7 +7,7 @@
     <div
       class="address"
       @click="toNext('/addressList',$route.query.ids)"
-      v-show="busiDetail.supportExpress&&detail"
+      v-show="busiDetail.supportExpress&&detail.addressId"
       v-if="!checked"
     >
       <div class="item">
@@ -27,7 +27,7 @@
     </div>
     <div
       class="add"
-      v-show="busiDetail.supportExpress&&!detail"
+      v-show="busiDetail.supportExpress&&!detail.addressId"
       v-if="!checked"
       @click="toNext('/addressList',$route.query.ids)"
     >
@@ -133,7 +133,7 @@ import {
 } from "@/api/user";
 import { UPLOAD_DOMAIN } from "@/utils/const";
 import { mapGetters } from "vuex";
-import { formatDate } from "@/utils/utils";
+import { formatDate,transformParams} from "@/utils/utils";
 import { weChatPay } from "@/utils/weChatPay";
 export default {
   data() {
@@ -269,7 +269,7 @@ export default {
           this.$router.push({
             path: "/setMobile",
             query: {
-              url: "/pay",
+              url: "/orderDetail",
               params: JSON.stringify(params)
             }
           });

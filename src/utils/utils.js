@@ -20,6 +20,7 @@ export function SetCookie(name, value, min) {
     } else {
         expires = "";
     }
+    console.log(name)
     document.cookie = name + "=" + value + expires + "; path=/";
 }
 // 读取cookie
@@ -72,6 +73,8 @@ export function objectMerge(target, source) {
 }
 // 删除cookie
 export function RemoveCookie(name) {
+    // console.log(GetCookie('cus'))
+    console.log(1)
     SetCookie(name, "", -1);
 }
 

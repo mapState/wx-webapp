@@ -25,7 +25,7 @@ export function weChatPay(params, returnUrl) {
       params,
       res => {
         if (res.err_msg == "get_brand_wcpay_request:ok") {
-          window.location.href = returnUrl;
+          window.location.reload();
         } else if (
           res.err_msg == "get_brand_wcpay_request:fail"
         ) {

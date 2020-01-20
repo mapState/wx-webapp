@@ -1,5 +1,5 @@
 <template>
-  <div v-wechat-title="$route.meta.title" class="container">
+  <div v-wechat-title="title" class="container">
     <div class="line"></div>
     <div class="tab">
       <div @click="chooseType(1)" :class="{active:type==1}">验证码登录</div>
@@ -55,7 +55,8 @@ export default {
       timeShow: false,
       time: 60,
       checked: true,
-      type: 1
+      type: 1,
+      title:""
     };
   },
   methods: {
@@ -120,7 +121,13 @@ export default {
         });
       }
     },
-    init() {}
+    init() {
+       if (this.$route.query.where){
+         this.title="创客登录"
+       }else{
+         this.title="商家登录"
+       }
+    }
   },
 
   mounted() {

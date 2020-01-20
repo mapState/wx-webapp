@@ -1,9 +1,9 @@
 <template>
   <div v-wechat-title="$route.meta.title" class="container">
     <div class="info">
-      <img src="@/assets/cover.png" class="photo" />
-      <div class="name">张三三</div>
-      <div class="mobile">130****0130</div>
+      <img :src="detail.image" class="photo" />
+      <div class="name">{{detail.name}}</div>
+      <div class="mobile">{{detail.phone?detail.phone:'未认证'}}</div>
       <img src="@/assets/set.png" class="set" @click="toNext('/set')" />
     </div>
     <div class="content">
@@ -135,7 +135,7 @@
             <div class="img">
               <img src="@/assets/service.png" />
             </div>
-            <br />联系客服
+            <br /><a href="tel:13666666666" style="color:#000">联系客服</a>
           </div>
         </div>
       </div>

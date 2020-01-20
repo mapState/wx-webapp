@@ -7,7 +7,7 @@
       <van-field v-model="formData.phone" label="手机号码：" placeholder="请输入手机号码" type="number" />
     </div>
     <div class="item" @click="show=true">
-      <van-field v-model="formData.regionAddress" label="所在地区：" placeholder="请选择省市区" />
+      <van-field v-model="formData.regionAddress" label="所在地区：" placeholder="请选择省市区" readonly/>
     </div>
     <div class="item">
       <van-field v-model="formData.address" label="详细地址：" placeholder="如街道、门牌号、小区、楼栋号、单元室" />

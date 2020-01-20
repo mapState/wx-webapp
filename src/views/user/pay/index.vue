@@ -13,7 +13,7 @@
         <div class="labels">
           <div>{{detail.typeName}}</div>
           <div>可奖励{{detail.money/100}}元</div>
-          <div>抽奖池{{detail.bonusDay/100}}元</div>
+          <div>抽奖池{{detail.bonusMoney/100}}元</div>
         </div>
         <div class="position">
           <img src="@/assets/po2.png" class="im1">
@@ -50,7 +50,7 @@
         <van-radio-group v-model="ways">
           <div class="item" @click="ways='1'" v-if="device().weChat">
             <img src="@/assets/way1.png" class="upDown">余额支付
-            <div class="upDown mid">剩余{{detail.bonusDay/100}}</div>
+            <div class="upDown mid">剩余{{detail.cusMoney/100}}</div>
             <div class="upDown right">
               <van-radio name="1"></van-radio>
             </div>
@@ -154,10 +154,12 @@ export default {
         } else {
           aliPay({
             busiUserId: this.$route.query.id,
-            money: this.money * 100
+            money: this.money * 100,
+            type:3,
+            message:location.href
           }).then(res => {
             const div = document.createElement("div");
-            div.innerHTML = res.data.orderInfo; //此处form就是后台返回接收到的数据
+            div.innerHTML = res.data
             document.body.appendChild(div);
             document.forms[0].submit();
           });

@@ -11,13 +11,17 @@
       <img src="@/assets/sao.png" alt="" class="sao" @click="sao">
     </div>
     <div class="tips">
-      <div class="item" v-for="(item,i) in msgs" :key="i">
+      <div class="item" v-for="(item,i) in msgs" :key="i" @click="remove">
         <img src="@/assets/dui.png" class="upDown">
         <div class="txt">{{item}}</div>
       </div>
     </div>
     <div class="banner">
-      <img :src="imgPath" @click="toAd()">
+      <van-swipe :show-indicators="false">
+        <van-swipe-item v-for="(item,i) in imgUrl" :key="i">
+          <img :src="url+item.image" @click="toAd(item.url)">
+        </van-swipe-item>
+      </van-swipe>
     </div>
     <div class="cates">
       <van-swipe @change="swipeChange" :show-indicators="false">
@@ -94,11 +98,11 @@
 </template>
 
 <script>
-import { copywriting, advert, typeA, notice, indexSearch } from "@/api/user";
+import { copywriting, advert, typeA, notice, indexSearch,logout } from "@/api/user";
 import { wechatSign } from "@/api/common";
 import { UPLOAD_DOMAIN } from "@/utils/const";
 import wx from "weixin-js-sdk";
-import { GetCookie, SetCookie } from "@/utils/utils";
+import { GetCookie, SetCookie,RemoveCookie } from "@/utils/utils";
 import tabbar from "@/components/tabBar";
 export default {
   components: {
@@ -108,7 +112,7 @@ export default {
     return {
       url: UPLOAD_DOMAIN,
       nav: 1,
-      imgUrl: "",
+      imgUrl: [],
       imgPath: "",
       msgs: [],
       notice: [],
@@ -118,6 +122,9 @@ export default {
     };
   },
   methods: {
+    remove(){
+      logout()
+    },
     toNext(msg, id) {
       this.$router.push({
         path: msg,
@@ -138,8 +145,8 @@ export default {
         });
       });
     },
-    toAd() {
-      location.href = this.imgUrl;
+    toAd(path) {
+      location.href = path;
     },
     swipeChange(e) {
       this.current = e;
@@ -165,8 +172,9 @@ export default {
         this.msgs = res.data;
       });
       advert().then(res => {
-        this.imgUrl = res.data[0].url;
-        this.imgPath = UPLOAD_DOMAIN + res.data[0].image;
+        this.imgUrl = res.data;
+
+        // this.imgPath = UPLOAD_DOMAIN + res.data[0].image;
       });
       typeA().then(res => {
         this.cates = [[]];

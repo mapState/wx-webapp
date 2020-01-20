@@ -457,6 +457,13 @@ export function orderBalance(params) {
         params
     })
 }
+export function logout(params) {
+    return request({
+        url: '/front/cus/logout',
+        method: 'get',
+        params
+    })
+}
 export function sign(data) {
     return request({
         url: 'order/sign',

@@ -117,9 +117,10 @@ export default {
         page: 1,
         size: 100,
         lat: GetCookie('lat'),
-        lon: GetCookie('lon'),
+        lon: GetCookie('lng'),
         ...this.search,
-        typeId: this.typeId
+        typeaId: this.$route.query.id,
+        typebId: this.typeId
       }).then(res => {
         this.list = res.data.data;
       });
@@ -127,8 +128,10 @@ export default {
     init() {
       typeB({ id: this.$route.query.id }).then(res => {
         this.tabs = res.data;
+        this.typeId=res.data[0].id
+        this.getList();
       });
-      this.getList();
+      
     }
   },
 

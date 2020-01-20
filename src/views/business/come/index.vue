@@ -207,7 +207,7 @@ export default {
       this.address = false;
     },
     submit() {
-      if (checked) {
+      if (this.checked) {
         if (
           this.formData.concessionDiscount > 0 &&
           this.formData.concessionDiscount < 100
@@ -219,18 +219,18 @@ export default {
           } else {
             if (ruleValidate(this.formData)) {
               if (this.$route.query.id) {
-                this.formData.lat = GetCookie("lat");
-                this.formData.lon = GetCookie("lon");
                 this.formData.makerUserId = this.$route.query.id;
               }
+              this.formData.lat = GetCookie("lat");
+              this.formData.lng = GetCookie("lng");
               busiAuth(this.formData).then(res => {
                 if (res.code == 200) {
                   this.$toast({
                     message: res.message
                   });
-                  this.$router.push({
-                    path: "/login"
-                  });
+                  // this.$router.push({
+                  //   path: "/login"
+                  // });
                 }
               });
             } else {

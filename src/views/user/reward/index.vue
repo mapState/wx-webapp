@@ -1,15 +1,17 @@
 <template>
   <div v-wechat-title="$route.meta.title" class="container">
-    <div class="top" :style="{backgroundImage:`url('http://img.koudaitiku.com/b0897af2be104ad6a93f4d871d570dc2.jpg')`}">
+    <div
+      class="top"
+      :style="{backgroundImage:`url('http://img.koudaitiku.com/b0897af2be104ad6a93f4d871d570dc2.jpg')`}"
+    >
       <div class="money">￥{{detail.bonusDay/100}}</div>
       <div class="tip1">今日已累计奖金（元）</div>
       <div class="tip2">*抽奖资格：{{detail.bonusCount}}次</div>
       <div class="tip3">*每日抽奖时间为:18:00-19:00</div>
-
       <button type="primary" class="btn" :disabled="true" v-if="time2<-3600000">抽奖结束</button>
       <button type="primary" class="btn" v-else-if="time2>-3600000&&time2<0" @click="platBonus">开始抽奖</button>
       <button type="primary" class="btn" :disabled="true" v-else>
-        <van-count-down :time="time2" format="抽奖倒计时：HH:mm:ss" />
+        <van-count-down :time="time2" format="抽奖倒计时：HH:mm:ss"/>
       </button>
     </div>
     <div class="nav">
@@ -30,11 +32,11 @@
       <div class="tab">
         <div @click="chooseTab(1)" :class="{active:tab==1}">
           <div>昨日抽奖榜</div>
-          <img src="@/assets/up.png" v-show="tab==1" />
+          <img src="@/assets/up.png" v-show="tab==1">
         </div>
         <div @click="chooseTab(2)" :class="{active:tab==2}">
           <div>累计抽奖榜</div>
-          <img src="@/assets/up.png" v-show="tab==2" />
+          <img src="@/assets/up.png" v-show="tab==2">
         </div>
       </div>
     </div>
@@ -42,11 +44,9 @@
       <div class="inner">
         <div class="item" v-for="(item,i) in rankYesterday" :key="i">
           <span>{{i+1}}</span>
-          <img :src="url+item.image" class="upDown" />
+          <img :src="url+item.image" class="upDown">
           <div class="name upDown">{{item.name}}</div>
-          <div class="right upDown">
-            {{item.money/100}}元
-          </div>
+          <div class="right upDown">{{item.money/100}}元</div>
         </div>
         <div class="last" v-show="rankYesterday.length<total1" @click="changePage(1)">点击加载更多</div>
         <empty msg="暂无数据" v-show="rankYesterday.length==0"/>
@@ -57,11 +57,9 @@
       <div class="inner">
         <div class="item" v-for="(item,i) in totalRank" :key="i">
           <span>{{i+1}}</span>
-          <img :src="url+item.image" class="upDown" />
+          <img :src="url+item.image" class="upDown">
           <div class="name upDown">{{item.name}}</div>
-          <div class="right upDown">
-            {{item.money/100}}元
-          </div>
+          <div class="right upDown">{{item.money/100}}元</div>
         </div>
         <div class="last" v-show="totalRank.length<total2" @click="changePage(2)">点击加载更多</div>
         <empty msg="暂无数据" v-show="totalRank.length==0"/>
@@ -70,9 +68,9 @@
     </div>
     <van-popup v-model="show">
       <div class="red">
-        <img src="@/assets/red.png" />
+        <img src="@/assets/red.png">
         <div class="up">
-          <img src="@/assets/cha.png" @click="show=false" />
+          <img src="@/assets/cha.png" @click="show=false">
           <div class="num">5000.00</div>
           <div class="tip">恭喜您抽中奖金(元)</div>
           <div class="sub">确定</div>
@@ -80,8 +78,7 @@
       </div>
     </van-popup>
     <van-popup v-model="over">
-      <div class="over">
-        抱歉您来晚了，奖金已抽完~
+      <div class="over">抱歉您来晚了，奖金已抽完~
         <div class="btn" @click="over=false">确认</div>
       </div>
     </van-popup>
@@ -92,7 +89,12 @@
 <script>
 import tabbar from "@/components/tabBar";
 import empty from "@/components/empty";
-import { platBonusDetail,rankYesterday,totalRank,platBonus } from "@/api/user";
+import {
+  platBonusDetail,
+  rankYesterday,
+  totalRank,
+  platBonus
+} from "@/api/user";
 import { UPLOAD_DOMAIN } from "@/utils/const";
 
 export default {
@@ -133,21 +135,21 @@ export default {
     getRankYesterday() {
       rankYesterday({
         page: this.page,
-        size: 10,
+        size: 10
       }).then(res => {
         this.rankYesterday = [...this.rankYesterday, ...res.data.data];
         this.total1 = res.data.total;
       });
     },
-    platBonus(){
-      platBonus().then(res=>{
-        this.show=true
-      })
+    platBonus() {
+      platBonus().then(res => {
+        this.show = true;
+      });
     },
     getTotalRank() {
       totalRank({
         page: this.page2,
-        size: 10,
+        size: 10
       }).then(res => {
         this.totalRank = [...this.totalRank, ...res.data.data];
         this.total2 = res.data.total;
@@ -163,9 +165,14 @@ export default {
           19 * 60 * 60 * 1000
       ).getTime();
       this.time2 = mid - new Date().getTime();
-      platBonusDetail().then(res=>{
-        this.detail=res.data
-      })
+      platBonusDetail().then(res => {
+        this.detail = res.data;
+        for (let i = 0; i < this.detail.lenth; i++) {
+          if (!this.detail[i].image.match("http")) {
+            this.detail[i].image = this.url - this.detail[i].image;
+          }
+        }
+      });
       this.getRankYesterday();
       this.getTotalRank();
     }

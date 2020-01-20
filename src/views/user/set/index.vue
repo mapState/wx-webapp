@@ -4,7 +4,7 @@
       <div class="item">
         头像
         <div class="img">
-          <img :src="url+detail.image" />
+          <img :src="detail.image" />
         </div>
       </div>
     </van-uploader>
@@ -78,6 +78,9 @@ export default {
     consoleDetail() {
       consoleDetail().then(res => {
         this.detail = res.data;
+        if(!this.detail.image.match('http')){
+          this.detail.image=this.url-this.detail.image
+        }
       });
     },
 
