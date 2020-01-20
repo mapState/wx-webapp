@@ -11,9 +11,9 @@
       <div class="contact">
         <div class="name">{{detail.name}}</div>
         <div class="labels">
-          <span>{{detail.typeName}}</span>
-          <span>可奖励{{detail.money/100}}元</span>
-          <span>抽奖池{{detail.bonusDay/100}}元</span>
+          <div>{{detail.typeName}}</div>
+          <div>可奖励{{detail.money/100}}元</div>
+          <div>抽奖池{{detail.bonusDay/100}}元</div>
         </div>
         <div class="position">
           <img src="@/assets/po2.png" class="im1">
@@ -21,6 +21,7 @@
           <img
             src="@/assets/po3.png"
             class="im2"
+            v-if="device().weChat"
             @click="goTo(detail.lat,detail.lon,detail.money,detail.regionAddress,detail.address)"
           >
           <span class="shu"></span>
@@ -28,8 +29,18 @@
             <img src="@/assets/mobile.png" class="im3">
           </a>
         </div>
-        <img src="@/assets/shou.png" class="shou" v-if="status==0" @click="collect">
-        <img src="@/assets/starA.png" class="shou" v-else @click="collect">
+        <img
+          src="@/assets/shou.png"
+          class="shou"
+          v-if="status==0&&device().weChat"
+          @click="collect"
+        >
+        <img
+          src="@/assets/starA.png"
+          class="shou"
+          v-else-if="status==1&&device().weChat"
+          @click="collect"
+        >
       </div>
       <div class="input">
         <span>支付金额:</span>
@@ -37,7 +48,7 @@
       </div>
       <div class="ways">
         <van-radio-group v-model="ways">
-          <div class="item" @click="ways='1'">
+          <div class="item" @click="ways='1'" v-if="device().weChat">
             <img src="@/assets/way1.png" class="upDown">余额支付
             <div class="upDown mid">剩余{{detail.bonusDay/100}}</div>
             <div class="upDown right">
@@ -74,7 +85,7 @@ import {
   consoleDetail
 } from "@/api/user";
 import { UPLOAD_DOMAIN } from "@/utils/const";
-import { transformParams,device } from "@/utils/utils";
+import { transformParams, device } from "@/utils/utils";
 import { weChatPay } from "@/utils/weChatPay";
 import wx from "weixin-js-sdk";
 export default {
@@ -86,7 +97,7 @@ export default {
       time: 30 * 60 * 60 * 1000,
       ways: "1",
       url: UPLOAD_DOMAIN,
-      device:device,
+      device: device,
       detail: {}
     };
   },
@@ -144,6 +155,11 @@ export default {
           aliPay({
             busiUserId: this.$route.query.id,
             money: this.money * 100
+          }).then(res => {
+            const div = document.createElement("div");
+            div.innerHTML = res.data.orderInfo; //此处form就是后台返回接收到的数据
+            document.body.appendChild(div);
+            document.forms[0].submit();
           });
         }
       } else {
@@ -173,7 +189,12 @@ export default {
   },
 
   mounted() {
-    this.init();
+    if (device.weChat) {
+      this.init();
+    }
+    payDetail({ busiUserId: this.$route.query.id }).then(res => {
+      this.detail = res.data;
+    });
   }
 };
 </script>

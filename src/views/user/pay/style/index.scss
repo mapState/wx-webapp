@@ -59,11 +59,13 @@
         color: rgba(0, 0, 0, 1);
       }
       .labels {
-        span {
+        overflow: hidden;
+        margin-top: 10px;
+        &>div {
           padding: 3px 6px;
           background: rgba(238, 238, 238, 1);
           border-radius: 2px;
-          display: inline-block;
+          float: left;
           font-size: 12px;
           margin-right: 8px;
           color: #666;

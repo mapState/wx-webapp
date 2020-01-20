@@ -127,18 +127,6 @@ export default {
       });
     },
     sao() {
-      // wechatSign({ url: encodeURI(location.href) }).then(res => {
-      //   const { appId, timestamp, nonceStr, signature } = res.data;
-
-      //   // wx.config({
-      //   //   debug: true,
-      //   //   appId,
-      //   //   timestamp,
-      //   //   nonceStr,
-      //   //   signature,
-      //   //   jsApiList: ["scanQRCode",'getLocation']
-      //   // });
-      // });
       wx.ready(() => {
         wx.scanQRCode({
           needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
