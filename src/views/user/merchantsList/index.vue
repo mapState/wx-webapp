@@ -62,6 +62,7 @@
 <script>
 import { typeB, typeSearch } from "@/api/user";
 import { UPLOAD_DOMAIN } from "@/utils/const";
+import { GetCookie, SetCookie } from '@/utils/utils'
 import empty from "@/components/empty";
 export default {
   components: {
@@ -115,8 +116,8 @@ export default {
       typeSearch({
         page: 1,
         size: 100,
-        lat: 100,
-        lon: 100,
+        lat: GetCookie('lat'),
+        lon: GetCookie('lon'),
         ...this.search,
         typeId: this.typeId
       }).then(res => {

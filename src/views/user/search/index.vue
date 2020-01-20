@@ -96,7 +96,7 @@ export default {
       SetCookie("history", this.historyList.toString());
     },
     getList(name){
-      indexSearch({page:1,size:100,name,lat:100,lon:100}).then(res=>{
+      indexSearch({page:1,size:100,name,lat:GetCookie('lat'),lon:GetCookie('lon')}).then(res=>{
         this.list=res.data.data
       })
     },

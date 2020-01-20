@@ -18,7 +18,11 @@
         <div class="position">
           <img src="@/assets/po2.png" class="im1">
           <span class="out">{{detail.regionAddress+' '+ detail.address}}</span>
-          <img src="@/assets/po3.png" class="im2">
+          <img
+            src="@/assets/po3.png"
+            class="im2"
+            @click="goTo(detail.lat,detail.lon,detail.money,detail.regionAddress,detail.address)"
+          >
           <span class="shu"></span>
           <a :href="'tel:'+detail.phone">
             <img src="@/assets/mobile.png" class="im3">
@@ -29,7 +33,7 @@
       </div>
       <div class="input">
         <span>支付金额:</span>
-        <input placeholder="请输入支付金额" v-model="money">
+        <input placeholder="请输入支付金额" v-model="money" type="number">
       </div>
       <div class="ways">
         <van-radio-group v-model="ways">
@@ -40,13 +44,13 @@
               <van-radio name="1"></van-radio>
             </div>
           </div>
-          <div class="item" @click="ways='2'">
+          <div class="item" @click="ways='2'" v-if="device().weChat">
             <img src="@/assets/way2.png" class="upDown">微信支付
             <div class="upDown right">
               <van-radio name="2"></van-radio>
             </div>
           </div>
-          <div class="item" @click="ways='3'">
+          <div class="item" @click="ways='3'" v-else>
             <img src="@/assets/way3.png" class="upDown">支付宝支付
             <div class="upDown right">
               <van-radio name="3"></van-radio>
@@ -66,9 +70,13 @@ import {
   collect,
   underBalance,
   wxPay,
-  aliPay
+  aliPay,
+  consoleDetail
 } from "@/api/user";
 import { UPLOAD_DOMAIN } from "@/utils/const";
+import { transformParams,device } from "@/utils/utils";
+import { weChatPay } from "@/utils/weChatPay";
+import wx from "weixin-js-sdk";
 export default {
   data() {
     return {
@@ -78,6 +86,7 @@ export default {
       time: 30 * 60 * 60 * 1000,
       ways: "1",
       url: UPLOAD_DOMAIN,
+      device:device,
       detail: {}
     };
   },
@@ -93,6 +102,18 @@ export default {
     collectStatus() {
       collectStatus({ busiUserId: this.$route.query.id }).then(res => {
         this.status = res.data;
+      });
+    },
+    goTo(lat, lon, name, regionAddress, address) {
+      wx.ready(() => {
+        wx.openLocation({
+          latitude: lat, // 纬度，浮点数，范围为90 ~ -90
+          longitude: lon, // 经度，浮点数，范围为180 ~ -180。
+          name: regionAddress, // 位置名
+          address: regionAddress + address, // 地址详情说明
+          scale: 1, // 地图缩放级别,整形值,范围从1~28。默认为最大
+          infoUrl: "" // 在查看位置界面底部显示的超链接,可点击跳转
+        });
       });
     },
     underBalance() {
@@ -114,7 +135,10 @@ export default {
         } else if (this.ways == 2) {
           wxPay({
             busiUserId: this.$route.query.id,
-            money: this.money * 100
+            money: this.money * 100,
+            type: 2
+          }).then(res => {
+            weChatPay(res.data, location.href);
           });
         } else {
           aliPay({
@@ -131,6 +155,18 @@ export default {
     init() {
       payDetail({ busiUserId: this.$route.query.id }).then(res => {
         this.detail = res.data;
+      });
+      consoleDetail().then(res => {
+        if (!res.data.phone) {
+          let params = transformParams();
+          this.$router.push({
+            path: "/setMobile",
+            query: {
+              url: "/pay",
+              params: JSON.stringify(params)
+            }
+          });
+        }
       });
       this.collectStatus();
     }

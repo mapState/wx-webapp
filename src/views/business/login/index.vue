@@ -44,6 +44,7 @@
 <script>
 import { login, sendPhone } from "@/api/bussiness";
 import { makLogin } from "@/api/mak";
+import wx from "weixin-js-sdk";
 export default {
   data() {
     return {

@@ -457,3 +457,10 @@ export function orderBalance(params) {
         params
     })
 }
+export function sign(data) {
+    return request({
+        url: 'order/sign',
+        method: 'post',
+        data
+    })
+}

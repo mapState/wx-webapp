@@ -135,6 +135,17 @@ export function getUrlParam(name) {
 export function objectToStr(obj, arr = []) {
     return Object.keys(obj).map(key => (`${key}=${obj[key]}`)).join('&')
 }
+// 获取地址栏参数
+export function transformParams() {
+    let paramsArray=location.href.split("?")[1].split('&')
+    let paramsObj = {};
+
+    paramsArray.forEach((item) => {
+        let i = item.indexOf('=');
+        paramsObj[item.slice(0, i)] = item.slice(i+1);
+    })
+    return paramsObj
+}   
 
 // 一键复制
 export function coby(val, that) {

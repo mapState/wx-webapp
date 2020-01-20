@@ -1,10 +1,10 @@
 import request from '@/utils/request'
 
-export function wechatSign(data) {
+export function wechatSign(params) {
     return request({
-        url: '/wechat/sign.htm',
-        method: 'post',
-        data
+        url: '/order/sign',
+        method: 'get',
+        params
     })
 }
 export function getOpenId(data) {

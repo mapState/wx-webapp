@@ -128,11 +128,13 @@ import {
   getBusiInfo,
   orderCreate,
   orderBalance,
-  addressFindById
+  addressFindById,
+  wxPay
 } from "@/api/user";
 import { UPLOAD_DOMAIN } from "@/utils/const";
 import { mapGetters } from "vuex";
 import { formatDate } from "@/utils/utils";
+import { weChatPay } from "@/utils/weChatPay";
 export default {
   data() {
     return {
@@ -207,25 +209,36 @@ export default {
           selfDate: this.time,
           list: this.formData.list
         }).then(res => {
-          console.log(res);
-          orderBalance({
-            orderId: res.data
-          }).then(res => {
-            if (res.code == 200) {
-              this.$toast({
-                message: "支付成功"
-              });
-              balance().then(res => {
-                this.money = res.data;
-              });
-              // payDetail({ busiUserId: this.$route.query.id }).then(res => {
-              //   this.detail = res.data;
-              // });
-            }
-          });
-          // this.$toast({
-          //   message: res.message
-          // });
+          if (this.ways == 1) {
+            orderBalance({
+              orderId: res.data
+            }).then(res => {
+              if (res.code == 200) {
+                this.$toast({
+                  message: "支付成功"
+                });
+                balance().then(res => {
+                  this.money = res.data;
+                });
+                // payDetail({ busiUserId: this.$route.query.id }).then(res => {
+                //   this.detail = res.data;
+                // });
+              }
+            });
+          } else {
+            wxPay({
+              addressId: this.detail.addressId,
+              busiUserId: this.busiDetail.id,
+              bySelf: Number(this.checked),
+              message: this.message,
+              money: this.formData.money * 100,
+              selfDate: this.time,
+              list: this.formData.list,
+              type: 1
+            }).then(res => {
+              weChatPay(res.data, location.href);
+            });
+          }
         });
       }
     },
@@ -249,6 +262,18 @@ export default {
       this.$route.query.count ? this.getGoodByDetailId() : this.cartGetByIds();
       getBusiInfo({ busiUserId: this.$route.query.busiUserId }).then(res => {
         this.busiDetail = res.data;
+      });
+      consoleDetail().then(res => {
+        if (!res.data.phone) {
+          let params = transformParams();
+          this.$router.push({
+            path: "/setMobile",
+            query: {
+              url: "/pay",
+              params: JSON.stringify(params)
+            }
+          });
+        }
       });
       balance().then(res => {
         this.money = res.data;

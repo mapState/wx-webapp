@@ -30,7 +30,7 @@
         <div class="position">
           <img src="@/assets/po2.png" class="im1" />
           <span class="out">{{detail.regionAddress+' '+ detail.address}}</span>
-          <img src="@/assets/po3.png" class="im2" />
+          <img src="@/assets/po3.png" class="im2" @click="goTo(detail.lat,detail.lon,detail.money,detail.regionAddress,detail.address)"/>
           <span class="shu"></span>
           <a :href="'tel:'+detail.phone">
             <img src="@/assets/mobile.png" class="im3" />
@@ -165,6 +165,7 @@ import {
 } from "@/api/user";
 import { UPLOAD_DOMAIN } from "@/utils/const";
 import empty from "@/components/empty";
+import wx from "weixin-js-sdk";
 export default {
   components: {
     empty
@@ -199,6 +200,18 @@ export default {
     },
     chooseTab(e) {
       this.tab = e;
+    },
+    goTo(lat, lon,name,regionAddress,address) {
+      wx.ready(() => {
+        wx.openLocation({
+          latitude: lat, // 纬度，浮点数，范围为90 ~ -90
+          longitude: lon, // 经度，浮点数，范围为180 ~ -180。
+          name: regionAddress, // 位置名
+          address: regionAddress+address, // 地址详情说明
+          scale: 1, // 地图缩放级别,整形值,范围从1~28。默认为最大
+          infoUrl: "" // 在查看位置界面底部显示的超链接,可点击跳转
+        });
+      });
     },
     bonus(){
       bonus({ busiUserId: this.$route.query.id }).then(res=>{

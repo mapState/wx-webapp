@@ -13,6 +13,7 @@
 
 <script>
 import { phoneAuth } from "@/api/user";
+import { sendPhone } from "@/api/bussiness";
 export default {
   data() {
     return {
@@ -30,7 +31,8 @@ export default {
       }).then(res => {
         if (this.$route.query.url) {
           this.$router.push({
-            path: this.$route.query.url
+            path: this.$route.query.url,
+            query: JSON.parse(this.$route.query.params)
           });
         }
         this.$toast({
@@ -65,6 +67,7 @@ export default {
   },
 
   mounted() {
+    console.log(this.$route.query);
     this.init();
   }
 };
