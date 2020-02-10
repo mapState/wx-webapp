@@ -3,7 +3,7 @@
     <div class="search">
       <img src="@/assets/position.png" alt="" class="position">
       <span class="city" @click="toNext('/area')">{{$route.query.name||'杭州市'}}</span>
-      <div class="input">
+      <div class="input" @click="toNext('/search')">
         <img src="@/assets/big.png">
         <div class="name" @click="toNext('/search')">商户名/地点/菜名</div>
         <!-- <input type="text" placeholder="" /> -->

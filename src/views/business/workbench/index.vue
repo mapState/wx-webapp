@@ -217,13 +217,13 @@ export default {
       
     },
     busiLineOrder(){
-      busiLineOrder({page:this.page,size:1}).then(res=>{
+      busiLineOrder({page:this.page,size:10}).then(res=>{
         this.sortList = [...this.sortList, ...res.data.data];
         this.totalSort=res.data.total;
       })
     },
     busiFreeOrder(){
-      busiFreeOrder({page:this.page2,size:1}).then(res=>{
+      busiFreeOrder({page:this.page2,size:10}).then(res=>{
         this.freeList = [...this.freeList, ...res.data.data];
         this.totalFree=res.data.total;
       })

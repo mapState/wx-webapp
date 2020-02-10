@@ -230,7 +230,7 @@ export default {
     getLineOrder() {
       lineOrder({
         page: this.page,
-        size: 1,
+        size: 10,
         busiUserId: this.$route.query.id
       }).then(res => {
         this.lineOrder = [...this.lineOrder, ...res.data.data];
@@ -251,7 +251,7 @@ export default {
     getFreeOrder() {
       freeOrder({
         page: this.page2,
-        size: 1,
+        size: 10,
         busiUserId: this.$route.query.id
       }).then(res => {
         this.freeOrder = [...this.freeOrder, ...res.data.data];
