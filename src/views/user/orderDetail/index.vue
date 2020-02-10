@@ -82,7 +82,7 @@
         v-model="message"
         rows="1"
         autosize
-        label="卖家留言"
+        label="买家留言"
         type="textarea"
         maxlength="50"
         placeholder="50字以内（选填）"
