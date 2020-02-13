@@ -136,7 +136,7 @@
         <img src="@/assets/red.png" />
         <div class="up">
           <img src="@/assets/cha.png" @click="show=false"/>
-          <div class="num">5000.00</div>
+          <div class="num">{{rewardNum/100}}</div>
           <div class="tip">恭喜您抽中奖金(元)</div>
           <div class="sub">确定</div>
         </div>
@@ -154,7 +154,6 @@
 <script>
 import {
   getBusiInfo,
-  typeSearch,
   lineOrder,
   freeOrder,
   bonusRollData,
@@ -182,6 +181,7 @@ export default {
       totalFree: 0,
       bonusRollData: [],
       page: 1,
+      rewardNum:0,
       page2: 1,
       status: 0,
       detail: {},
@@ -216,6 +216,7 @@ export default {
     bonus(){
       bonus({ busiUserId: this.$route.query.id }).then(res=>{
         this.show=true
+        this.rewardNum=res.data
       })
     },
     changePage(t) {
@@ -266,14 +267,15 @@ export default {
         this.bonusRollData = res.data;
       });
       var mid = new Date(
-        new Date(new Date().toLocaleDateString()).getTime() +
-          15 * 60 * 60 * 1000
+              new Date(new Date().toLocaleDateString()).getTime() +
+              18 * 60 * 60 * 1000
       ).getTime();
       var end = new Date(
-        new Date(new Date().toLocaleDateString()).getTime() +
-          16 * 60 * 60 * 1000
+              new Date(new Date().toLocaleDateString()).getTime() +
+              19 * 60 * 60 * 1000
       ).getTime();
       this.time = mid - new Date().getTime();
+      console.log(this.time)
       getBusiInfo({ busiUserId: this.$route.query.id }).then(res => {
         this.detail = res.data;
       });

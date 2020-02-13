@@ -251,7 +251,7 @@ export default {
       }
     },
     toAd() {
-      location.href = this.imgUrl;
+      // location.href = this.imgUrl;
     },
     init() {
       getGoodType().then(res => {

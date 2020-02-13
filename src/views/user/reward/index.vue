@@ -71,7 +71,7 @@
         <img src="@/assets/red.png">
         <div class="up">
           <img src="@/assets/cha.png" @click="show=false">
-          <div class="num">5000.00</div>
+          <div class="num">{{rewardNum/100}}</div>
           <div class="tip">恭喜您抽中奖金(元)</div>
           <div class="sub">确定</div>
         </div>
@@ -113,6 +113,7 @@ export default {
       total2: 0,
       page: 1,
       page2: 1,
+      rewardNum:0,
       show: false,
       over: false,
       url: UPLOAD_DOMAIN,
@@ -165,6 +166,7 @@ export default {
           19 * 60 * 60 * 1000
       ).getTime();
       this.time2 = mid - new Date().getTime();
+      console.log(this.time2)
       platBonusDetail().then(res => {
         this.detail = res.data;
         for (let i = 0; i < this.detail.lenth; i++) {
