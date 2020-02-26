@@ -108,7 +108,8 @@
             />
           </van-cell-group>
         </div>
-        <van-button type="danger" class="sub" @click="chooseAddress">保存</van-button>
+        <div style="background:#FFCC85;text-align:center;line-height:35px;font-size:16px;color:#5A3504;margin-top:15px;border-radius:5px">保存</div>
+        <!-- <van-button type="danger" class="sub" @click="chooseAddress">保存</van-button> -->
       </div>
     </van-popup>
     <van-popup v-model="rankShow">
