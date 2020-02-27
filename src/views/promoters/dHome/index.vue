@@ -109,7 +109,7 @@ export default {
     },
     init() {
       console().then(res => {
-        this.value = "http://192.168.1.118:8080/#/regist?id=" + res.data.mak.id;
+        this.value = "http://hxkjzjlm.top/home/#/regist?id=" + res.data.mak.id;
         this.detail = res.data;
       });
     }
