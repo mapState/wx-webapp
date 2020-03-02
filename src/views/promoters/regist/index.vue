@@ -88,12 +88,11 @@ export default {
         let obj = { ...this.formData, pid: this.$route.query.id || 0 };
         makAdd(obj).then(res => {
           if (res.code == 200) {
-            // this.$router.push({
-            //   path: "/login",
-            //   query: {
-            //     where: 1
-            //   }
-            // });
+            this.$router.push({
+              path: "/s6"
+            });
+            
+          }else{
             this.$toast({
               message: res.message
             });

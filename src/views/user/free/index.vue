@@ -33,7 +33,7 @@
           <div class="name">{{item.name}}</div>
           <div class="labels">
             <div>{{item.days}}天前消费</div>
-            <div>免单排名第{{item.id-1}}名</div>
+            <div>免单排名第{{item.id}}名</div>
           </div>
           <div class="instro out">商家当前累计抽奖池：{{item.bonusCount/100}}元</div>
           <div class="right upDown">

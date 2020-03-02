@@ -2,12 +2,12 @@
   <div v-wechat-title="$route.meta.title" class="container">
     <div class="total">累计抽奖获得：{{total/100}}元</div>
     <div class="list">
-      <div class="item" v-for="(item,i) in list" :key="i" @click="item.type==2?toNext('/merchantsList/merchantsDetail',item.busiUserId):''">
-        <img :src="url+item.storeImageUrl" class="cover" v-if="item.type==2"/>
+      <div class="item" v-for="(item,i) in list" :key="i" @click="item.type!=2?toNext('/merchantsList/merchantsDetail',item.busiUserId):''">
+        <img :src="url+item.storeImageUrl" class="cover" v-if="item.type!=2"/>
         <img src="@/assets/yu2.png" class="cover" v-else/>
         <div class="name">
           {{item.name||"平台抽奖"}}
-          <span v-if="item.type==2">{{item.name}}</span>
+          <span v-if="item.type!=2">{{item.name}}</span>
         </div>
         <div class="instro out">抽奖时间 {{item.createDate}}</div>
         <div class="right upDown">

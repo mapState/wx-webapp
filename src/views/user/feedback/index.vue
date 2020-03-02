@@ -3,7 +3,7 @@
     <div class="tip">*请输入您要反馈的问题，我们将尽快为您处理</div>
     <div class="text">
       <van-cell-group>
-        <van-field v-model="message" rows="5" autosize type="textarea" placeholder="请输入留言" />
+        <van-field v-model="message" rows="5" autosize type="textarea" placeholder="请输入留言"/>
       </van-cell-group>
     </div>
     <div class="btn" @click="feedback">提交</div>
@@ -21,9 +21,15 @@ export default {
   methods: {
     feedback() {
       feedback({ content: this.message }).then(res => {
-        this.$toast({
-          message: res.message
-        });
+        if (res.code == 200) {
+          this.$router.push({
+            path: "/s4"
+          });
+        } else {
+          this.$toast({
+            message: res.message
+          });
+        }
       });
     },
     init() {}

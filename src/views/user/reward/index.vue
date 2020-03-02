@@ -71,7 +71,7 @@
         <img src="@/assets/red.png">
         <div class="up">
           <img src="@/assets/cha.png" @click="show=false">
-          <div class="num">{{rewardNum/100}}</div>
+          <div class="num">{{(rewardNum/100).toFixed(2)}}</div>
           <div class="tip">恭喜您抽中奖金(元)</div>
           <div class="sub">确定</div>
         </div>

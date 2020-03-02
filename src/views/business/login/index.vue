@@ -7,17 +7,17 @@
     </div>
     <div class="input">
       <div class="item">
-        <img src="@/assets/user.png" class="upDown" />
+        <img src="@/assets/user.png" class="upDown">
         <div class="shu upDown"></div>
         <div class="mid upDown">
-          <van-field v-model="phone" placeholder="请输入您的手机号码" />
+          <van-field v-model="phone" placeholder="请输入您的手机号码"/>
         </div>
       </div>
       <div class="item" v-if="type==1">
-        <img src="@/assets/lock.png" class="upDown" />
+        <img src="@/assets/lock.png" class="upDown">
         <div class="shu upDown"></div>
         <div class="mid upDown">
-          <van-field v-model="code" placeholder="请输入验证码" />
+          <van-field v-model="code" placeholder="请输入验证码"/>
         </div>
         <span
           class="upDown"
@@ -26,10 +26,10 @@
         >{{timeShow?this.time+'s':'获取验证码'}}</span>
       </div>
       <div class="item" v-else>
-        <img src="@/assets/lock.png" class="upDown" />
+        <img src="@/assets/lock.png" class="upDown">
         <div class="shu upDown"></div>
         <div class="mid upDown">
-          <van-field v-model="password" placeholder="请输入密码" type="password" />
+          <van-field v-model="password" placeholder="请输入密码" type="password"/>
         </div>
       </div>
     </div>
@@ -42,7 +42,8 @@
 </template>
 
 <script>
-import { login, sendPhone } from "@/api/bussiness";
+import { login, sendPhone, updateOpenId } from "@/api/bussiness";
+import { GetCookie } from "@/utils/utils";
 import { makLogin } from "@/api/mak";
 import wx from "weixin-js-sdk";
 export default {
@@ -56,7 +57,7 @@ export default {
       time: 60,
       checked: true,
       type: 1,
-      title:""
+      title: ""
     };
   },
   methods: {
@@ -88,6 +89,30 @@ export default {
             if (res.code == 200) {
               this.$router.push({
                 path: "/workbench"
+              });
+            } else if (res.code == 102) {
+              this.$dialog
+                .confirm({
+                  title: "确认支付吗？"
+                })
+                .then(() => {
+                  updateOpenId({ openId: GetCookie("openId") }).then(res => {
+                    this.$toast({
+                      message: res.message
+                    });
+                    this.$router.push({
+                      path: "/workbench"
+                    });
+                  });
+                })
+                .catch(() => {
+                  this.$router.push({
+                    path: "/workbench"
+                  });
+                });
+            } else {
+              this.$toast({
+                message: res.message
               });
             }
           });
@@ -122,11 +147,11 @@ export default {
       }
     },
     init() {
-       if (this.$route.query.where){
-         this.title="创客登录"
-       }else{
-         this.title="商家登录"
-       }
+      if (this.$route.query.where) {
+        this.title = "创客登录";
+      } else {
+        this.title = "商家登录";
+      }
     }
   },
 

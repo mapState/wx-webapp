@@ -4,20 +4,18 @@
       免单总金额:
       <span>￥{{detail.totalMoney/100}}</span>
     </div>
-    <div class="item">
-      拆分笔数
+    <div class="item">拆分笔数
       <div class="step upDown">
-        <van-stepper v-model="value" />
+        <van-stepper v-model="value"/>
       </div>
     </div>
     <div class="item" style="border-bottom:10px solid #f2f2f2">
       每笔奖励
       <span class="num">￥{{detail.totalMoney/100/value}}</span>
     </div>
-    <div class="item">
-      免单用户
+    <div class="item">免单用户
       <div class="user">
-        <img :src="url+detail.userLogo" class="upDown" />
+        <img :src="url+detail.userLogo" class="upDown">
         {{detail.userName}}
       </div>
     </div>
@@ -34,7 +32,7 @@
 </template>
 
 <script>
-import { orderDetail,orderSplit } from "@/api/bussiness";
+import { orderDetail, orderSplit } from "@/api/bussiness";
 import { UPLOAD_DOMAIN } from "@/utils/const";
 export default {
   data() {
@@ -43,21 +41,30 @@ export default {
       url: UPLOAD_DOMAIN,
       detail: {
         list: []
-      },
+      }
     };
   },
   methods: {
-    orderSplit(){
-      orderSplit({orderId: this.$route.query.orderId,count:this.value}).then(res=>{
-        this.$toast({
-          message: res.message
-        });
-      })
+    orderSplit() {
+      orderSplit({
+        orderId: this.$route.query.orderId,
+        count: this.value
+      }).then(res => {
+        if (res.code == 200) {
+          this.$router.push({
+            path: "/s3"
+          });
+        } else {
+          this.$toast({
+            message: res.message
+          });
+        }
+      });
     },
     init() {
       orderDetail({ orderId: this.$route.query.orderId }).then(res => {
         this.detail = res.data;
-        let sum=0;
+        let sum = 0;
         for (let j = 0; j < this.detail.list.length; j++) {
           sum += this.detail.list[j].count;
         }

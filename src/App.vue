@@ -21,6 +21,11 @@ export default {
   mounted() {
     weChatAuth();
     wechatSdk()
+    // login({
+    //   openId: "56845648456",
+    //   name: "zxx",
+    //   logoUrl: "dfdf"
+    // });
     this.init();
   }
 };

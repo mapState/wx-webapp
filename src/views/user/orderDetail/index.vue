@@ -225,9 +225,14 @@ export default {
                   orderId: res.data
                 }).then(res => {
                   if (res.code == 200) {
-                    this.$toast({
-                      message: "支付成功"
-                    });
+                    this.$router.push({
+                    path: "/s2",
+                    query:{
+                      name:this.busiDetail.name,
+                      id:this.busiDetail.id,
+                      money:this.formData.money
+                    }
+                  });
                     balance().then(res => {
                       this.money = res.data;
                     });
@@ -251,7 +256,7 @@ export default {
               list: this.formData.list,
               type: 1
             }).then(res => {
-              weChatPay(res.data, location.href);
+              weChatPay(res.data, "http://hxkjzjlm.top/home/#/s2?id=" + this.busiDetail.id+'&name='+this.busiDetail.name+'&money='+this.formData.money);
             });
           }
         });

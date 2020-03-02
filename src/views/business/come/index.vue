@@ -229,9 +229,9 @@ export default {
                   this.$toast({
                     message: res.message
                   });
-                  // this.$router.push({
-                  //   path: "/login"
-                  // });
+                  this.$router.push({
+                    path: "/s1"
+                  });
                 }
               });
             } else {

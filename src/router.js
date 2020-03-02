@@ -1,6 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+const s1 = () => import("@/views/success/s1.vue")
+const s2 = () => import("@/views/success/s2.vue")
+const s3 = () => import("@/views/success/s3.vue")
+const s4 = () => import("@/views/success/s4.vue")
+const s5 = () => import("@/views/success/s5.vue")
+const s6 = () => import("@/views/success/s6.vue")
 
 // 创客
 const dHome = () => import("@/views/promoters/dHome")
@@ -70,6 +76,12 @@ const merchantsDetail = () => import("@/views/user/merchantsList/merchantsDetail
 Vue.use(Router)
 export default new Router({
 	routes: [
+		{ path: '/s1', component: s1,meta: { title: '商家入驻 ' }},
+		{ path: '/s2', component: s2,meta: { title: '支付 ' }},
+		{ path: '/s3', component: s3,meta: { title: '订单拆分 ' }},
+		{ path: '/s4', component: s4,meta: { title: '我要反馈 ' }},
+		{ path: '/s5', component: s5,meta: { title: '发表评价 ' }},
+		{ path: '/s6', component: s6,meta: { title: '创客注册 ' }},
 		{ path: '/totalRed', component: totalRed, meta: { title: '已结算分红' } },
 		{ path: '/area', component: area, meta: { title: '选择城市' } },
 		{ path: '/team', component: team, meta: { title: '团队人员' } },

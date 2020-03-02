@@ -4,7 +4,7 @@
       <!-- <img :src="url+detail.storeImageUrl" alt /> -->
       <div class="imgTop">
         <div class="up"></div>
-        <img :src="url+detail.storeImageUrl" alt />
+        <img :src="url+detail.storeImageUrl" alt="">
       </div>
     </div>
     <div class="content">
@@ -16,17 +16,17 @@
           <div>抽奖池{{detail.bonusMoney/100}}元</div>
         </div>
         <div class="position">
-          <img src="@/assets/po2.png" class="im1" />
+          <img src="@/assets/po2.png" class="im1">
           <span class="out">{{detail.regionAddress+' '+ detail.address}}</span>
           <img
             src="@/assets/po3.png"
             class="im2"
             v-if="device().weChat"
             @click="goTo(detail.lat,detail.lon,detail.money,detail.regionAddress,detail.address)"
-          />
+          >
           <span class="shu"></span>
           <a :href="'tel:'+detail.phone">
-            <img src="@/assets/mobile.png" class="im3" />
+            <img src="@/assets/mobile.png" class="im3">
           </a>
         </div>
         <img
@@ -34,35 +34,36 @@
           class="shou"
           v-if="status==0&&device().weChat"
           @click="collect"
-        />
+        >
         <img
           src="@/assets/starA.png"
           class="shou"
           v-else-if="status==1&&device().weChat"
           @click="collect"
-        />
+        >
       </div>
       <div class="input">
-        <span>支付金额:</span>
-        <input placeholder="请输入支付金额" v-model="money" type="number" />
+        <!-- <span>支付金额:</span>
+        <input placeholder="请输入支付金额" v-model="money" type="number"> -->
+        <van-field v-model="money" label="支付金额：" type="number"/>
       </div>
       <div class="ways">
         <van-radio-group v-model="ways">
           <div class="item" @click="ways='1'">
-            <img src="@/assets/way1.png" class="upDown" />余额支付
+            <img src="@/assets/way1.png" class="upDown">余额支付
             <div class="upDown mid">剩余{{detail.cusMoney/100}}</div>
             <div class="upDown right">
               <van-radio name="1"></van-radio>
             </div>
           </div>
           <div class="item" @click="ways='2'" v-if="device().weChat">
-            <img src="@/assets/way2.png" class="upDown" />微信支付
+            <img src="@/assets/way2.png" class="upDown">微信支付
             <div class="upDown right">
               <van-radio name="2"></van-radio>
             </div>
           </div>
           <div class="item" @click="ways='3'" v-else>
-            <img src="@/assets/way3.png" class="upDown" />支付宝支付
+            <img src="@/assets/way3.png" class="upDown">支付宝支付
             <div class="upDown right">
               <van-radio name="3"></van-radio>
             </div>
@@ -140,11 +141,20 @@ export default {
                 money: this.money * 100
               }).then(res => {
                 if (res.code == 200) {
-                  this.$toast({
-                    message: "支付成功"
+                  this.$router.push({
+                    path: "/s2",
+                    query:{
+                      name:this.detail.name,
+                      id:this.$route.query.id,
+                      money:this.money
+                    }
                   });
                   payDetail({ busiUserId: this.$route.query.id }).then(res => {
                     this.detail = res.data;
+                  });
+                } else {
+                  this.$toast({
+                    message: res.message
                   });
                 }
               });
@@ -158,14 +168,14 @@ export default {
             money: this.money * 100,
             type: 2
           }).then(res => {
-            weChatPay(res.data, location.href);
+            weChatPay(res.data, "http://hxkjzjlm.top/home/#/s2?id=" + this.$route.query.id+'&name='+this.detail.name+'&money='+this.money);
           });
         } else {
           aliPay({
             busiUserId: this.$route.query.id,
             money: this.money * 100,
             type: 3,
-            message: location.href
+            message: "http://hxkjzjlm.top/home/#/s2?id=" + this.$route.query.id+'&name='+this.detail.name+'&money='+this.money
           }).then(res => {
             const div = document.createElement("div");
             div.innerHTML = res.data;
@@ -220,5 +230,8 @@ export default {
   font-size: 15px;
   font-weight: bold;
   color: rgba(255, 59, 48, 1);
+}
+>>>.van-field__label{
+  width: auto;
 }
 </style>

@@ -5,7 +5,7 @@
       编辑商品
       <div class="right">
         <span @click="add(1)">上架</span>
-        <a @click="add(0)">保存</a>
+        <a @click="add(0)">下架</a>
       </div>
     </div>
     <div class="item" style="border-bottom:1px solid #ddd">

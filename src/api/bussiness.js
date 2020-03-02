@@ -198,3 +198,11 @@ export function busiQrcode() {
         responseType: "arraybuffer"
     })
 }
+
+export function updateOpenId(data) {
+    return request({
+        url: '/front/busi/updateOpenId',
+        method: 'post',
+        data
+    })
+}

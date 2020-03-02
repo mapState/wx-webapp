@@ -10,6 +10,7 @@
         title-active-color="#000"
         @click="chooseTab"
       >
+        <van-tab title="全部" name=" "></van-tab>
         <van-tab :title="item.name" v-for="(item,i) in tabs" :key="i" :name="item.id"></van-tab>
       </van-tabs>
     </div>

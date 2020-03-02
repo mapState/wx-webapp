@@ -71,7 +71,7 @@ export default {
           publish(obj, this.$route.query.id).then(res => {
             if (res.code == 200) {
               this.$router.push({
-                path: '/success'
+                path: '/s5'
               });
             }
           });

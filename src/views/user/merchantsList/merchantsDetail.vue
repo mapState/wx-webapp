@@ -73,7 +73,7 @@
           <span>{{i+1}}</span>
           <img :src="url+item.image" class="upDown" />
           <div class="name upDown">{{item.name}}</div>
-          <div class="tip upDown" v-show="i==0">还差{{item.money/100-item.bonusMoney/100}}元够免单</div>
+          <div class="tip upDown" v-show="i==0">还差{{(item.money/100-item.bonusMoney/100).toFixed(1)}}元够免单</div>
           <div class="right upDown">
             <div class="in upDown" style="width:100%">
               <div class="money"><b>{{item.money/100}}</b>元</div>待奖励
@@ -136,7 +136,7 @@
         <img src="@/assets/red.png" />
         <div class="up">
           <img src="@/assets/cha.png" @click="show=false"/>
-          <div class="num">{{rewardNum/100}}</div>
+          <div class="num">{{(rewardNum/100).toFixed(2)}}</div>
           <div class="tip">恭喜您抽中奖金(元)</div>
           <div class="sub">确定</div>
         </div>
