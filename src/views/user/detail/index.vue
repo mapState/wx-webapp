@@ -9,7 +9,7 @@
     <div class="list">
       <div class="item" v-for="(item,i) in balanceDetails" :key="i" @click="item.type==7||item.type==6||item.type==5||item.type==4?toNext('/merchantsList/merchantsDetail',item.busiUserId):''">
         <img src="@/assets/yu.png" class="cover" v-if="item.type==1"/>
-        <img src="@/assets/yu2.png" class="cover" v-else-if="item.type==2"/>
+        <img src="@/assets/yu3.png" class="cover" v-else-if="item.type==2"/>
         <img src="@/assets/yu2.png" class="cover" v-else-if="item.type==3"/>
         <img :src="url+item.storeImageUrl" class="cover" v-else/>
         <div class="name">

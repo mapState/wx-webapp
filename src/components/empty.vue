@@ -32,7 +32,7 @@ export default {
   img {
     display: block;
     width: 99px;
-    margin: 0 auto;
+    margin-left: 38%;
     margin-top: 25px;
   }
   .tip {
