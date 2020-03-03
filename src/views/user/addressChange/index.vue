@@ -63,6 +63,30 @@ export default {
       this.show = false;
     },
     addressUpdate() {
+      if(this.formData.phone.length!=11){
+        this.$toast({
+          message: '手机号格式不正确'
+        });
+        return;
+      }
+      if(!this.formData.name){
+        this.$toast({
+          message: '收货人必填'
+        });
+        return;
+      }
+      if(!this.formData.regionAddress){
+        this.$toast({
+          message: '请选择地区'
+        });
+        return;
+      }
+      if(!this.formData.address){
+        this.$toast({
+          message: '请填写详细地址'
+        });
+        return;
+      }
       let obj = { ...this.formData };
       obj.moren = Number(obj.moren);
       addressUpdate(obj).then(res => {

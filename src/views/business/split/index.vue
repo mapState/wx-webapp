@@ -82,4 +82,7 @@ export default {
 @import "./style/index.scss";
 </style>
 <style scoped>
+>>> .van-stepper__input{
+  line-height: 30px;
+}
 </style>

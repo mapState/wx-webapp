@@ -215,4 +215,7 @@ export default {
 >>> .van-popup {
   background: transparent;
 }
+>>> .van-stepper__input{
+  line-height: 30px;
+}
 </style>

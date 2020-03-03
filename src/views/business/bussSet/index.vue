@@ -43,7 +43,7 @@
         <van-switch v-model="detail.supportExpress" size="20px"/>
       </div>
     </div>
-    <div class="get">到店取货
+    <div class="get" style="border-bottom:1px solid #ddd">到店取货
       <div class="right upDown">
         <van-switch v-model="detail.supportStore" size="20px"/>
       </div>
@@ -56,7 +56,12 @@
 </template>
 
 <script>
-import { getBusiInfo, updateBusiInfo,updateOpenId } from "@/api/bussiness";
+import {
+  getBusiInfo,
+  updateBusiInfo,
+  updateOpenId,
+  logout
+} from "@/api/bussiness";
 import { UPLOAD_DOMAIN } from "@/utils/const";
 import { uploadImg } from "@/utils/upload";
 export default {
@@ -98,10 +103,18 @@ export default {
     },
     logout() {
       logout().then(res => {
-        updateOpenId({openId:''})
-        this.$router.push({
-          path: "/login"
-        });
+        this.$dialog
+          .confirm({
+            title: "是否解除绑定微信？"
+          })
+          .then(() => {
+            updateOpenId({ openId: "" });
+            this.$router.push({
+              path: "/login"
+            });
+          })
+          .catch(() => {
+          });
       });
     },
     getBusiInfo() {

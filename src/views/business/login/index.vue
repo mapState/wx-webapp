@@ -87,29 +87,31 @@ export default {
             code: this.code
           }).then(res => {
             if (res.code == 200) {
-              this.$router.push({
-                path: "/workbench"
-              });
-            } else if (res.code == 102) {
-              this.$dialog
-                .confirm({
-                  title: "确认支付吗？"
-                })
-                .then(() => {
-                  updateOpenId({ openId: GetCookie("openId") }).then(res => {
-                    this.$toast({
-                      message: res.message
+              if (!res.data.open_id) {
+                this.$dialog
+                  .confirm({
+                    title: "是否绑定微信"
+                  })
+                  .then(() => {
+                    updateOpenId({ openId: GetCookie("openId") }).then(res => {
+                      this.$toast({
+                        message: res.message
+                      });
+                      this.$router.push({
+                        path: "/workbench"
+                      });
                     });
+                  })
+                  .catch(() => {
                     this.$router.push({
                       path: "/workbench"
                     });
                   });
-                })
-                .catch(() => {
-                  this.$router.push({
-                    path: "/workbench"
-                  });
+              } else {
+                this.$router.push({
+                  path: "/workbench"
                 });
+              }
             } else {
               this.$toast({
                 message: res.message

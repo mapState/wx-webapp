@@ -200,4 +200,5 @@ export default {
   height: 36px;
   margin: 0 auto;
 }
+
 </style>
