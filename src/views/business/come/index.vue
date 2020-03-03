@@ -108,7 +108,7 @@
             />
           </van-cell-group>
         </div>
-        <div style="background:#FFCC85;text-align:center;line-height:35px;font-size:16px;color:#5A3504;margin-top:15px;border-radius:5px">保存</div>
+        <div style="background:#FFCC85;text-align:center;line-height:35px;font-size:16px;color:#5A3504;margin-top:15px;border-radius:5px" @click="chooseAddress">保存</div>
         <!-- <van-button type="danger" class="sub" @click="chooseAddress">保存</van-button> -->
       </div>
     </van-popup>
