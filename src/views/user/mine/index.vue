@@ -1,7 +1,7 @@
 <template>
   <div v-wechat-title="$route.meta.title" class="container">
     <div class="info">
-      <img :src="url+detail.image" class="photo" />
+      <img :src="detail.image" class="photo" />
       <div class="name">{{detail.name}}</div>
       <div class="mobile">{{detail.phone?detail.phone:'未认证'}}</div>
       <img src="@/assets/set.png" class="set" @click="toNext('/set')" />
@@ -180,6 +180,9 @@ export default {
     getConsole() {
       console().then(res => {
         this.detail = res.data;
+        if(!this.detail.image.match('http')){
+          this.detail.image=this.url+this.detail.image
+        }
       });
     },
     init() {

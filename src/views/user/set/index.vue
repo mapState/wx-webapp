@@ -78,8 +78,9 @@ export default {
     consoleDetail() {
       consoleDetail().then(res => {
         this.detail = res.data;
+        this.name=res.data.name;
         if(!this.detail.image.match('http')){
-          this.detail.image=this.url-this.detail.image
+          this.detail.image=this.url+this.detail.image
         }
       });
     },

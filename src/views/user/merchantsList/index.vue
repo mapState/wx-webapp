@@ -1,7 +1,7 @@
 <template>
   <div v-wechat-title="$route.meta.title" class="container">
     <div class="search">
-      <van-search placeholder="商家名称" background="#fff" v-model="name" @search="searchName" />
+      <van-search placeholder="商家名称" background="#fff" v-model="name" @search="searchName"/>
     </div>
     <div class="tabs">
       <van-tabs
@@ -18,21 +18,21 @@
       <div :class="{active:sort==1}" @click="chooseSort(1)">推荐</div>
       <div :class="{active:sort==2}" @click="chooseSort(2)">
         距离
-        <img src="@/assets/shang2.png" v-if="sort==2&&search.type2===1" />
-        <img src="@/assets/xia2.png" v-else-if="sort==2&&search.type2===0" />
-        <img src="@/assets/ud.png" v-else />
+        <img src="@/assets/shang2.png" v-if="sort==2&&search.type2===1">
+        <img src="@/assets/xia2.png" v-else-if="sort==2&&search.type2===0">
+        <img src="@/assets/ud.png" v-else>
       </div>
       <div :class="{active:sort==3}" @click="chooseSort(3)">
         人气
-        <img src="@/assets/shang2.png" v-if="sort==3&&search.type3===1" />
-        <img src="@/assets/xia2.png" v-else-if="sort==3&&search.type3===0" />
-        <img src="@/assets/ud.png" v-else />
+        <img src="@/assets/shang2.png" v-if="sort==3&&search.type3===1">
+        <img src="@/assets/xia2.png" v-else-if="sort==3&&search.type3===0">
+        <img src="@/assets/ud.png" v-else>
       </div>
       <div :class="{active:sort==4}" @click="chooseSort(4)">
         优惠
-        <img src="@/assets/shang2.png" v-if="sort==4&&search.type4===1" />
-        <img src="@/assets/xia2.png" v-else-if="sort==4&&search.type4===0" />
-        <img src="@/assets/ud.png" v-else />
+        <img src="@/assets/shang2.png" v-if="sort==4&&search.type4===1">
+        <img src="@/assets/xia2.png" v-else-if="sort==4&&search.type4===0">
+        <img src="@/assets/ud.png" v-else>
       </div>
     </div>
     <div class="list" style="background:#fff">
@@ -42,7 +42,7 @@
         v-for="(item,i) in list"
         :key="i"
       >
-        <img :src="url+item.storeImageUrl" class="cover" />
+        <img :src="url+item.storeImageUrl" class="cover">
         <div class="name">{{item.name}}</div>
         <div class="labels" style="margin-bottom:10px">
           <div style="border:none;padding:0;font-size:13px;margin-right:5px">{{item.category}}</div>
@@ -55,7 +55,7 @@
         <div class="instro out">{{item.firm}}</div>
         <div class="num">{{(item.juli/1000).toFixed(1)}}km</div>
       </div>
-      <empty msg="暂无数据" v-show="list.length==0" />
+      <empty msg="暂无数据" v-show="list.length==0"/>
     </div>
   </div>
 </template>
@@ -63,7 +63,7 @@
 <script>
 import { typeB, typeSearch } from "@/api/user";
 import { UPLOAD_DOMAIN } from "@/utils/const";
-import { GetCookie, SetCookie } from '@/utils/utils'
+import { GetCookie, SetCookie } from "@/utils/utils";
 import empty from "@/components/empty";
 export default {
   components: {
@@ -117,8 +117,8 @@ export default {
       typeSearch({
         page: 1,
         size: 100,
-        lat: GetCookie('lat'),
-        lon: GetCookie('lng'),
+        lat: GetCookie("lat"),
+        lon: GetCookie("lng"),
         ...this.search,
         typeaId: this.$route.query.id,
         typebId: this.typeId
@@ -129,10 +129,8 @@ export default {
     init() {
       typeB({ id: this.$route.query.id }).then(res => {
         this.tabs = res.data;
-        this.typeId=res.data[0].id
         this.getList();
       });
-      
     }
   },
 

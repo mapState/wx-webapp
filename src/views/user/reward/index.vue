@@ -9,9 +9,8 @@
       <div class="tip2">*抽奖资格：{{detail.bonusCount}}次</div>
       <div class="tip3">*每日抽奖时间为:18:00-19:00</div>
       <button type="primary" class="btn" :disabled="true" v-if="time2<-3600000">抽奖结束</button>
-      <button type="primary" class="btn" @click="platBonus">开始抽奖</button>
-      <!-- <button type="primary" class="btn" v-else-if="time2>-3600000&&time2<0" @click="platBonus">开始抽奖</button>
-      <button type="primary" class="btn" :disabled="true" v-else> -->
+      <button type="primary" class="btn" v-else-if="time2>-3600000&&time2<0" @click="platBonus">开始抽奖</button>
+      <button type="primary" class="btn" :disabled="true" v-else>
         <van-count-down :time="time2" format="抽奖倒计时：HH:mm:ss"/>
       </button>
     </div>
