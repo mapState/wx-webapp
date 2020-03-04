@@ -62,6 +62,7 @@
         multiple
         :max-count="2"
         :after-read="(file)=>onRead(file,'fileList')"
+        @delete="del"
       >
         <div class="upload">
           <van-icon name="plus"/>
@@ -70,7 +71,7 @@
     </div>
     <div class="photos">
       <div class="title">营业执照</div>
-      <van-uploader :after-read="(file)=>onRead(file,'businessLicenseUrl')">
+      <van-uploader :after-read="(file)=>onRead(file,'businessLicenseUrl')" >
         <img :src="url+formData.businessLicenseUrl" alt="" v-if="formData.businessLicenseUrl">
         <div class="upload" v-else>
           <van-icon name="plus"/>
@@ -181,20 +182,15 @@ export default {
   methods: {
     async onRead(file, type) {
       console.log(file);
+
       if (Array.isArray(file)) {
+        let arr = [];
         for (let i = 0; i < file.length; i++) {
           let url = await uploadImg(file[i]);
-          if (type == "fileList") {
-            this.fileList[this.fileList.length - 1].url = url;
-            let arr = [];
-            for (let i = 0; i < this.fileList.length; i++) {
-              arr.push(this.fileList[i].url);
-            }
-            this.formData.legalCardUrl = arr.toString();
-          } else {
-            this.formData[type] = url;
-          }
+          arr.push(url);
         }
+        this.formData.legalCardUrl = arr.toString();
+        console.log(this.formData.legalCardUrl)
       } else {
         let url = await uploadImg(file);
         if (type == "fileList") {
@@ -208,6 +204,11 @@ export default {
           this.formData[type] = url;
         }
       }
+    },
+    async del(file,i){
+      let arr=this.formData.legalCardUrl.split(',')
+      arr.splice(i.index,1)
+      this.formData.legalCardUrl=arr.toString()
     },
     chooseArea(e) {
       this.formData.province = e[0].code;

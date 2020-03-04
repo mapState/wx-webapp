@@ -29,6 +29,7 @@
         multiple
         :max-count="4"
         :after-read="(file)=>onRead(file,'image')"
+        @delete="(file,i)=>del(file,i,'image')"
       />
     </div>
     <div class="photos">
@@ -40,6 +41,7 @@
         v-model="formData.descImage"
         multiple
         :after-read="(file)=>onRead(file,'descImage')"
+        @delete="(file,i)=>del(file,i,'image')"
       />
     </div>
     <div class="size" v-for="(item,i) in formData.list" :key="i">
@@ -102,18 +104,25 @@ export default {
       if (type === "one") {
         let url = await uploadImg(file);
         this.formData.list[i].image = url;
-        console.log(this.formData.list[i].image);
       } else {
+        let length = this.formData[type].length;
         if (Array.isArray(file)) {
           for (let i = 0; i < file.length; i++) {
             let url = await uploadImg(file[i]);
-            this.formData[type][this.formData[type].length - 1].url = url;
+            this.formData[type][length - 2].url = url;
+            length++;
+            
           }
         } else {
           let url = await uploadImg(file);
           this.formData[type][this.formData[type].length - 1].url = url;
         }
       }
+    },
+    async del(file, i, type) {
+      console.log(this.formData[type])
+      this.formData[type].splice(i.index, 1);
+      
     },
     addSize() {
       this.formData.list.push({

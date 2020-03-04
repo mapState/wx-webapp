@@ -25,7 +25,7 @@
       <div class="title">折扣让利：
         <div style="color:#aaa;font-size:12px;display:inline-block">输入80即8折</div>
       </div>
-      <div class="right upDown">{{detail.concessionDiscount}}</div>
+      <div class="right upDown">当前折扣{{detail.concessionDiscount/10}}折</div>
       <van-cell-group>
         <van-field v-model="detail.concessionDiscount" type="number"/>
       </van-cell-group>
@@ -96,16 +96,19 @@ export default {
       let obj = this.detail;
       obj.supportExpress = Number(obj.supportExpress);
       obj.supportStore = Number(obj.supportStore);
-      if(obj.concessionDiscount<this.detail.lowDiscount){
+      if (obj.concessionDiscount > this.detail.lowDiscount) {
         this.$toast({
-          message: `当前让利比例不能少于${this.detail.lowDiscount}%`
+          message: `请输入小于${this.detail.lowDiscount}的数值`
         });
-        
-      }
-      updateBusiInfo(obj).then(res => {
-        
         this.getBusiInfo();
-      });
+      } else {
+        updateBusiInfo(obj).then(res => {
+          this.getBusiInfo();
+          this.$toast({
+            message: `更新成功`
+          });
+        });
+      }
     },
     logout() {
       logout().then(res => {
@@ -119,8 +122,7 @@ export default {
               path: "/login"
             });
           })
-          .catch(() => {
-          });
+          .catch(() => {});
       });
     },
     getBusiInfo() {
