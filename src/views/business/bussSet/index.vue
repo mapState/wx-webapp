@@ -22,10 +22,12 @@
       </van-cell-group>
     </div>
     <div class="input">
-      <div class="title">折扣让利：</div>
+      <div class="title">折扣让利：
+        <div style="color:#aaa;font-size:12px;display:inline-block">输入80即8折</div>
+      </div>
       <div class="right upDown">{{detail.concessionDiscount}}</div>
       <van-cell-group>
-        <van-field v-model="detail.concessionDiscount" placeholder="当前让利比例不能少于80%" type="number"/>
+        <van-field v-model="detail.concessionDiscount" type="number"/>
       </van-cell-group>
     </div>
     <div class="reset">
@@ -94,10 +96,14 @@ export default {
       let obj = this.detail;
       obj.supportExpress = Number(obj.supportExpress);
       obj.supportStore = Number(obj.supportStore);
-      updateBusiInfo(obj).then(res => {
+      if(obj.concessionDiscount<this.detail.lowDiscount){
         this.$toast({
-          message: res.message
+          message: `当前让利比例不能少于${this.detail.lowDiscount}%`
         });
+        
+      }
+      updateBusiInfo(obj).then(res => {
+        
         this.getBusiInfo();
       });
     },

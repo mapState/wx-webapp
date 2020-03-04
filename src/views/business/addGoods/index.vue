@@ -1,7 +1,7 @@
 <template>
   <div v-wechat-title="$route.meta.title" class="container">
     <div class="nav">
-      <img src="@/assets/left.png" class="upDown" @click="$router.go(-1)" />
+      <img src="@/assets/left.png" class="upDown" @click="$router.go(-1)">
       编辑商品
       <div class="right">
         <span @click="add(1)">上架</span>
@@ -9,12 +9,12 @@
       </div>
     </div>
     <div class="item" style="border-bottom:1px solid #ddd">
-      <van-field v-model="formData.goodTitle" label="商品标题" placeholder="请输入商品标题" />
+      <van-field v-model="formData.goodTitle" label="商品标题" placeholder="请输入商品标题"/>
     </div>
     <div class="item" style="background:#fff">
       <span>商品类别</span>
       <select v-model="formData.goodType">
-        <option value disabled selected style="display:none;" class="font">请选择商品类别</option>
+        <option value="" disabled selected style="display:none;" class="font">请选择商品类别</option>
         <option :value="item.id" v-for="(item,i) in cates" :key="i">{{item.name}}</option>
       </select>
     </div>
@@ -44,21 +44,21 @@
     </div>
     <div class="size" v-for="(item,i) in formData.list" :key="i">
       <div class="item">
-        <van-field v-model="item.name" label="规格:" placeholder="请输入您的规格" />
+        <van-field v-model="item.name" label="规格:" placeholder="请输入您的规格"/>
       </div>
       <div class="item money">
-        <van-field v-model="item.money" label="规格价格:" placeholder="请输入您的规格价格" type="number" />
+        <van-field v-model="item.money" label="规格价格:" placeholder="请输入您的规格价格" type="number"/>
       </div>
       <div class="item">
-        <van-field v-model="item.stock" label="规格库存:" placeholder="请输入您的规格库存" type="number" />
+        <van-field v-model="item.stock" label="规格库存:" placeholder="请输入您的规格库存" type="number"/>
       </div>
       <div class="item photos" style="border:none">
         <div class="title">规格类型主图</div>
         <van-uploader :after-read="(file)=>onRead(file,'one',i)">
-          <img :src="url+item.image" alt v-if="item.image" style="width:50px" />
-          <div class="upload" v-else>
-            <van-icon name="plus" />
-          </div>
+          <img :src="url+item.image" alt="" style="width:50px">
+          <!-- <div class="upload" v-else>
+            <van-icon name="plus"/>
+          </div>-->
         </van-uploader>
       </div>
     </div>
@@ -99,11 +99,20 @@ export default {
   },
   methods: {
     async onRead(file, type, i) {
-      let url = await uploadImg(file);
       if (type === "one") {
+        let url = await uploadImg(file);
         this.formData.list[i].image = url;
+        console.log(this.formData.list[i].image);
       } else {
-        this.formData[type][this.formData[type].length - 1].url = url;
+        if (Array.isArray(file)) {
+          for (let i = 0; i < file.length; i++) {
+            let url = await uploadImg(file[i]);
+            this.formData[type][this.formData[type].length - 1].url = url;
+          }
+        } else {
+          let url = await uploadImg(file);
+          this.formData[type][this.formData[type].length - 1].url = url;
+        }
       }
     },
     addSize() {
@@ -208,7 +217,7 @@ export default {
             this.formData = { ...res.data };
             this.formData.descImage = arr11;
             for (let i = 0; i < this.formData.list.length; i++) {
-              this.formData.list[i].money = this.formData.list[i].money /100;
+              this.formData.list[i].money = this.formData.list[i].money / 100;
             }
             this.formData.image = arr22;
             console.log(this.formData);

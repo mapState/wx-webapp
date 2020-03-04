@@ -108,7 +108,10 @@
             />
           </van-cell-group>
         </div>
-        <div style="background:#FFCC85;text-align:center;line-height:35px;font-size:16px;color:#5A3504;margin-top:15px;border-radius:5px" @click="chooseAddress">保存</div>
+        <div
+          style="background:#FFCC85;text-align:center;line-height:35px;font-size:16px;color:#5A3504;margin-top:15px;border-radius:5px"
+          @click="chooseAddress"
+        >保存</div>
         <!-- <van-button type="danger" class="sub" @click="chooseAddress">保存</van-button> -->
       </div>
     </van-popup>
@@ -177,16 +180,33 @@ export default {
   },
   methods: {
     async onRead(file, type) {
-      let url = await uploadImg(file);
-      if (type == "fileList") {
-        this.fileList[this.fileList.length - 1].url = url;
-        let arr = [];
-        for (let i = 0; i < this.fileList.length; i++) {
-          arr.push(this.fileList[i].url);
+      console.log(file);
+      if (Array.isArray(file)) {
+        for (let i = 0; i < file.length; i++) {
+          let url = await uploadImg(file[i]);
+          if (type == "fileList") {
+            this.fileList[this.fileList.length - 1].url = url;
+            let arr = [];
+            for (let i = 0; i < this.fileList.length; i++) {
+              arr.push(this.fileList[i].url);
+            }
+            this.formData.legalCardUrl = arr.toString();
+          } else {
+            this.formData[type] = url;
+          }
         }
-        this.formData.legalCardUrl = arr.toString();
       } else {
-        this.formData[type] = url;
+        let url = await uploadImg(file);
+        if (type == "fileList") {
+          this.fileList[this.fileList.length - 1].url = url;
+          let arr = [];
+          for (let i = 0; i < this.fileList.length; i++) {
+            arr.push(this.fileList[i].url);
+          }
+          this.formData.legalCardUrl = arr.toString();
+        } else {
+          this.formData[type] = url;
+        }
       }
     },
     chooseArea(e) {
