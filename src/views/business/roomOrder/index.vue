@@ -3,7 +3,7 @@
     <div class="list">
       <div class="item" v-for="(item,i) in orderList" :key="i">
         <div class="name">
-          <img :src="url+item.image" class="upDown" style="border-radius:50%" />
+          <img :src="url+item.image" class="upDown" style="border-radius:50%">
           {{item.userName}}
         </div>
         <div class="goodsWrap">
@@ -14,10 +14,11 @@
           </div>
         </div>
         <div class="btns">
-          
-          <div @click.stop="toNext('/split',item.orderId)" >免单拆分</div>
+          <div
+            @click.stop="toNext('/split',item.orderId,item.image,item.userName,item.money,item.createDate)"
+          >免单拆分</div>
           <div @click.stop="true">
-            <a :href="'tel:'+item.userPhone" style="color:#B8741A">联系买家</a> 
+            <a :href="'tel:'+item.userPhone" style="color:#B8741A">联系买家</a>
           </div>
         </div>
       </div>
@@ -47,12 +48,16 @@ export default {
     };
   },
   methods: {
-    toNext(msg, orderId) {
-      console.log(orderId)
+    toNext(msg, orderId, image, userName, money, createDate) {
+      console.log(orderId);
       this.$router.push({
         path: msg,
-        query:{
-          orderId
+        query: {
+          orderId,
+          image,
+          userName,
+          money,
+          createDate
         }
       });
     },
@@ -60,7 +65,7 @@ export default {
       coby("11", this);
     },
     getOrderList(e) {
-      storePay({ page: 1, size: 10000}).then(res => {
+      storePay({ page: 1, size: 10000 }).then(res => {
         this.orderList = res.data;
       });
     },

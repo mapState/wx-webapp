@@ -213,3 +213,10 @@ export function storePay(params) {
         params
     })
 }
+export function storeSplit(params) {
+    return request({
+        url: '/front/busi/storeSplit',
+        method: 'get',
+        params
+    })
+}

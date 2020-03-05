@@ -25,19 +25,19 @@
     </div>
     <div class="item" style="font-weight:500;border:none">
       完成时间
-      <span class="time">{{detail.updateDate}}</span>
+      <span class="time">{{detail.createDate}}</span>
     </div>
     <div class="sub" @click="orderSplit">确定拆分</div>
   </div>
 </template>
 
 <script>
-import { orderDetail, orderSplit } from "@/api/bussiness";
+import { orderDetail, orderSplit, storeSplit } from "@/api/bussiness";
 import { UPLOAD_DOMAIN } from "@/utils/const";
 export default {
   data() {
     return {
-      value: 1,
+      value: 2,
       url: UPLOAD_DOMAIN,
       detail: {
         list: []
@@ -46,30 +46,53 @@ export default {
   },
   methods: {
     orderSplit() {
-      orderSplit({
-        orderId: this.$route.query.orderId,
-        count: this.value
-      }).then(res => {
-        if (res.code == 200) {
-          this.$router.push({
-            path: "/s3"
-          });
-        } else {
-          this.$toast({
-            message: res.message
-          });
-        }
-      });
+      if (this.$route.query.createDate) {
+        storeSplit({
+          payId: this.$route.query.orderId,
+          count: this.value
+        }).then(res => {
+          if (res.code == 200) {
+            this.$router.push({
+              path: "/s3"
+            });
+          } else {
+            this.$toast({
+              message: res.message
+            });
+          }
+        });
+      } else {
+        orderSplit({
+          orderId: this.$route.query.orderId,
+          count: this.value
+        }).then(res => {
+          if (res.code == 200) {
+            this.$router.push({
+              path: "/s3"
+            });
+          } else {
+            this.$toast({
+              message: res.message
+            });
+          }
+        });
+      }
     },
     init() {
-      orderDetail({ orderId: this.$route.query.orderId }).then(res => {
-        this.detail = res.data;
-        let sum = 0;
-        for (let j = 0; j < this.detail.list.length; j++) {
-          sum += this.detail.list[j].count;
-        }
-        this.detail.totalNum = sum;
-      });
+      if (this.$route.query.createDate) {
+        this.detail = this.$route.query;
+        this.detail.totalMoney = this.detail.money;
+        this.detail.userLogo = this.detail.image;
+      } else {
+        orderDetail({ orderId: this.$route.query.orderId }).then(res => {
+          this.detail = res.data;
+          let sum = 0;
+          for (let j = 0; j < this.detail.list.length; j++) {
+            sum += this.detail.list[j].count;
+          }
+          this.detail.totalNum = sum;
+        });
+      }
     }
   },
 
@@ -82,7 +105,7 @@ export default {
 @import "./style/index.scss";
 </style>
 <style scoped>
->>> .van-stepper__input{
+>>> .van-stepper__input {
   line-height: 30px;
 }
 </style>
