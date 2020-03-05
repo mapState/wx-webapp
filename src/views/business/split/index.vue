@@ -53,7 +53,10 @@ export default {
         }).then(res => {
           if (res.code == 200) {
             this.$router.push({
-              path: "/s3"
+              path: "/s3",
+              query:{
+                a:1
+              }
             });
           } else {
             this.$toast({

@@ -15,12 +15,21 @@ export default {
   },
   methods: {
     toNext(msg, id) {
-      this.$router.push({
-        path: '/bussOrder',
-        query: {
-          id
-        }
-      });
+      if (this.$route.query.a) {
+        this.$router.push({
+          path: "/roomOrder",
+          query: {
+            id
+          }
+        });
+      } else {
+        this.$router.push({
+          path: "/bussOrder",
+          query: {
+            id
+          }
+        });
+      }
     },
     init() {}
   },
