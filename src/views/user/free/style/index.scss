@@ -65,10 +65,10 @@
       background: rgba(255, 255, 255, 1);
       margin: 0 auto;
       width: 345px;
-      box-shadow:0px 1px 13px 0px rgba(0, 0, 0, 0.1);
+      box-shadow: 0px 1px 13px 0px rgba(0, 0, 0, 0.1);
       .item {
-        &:last-of-type{
-          border:none
+        &:last-of-type {
+          border: none;
         }
         height: 100px;
         position: relative;
@@ -79,7 +79,9 @@
         .cover {
           position: absolute;
           width: 67px;
+          height: 69px;
           border-radius: 3px;
+          object-fit: cover;
           top: 50%;
           transform: translateY(-50%);
           left: 11px;
@@ -101,12 +103,12 @@
           overflow: hidden;
           margin: 10px 0;
           & > div {
-            font-size:12px;
+            font-size: 12px;
             margin-right: 10px;
             color: #666;
             float: left;
-            &:last-of-type{
-              color: #B8741A;
+            &:last-of-type {
+              color: #b8741a;
             }
           }
         }
@@ -123,7 +125,7 @@
           color: rgba(102, 102, 102, 1);
           right: 11px;
         }
-        .right{
+        .right {
           width: 67px;
           height: 31px;
           background: rgba(255, 255, 255, 1);
@@ -150,10 +152,10 @@
       background: rgba(255, 255, 255, 1);
       margin: 0 auto;
       width: 345px;
-      box-shadow:0px 1px 13px 0px rgba(0, 0, 0, 0.1);
+      box-shadow: 0px 1px 13px 0px rgba(0, 0, 0, 0.1);
       .item {
-        &:last-of-type{
-          border:none
+        &:last-of-type {
+          border: none;
         }
         height: 100px;
         position: relative;
@@ -186,12 +188,12 @@
           overflow: hidden;
           margin: 10px 0;
           & > div {
-            font-size:12px;
+            font-size: 12px;
             margin-right: 10px;
             color: #666;
             float: left;
-            &:last-of-type{
-              color: #B8741A;
+            &:last-of-type {
+              color: #b8741a;
             }
           }
         }
@@ -209,7 +211,7 @@
           color: rgba(102, 102, 102, 1);
           right: 11px;
         }
-        .right{
+        .right {
           width: 67px;
           height: 31px;
           background: rgba(255, 255, 255, 1);
