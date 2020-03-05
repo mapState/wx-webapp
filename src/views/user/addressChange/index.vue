@@ -63,9 +63,9 @@ export default {
       this.show = false;
     },
     addressUpdate() {
-      if(this.formData.phone.length!=11){
+      if(!this.formData.phone){
         this.$toast({
-          message: '手机号格式不正确'
+          message: '手机号必填'
         });
         return;
       }
@@ -87,7 +87,7 @@ export default {
         });
         return;
       }
-      let obj = { ...this.formData };
+      let obj = { ...this.formData,id: this.$route.query.id||'' };
       obj.moren = Number(obj.moren);
       addressUpdate(obj).then(res => {
         this.$router.go(-1);

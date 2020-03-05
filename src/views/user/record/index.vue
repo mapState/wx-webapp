@@ -50,7 +50,7 @@ export default {
       this.getList()
     },
     getList(){
-      consumeSearch({page:1,size:10000,name:this.name,type1:this.type1,type2:this.type2}).then(res=>{
+      consumeSearch({page:1,size:10000000,name:this.name,type1:this.type1,type2:this.type2}).then(res=>{
         this.list=res.data.data
       })
     },

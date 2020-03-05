@@ -43,7 +43,7 @@
           <div @click.stop="true">
             <a :href="'tel:'+item.userPhone" style="color:#B8741A">联系买家</a> 
           </div>
-        </div>
+        </div> 
       </div>
       <empty msg="暂无数据" v-show="orderList.length==0"/>
     </div>

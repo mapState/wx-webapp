@@ -3,8 +3,8 @@
     <div class="item litInput2">
       <van-field
         v-model="formData.concessionDiscount"
-        label="让利折扣"
-        placeholder="请输入每笔订单让利折扣"
+        label="消费折扣"
+        placeholder="请输入每笔订单消费折扣"
         type="number"
       />
       <span class="upDown">输入80即8折</span>

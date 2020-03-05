@@ -17,7 +17,7 @@
           <span>{{detail.phone}}</span>
         </div>
         <div class="detail">
-          <span v-show="detail.addressId==addressId||!addressId">默认</span>
+          <span v-show="(detail.addressId==addressId||!addressId)&&detail.moren">默认</span>
           {{detail.regionAddress+' '+detail.address}}
         </div>
         <div class="right upDown">
@@ -167,7 +167,8 @@ export default {
       this.$router.push({
         path: msg,
         query: {
-          ids
+          ids,
+          add:1
         }
       });
     },
@@ -298,12 +299,17 @@ export default {
       balance().then(res => {
         this.money = res.data;
       });
+      console.log(this.addressId)
       if (this.addressId) {
+        
         addressFindById({ id: this.addressId }).then(res => {
           this.detail = res.data;
+          this.detail.addressId = res.data.id;
           console.log(this.detail);
+          
         });
       } else {
+        console.log(2)
         consoleDetail().then(res => {
           this.detail = res.data;
           console.log(this.detail);

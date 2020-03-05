@@ -22,7 +22,7 @@
       </van-cell-group>
     </div>
     <div class="input">
-      <div class="title">折扣让利：
+      <div class="title">消费折扣：
         <div style="color:#aaa;font-size:12px;display:inline-block">输入80即8折</div>
       </div>
       <div class="right upDown">当前折扣{{detail.concessionDiscount/10}}折</div>
@@ -98,7 +98,7 @@ export default {
       obj.supportStore = Number(obj.supportStore);
       if (obj.concessionDiscount > this.detail.lowDiscount) {
         this.$toast({
-          message: `请输入小于${this.detail.lowDiscount}的数值`
+          message: `折扣消费，请输入小于${this.detail.lowDiscount}的数值`
         });
         this.getBusiInfo();
       } else {
@@ -111,19 +111,21 @@ export default {
       }
     },
     logout() {
-      logout().then(res => {
-        this.$dialog
-          .confirm({
-            title: "是否解除绑定微信？"
-          })
-          .then(() => {
-            updateOpenId({ openId: "" });
-            this.$router.push({
-              path: "/login"
+      this.$dialog
+        .confirm({
+          title: "是否解除绑定微信？"
+        })
+        .then(() => {
+          updateOpenId({ openId: "" });
+          logout()
+            .then(res => {})
+            .then(res => {
+              this.$router.push({
+                path: "/login"
+              });
             });
-          })
-          .catch(() => {});
-      });
+        })
+        .catch(() => {});
     },
     getBusiInfo() {
       getBusiInfo().then(res => {

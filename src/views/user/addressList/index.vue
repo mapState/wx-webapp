@@ -44,7 +44,8 @@ export default {
       });
     },
     detailSet(addressId) {
-      if (this.$route.query.ids) {
+      console.log()
+      if (this.$route.query.ids||this.$route.query.add) {
         this.getAddressId(addressId);
         this.$router.go(-1);
       } else {

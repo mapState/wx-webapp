@@ -37,6 +37,7 @@ const bussSet = () => import("@/views/business/bussSet")
 const psd = () => import("@/views/business/psd")
 const bussDetail = () => import("@/views/business/bussDetail")
 const goodsManage = () => import("@/views/business/goodsManage")
+const roomOrder = () => import("@/views/business/roomOrder")
 
 
 
@@ -102,6 +103,7 @@ export default new Router({
 		{ path: '/come', component: come, meta: { title: '商家入驻' } },
 		{ path: '/split', component: split, meta: { title: '订单拆分' } },
 		{ path: '/bussOrder', component: bussOrder, meta: { title: '订单管理' } },
+		{ path: '/roomOrder', component: roomOrder, meta: { title: '订单管理' } },
 		{ path: '/bussOrderDetail', component: bussOrderDetail, meta: { title: '订单详情' } },
 		{ path: '/cards', component: cards, meta: { title: '商家入驻' } },
 		{ path: '/workbench', component: workbench, meta: { title: '商家工作台' } },

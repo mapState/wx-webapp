@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="banner">
-      <van-swipe :show-indicators="false">
+      <van-swipe :show-indicators="false" :autoplay="2000">
         <van-swipe-item v-for="(item,i) in imgUrl" :key="i">
           <img :src="url+item.image" @click="toAd(item.url)">
         </van-swipe-item>

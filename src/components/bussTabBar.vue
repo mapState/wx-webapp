@@ -18,12 +18,20 @@
             :src="props.active ? icon[1].active : icon[1].inactive"
           />
         </van-tabbar-item>
+        <van-tabbar-item to="/roomOrder">
+          <span>店内消费</span>
+          <img
+            slot="icon"
+            slot-scope="props"
+            :src="props.active ? icon[2].active : icon[2].inactive"
+          />
+        </van-tabbar-item>
         <van-tabbar-item to="/goodsManage">
           <span>商品管理</span>
           <img
             slot="icon"
             slot-scope="props"
-            :src="props.active ? icon[2].active : icon[2].inactive"
+            :src="props.active ? icon[3].active : icon[3].inactive"
           />
         </van-tabbar-item>
       </van-tabbar>
@@ -44,6 +52,10 @@ export default {
         {
           active: "http://cdn.pike8.top/Fm5UebUpM7MAEksFvuuvfPClcRBx",
           inactive: "http://cdn.pike8.top/FuyQ_cGQH8gh8npdvLJLAV4OmeRG"
+        },
+        {
+          active: "http://cdn.pike8.top/FoGb_kBwfZX72V4Hs7k91XFICVDH",
+          inactive: "http://cdn.pike8.top/Fng5F1icHUZAio4_D8lcpINW8Nm-"
         },
         {
           active: "http://cdn.pike8.top/FjRAwXXIE3U3AwbUgCwbwujhrgZw",

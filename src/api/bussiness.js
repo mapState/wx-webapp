@@ -206,3 +206,10 @@ export function updateOpenId(data) {
         data
     })
 }
+export function storePay(params) {
+    return request({
+        url: '/front/busi/storePay',
+        method: 'get',
+        params
+    })
+}

@@ -218,6 +218,7 @@ export default {
             for (let i = 0; i < arr1.length; i++) {
               arr11.push({ url: UPLOAD_DOMAIN + arr1[i], isImage: true });
             }
+            console.log(arr11)
             let arr2 = res.data.image.split(",");
             let arr22 = [];
             for (let i = 0; i < arr2.length; i++) {

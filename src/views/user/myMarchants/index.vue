@@ -49,7 +49,7 @@ export default {
       })
     },
     collectSearch(){
-      collectSearch({page:1,size:10000,name:this.name}).then(res=>{
+      collectSearch({page:1,size:10000000,name:this.name}).then(res=>{
         this.list=res.data.data
       })
     },

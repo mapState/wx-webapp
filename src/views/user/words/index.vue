@@ -81,7 +81,7 @@ export default {
       });
     },
     getList(type){
-      evaluateList({page:1,size:1000,goodId:this.$route.query.id,type}).then(res=>{
+      evaluateList({page:1,size:1000000,goodId:this.$route.query.id,type}).then(res=>{
         this.list=res.data.data
         for(let i=0;i<this.list.length;i++){
           try {

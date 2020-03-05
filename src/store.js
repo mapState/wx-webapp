@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-// import createPersistedState from 'vuex-persistedstate'
+import createPersistedState from 'vuex-persistedstate'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -32,5 +32,5 @@ export default new Vuex.Store({
       commit('getAddressId',payload);
     }
   },
-  // plugins: [createPersistedState()],
+  plugins: [createPersistedState()],
 })
