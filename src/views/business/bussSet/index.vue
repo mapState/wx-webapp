@@ -96,9 +96,9 @@ export default {
       let obj = this.detail;
       obj.supportExpress = Number(obj.supportExpress);
       obj.supportStore = Number(obj.supportStore);
-      if (obj.concessionDiscount > this.detail.lowDiscount) {
+      if (obj.concessionDiscount > 90) {
         this.$toast({
-          message: `折扣消费，请输入小于${this.detail.lowDiscount}的数值`
+          message: '请输入90以内的数值'
         });
         this.getBusiInfo();
       } else {

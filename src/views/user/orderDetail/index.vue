@@ -168,7 +168,7 @@ export default {
         path: msg,
         query: {
           ids,
-          add:1
+          add: 1
         }
       });
     },
@@ -190,78 +190,108 @@ export default {
       });
     },
     orderCreate() {
-      let flag = true;
-      if (this.checked) {
-        if (!this.time) {
-          this.flag = false;
-          this.$toast({
-            message: "请设置取货时间"
-          });
-        }
-      } else {
-        if (!this.detail) {
-          this.flag = false;
-          this.$toast({
-            message: "请设置收货地址"
-          });
-        }
-      }
-      if (flag) {
-        orderCreate({
-          addressId: this.detail.addressId,
-          busiUserId: this.busiDetail.id,
-          bySelf: Number(this.checked),
-          message: this.message,
-          money: this.formData.money * 100,
-          selfDate: this.time,
-          list: this.formData.list
-        }).then(res => {
-          if (this.ways == 1) {
-            this.$dialog
-              .confirm({
-                title: "确认支付吗？"
-              })
-              .then(() => {
-                orderBalance({
-                  orderId: res.data
-                }).then(res => {
-                  if (res.code == 200) {
-                    this.$router.push({
-                    path: "/s2",
-                    query:{
-                      name:this.busiDetail.name,
-                      id:this.busiDetail.id,
-                      money:this.formData.money
-                    }
-                  });
-                    balance().then(res => {
-                      this.money = res.data;
-                    });
-                    // payDetail({ busiUserId: this.$route.query.id }).then(res => {
-                    //   this.detail = res.data;
-                    // });
-                  }
-                });
-              })
-              .catch(() => {
-                // on cancel
+      consoleDetail().then(res => {
+        if (!res.data.phone) {
+          this.$dialog
+            .confirm({
+              title: "是否前去绑定手机号？"
+            })
+            .then(() => {
+              let params = transformParams();
+              this.$router.push({
+                path: "/setMobile",
+                query: {
+                  url: "/orderDetail",
+                  params: JSON.stringify(params)
+                }
               });
+            })
+            .catch(() => {
+              // on cancel
+            });
+        } else {
+          let flag = true;
+          if (this.checked) {
+            if (!this.time) {
+              this.flag = false;
+              this.$toast({
+                message: "请设置取货时间"
+              });
+            }
           } else {
-            wxPay({
+            if (!this.detail) {
+              this.flag = false;
+              this.$toast({
+                message: "请设置收货地址"
+              });
+            }
+          }
+          if (flag) {
+            orderCreate({
               addressId: this.detail.addressId,
               busiUserId: this.busiDetail.id,
               bySelf: Number(this.checked),
               message: this.message,
               money: this.formData.money * 100,
               selfDate: this.time,
-              list: this.formData.list,
-              type: 1
+              list: this.formData.list
             }).then(res => {
-              weChatPay(res.data, "http://hxkjzjlm.top/home/#/s2?id=" + this.busiDetail.id+'&name='+this.busiDetail.name+'&money='+this.formData.money);
+              if (this.ways == 1) {
+                this.$dialog
+                  .confirm({
+                    title: "确认支付吗？"
+                  })
+                  .then(() => {
+                    orderBalance({
+                      orderId: res.data
+                    }).then(res => {
+                      if (res.code == 200) {
+                        this.$router.push({
+                          path: "/s2",
+                          query: {
+                            name: this.busiDetail.name,
+                            id: this.busiDetail.id,
+                            money: this.formData.money
+                          }
+                        });
+                        balance().then(res => {
+                          this.money = res.data;
+                        });
+                        // payDetail({ busiUserId: this.$route.query.id }).then(res => {
+                        //   this.detail = res.data;
+                        // });
+                      }
+                    });
+                  })
+                  .catch(() => {
+                    // on cancel
+                  });
+              } else {
+                wxPay({
+                  addressId: this.detail.addressId,
+                  busiUserId: this.busiDetail.id,
+                  bySelf: Number(this.checked),
+                  message: this.message,
+                  money: this.formData.money * 100,
+                  selfDate: this.time,
+                  list: this.formData.list,
+                  type: 1
+                }).then(res => {
+                  weChatPay(
+                    res.data,
+                    "http://hxkjzjlm.top/home/#/s2?id=" +
+                      this.busiDetail.id +
+                      "&name=" +
+                      this.busiDetail.name +
+                      "&money=" +
+                      this.formData.money
+                  );
+                });
+              }
             });
           }
-        });
-      }
+        }
+      });
     },
     getGoodByDetailId() {
       getGoodByDetailId({
@@ -284,32 +314,17 @@ export default {
       getBusiInfo({ busiUserId: this.$route.query.busiUserId }).then(res => {
         this.busiDetail = res.data;
       });
-      consoleDetail().then(res => {
-        if (!res.data.phone) {
-          let params = transformParams();
-          this.$router.push({
-            path: "/setMobile",
-            query: {
-              url: "/orderDetail",
-              params: JSON.stringify(params)
-            }
-          });
-        }
-      });
       balance().then(res => {
         this.money = res.data;
       });
-      console.log(this.addressId)
       if (this.addressId) {
-        
         addressFindById({ id: this.addressId }).then(res => {
           this.detail = res.data;
           this.detail.addressId = res.data.id;
           console.log(this.detail);
-          
         });
       } else {
-        console.log(2)
+        console.log(2);
         consoleDetail().then(res => {
           this.detail = res.data;
           console.log(this.detail);
