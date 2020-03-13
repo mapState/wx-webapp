@@ -3,7 +3,7 @@
     <div class="info">
       <div class="title" @click="join=true">
         我的身份
-        <div style="float:right;">推广码</div>
+        <div style="float:right;font-weight:400;font-size:12px">推广码</div>
         <img src="@/assets/er.png" class="upDown" />
       </div>
       <div class="name">

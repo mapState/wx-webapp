@@ -2,7 +2,7 @@
   <div v-wechat-title="$route.meta.title" class="container">
     <div class="search">
       <img src="@/assets/position.png" alt class="position" />
-      <span class="city" @click="toNext('/area')">{{$route.query.name||GetCookie('city')}}</span>
+      <span class="city" @click="toNext('/area')">{{$route.query.name||city}}</span>
       <div class="input" @click="toNext('/search')">
         <img src="@/assets/big.png" />
         <div class="name" @click="toNext('/search')">商户名/地点/菜名</div>
@@ -127,6 +127,7 @@ export default {
       nav: 1,
       imgUrl: [],
       imgPath: "",
+      city: "",
       msgs: [],
       notice: [],
       GetCookie: GetCookie,
@@ -134,7 +135,7 @@ export default {
       list: [],
       cates: [[]],
       list: [],
-      page:1,
+      page: 1,
       loading: false,
       finished: false
     };
@@ -171,8 +172,8 @@ export default {
     },
     chooseNav(e) {
       this.nav = e;
-      this.list=[]
-      this.page=1
+      this.list = [];
+      this.page = 1;
       this.getList(e);
     },
     getList(type) {
@@ -195,8 +196,26 @@ export default {
       });
     },
     onLoad() {
-      this.page++
+      this.page++;
       this.getList(this.nav);
+    },
+    showCityInfo() {
+      //实例化城市查询类
+      var citysearch = new AMap.CitySearch();
+      //自动获取用户IP，返回当前城市
+      citysearch.getLocalCity((status, result)=> {
+        if (status === "complete" && result.info === "OK") {
+          if (result && result.city && result.bounds) {
+            var cityinfo = result.city;
+            var citybounds = result.bounds;
+            SetCookie("city", cityinfo);
+            this.city=cityinfo
+            // map.setBounds(citybounds);
+          }
+        } else {
+          console.log(result);
+        }
+      });
     },
     init() {
       this.getList(1);
@@ -229,6 +248,13 @@ export default {
   },
 
   mounted() {
+    var map = new AMap.Map("container", {
+      resizeEnable: true,
+      center: [GetCookie("lng"), GetCookie("lat")],
+      zoom: 13
+    });
+    //获取用户所在城市信息
+    this.showCityInfo();
     this.init();
   }
 };
@@ -240,10 +266,10 @@ export default {
 >>> .van-swipe {
   height: 100%;
 }
->>> .van-cell{
+>>> .van-cell {
   padding: 0;
 }
->>> .van-cell:not(:last-child)::after{
+>>> .van-cell:not(:last-child)::after {
   border: none;
 }
 </style>
