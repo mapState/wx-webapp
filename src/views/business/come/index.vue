@@ -1,14 +1,14 @@
 <template>
   <div v-wechat-title="$route.meta.title" class="container">
     <div class="banner">
-      <img :src="imgPath" @click="toAd()">
+      <img :src="imgPath" @click="toAd()" />
     </div>
     <div class="item">
-      <van-field v-model="formData.name" label="商家名称" placeholder="请输入您的商户名称"/>
+      <van-field v-model="formData.name" label="商家名称" placeholder="请输入您的商户名称" />
     </div>
     <div class="litInput item" @click="rankShow=true">
-      <van-field v-model="formData.businessScopeTxt" label="经营范围" placeholder="请选择您的经营范围" readonly/>
-      <img src="@/assets/jian.png" class="upDown">
+      <van-field v-model="formData.businessScopeTxt" label="经营范围" placeholder="请选择您的经营范围" readonly />
+      <img src="@/assets/jian.png" class="upDown" />
     </div>
     <div class="item">
       <van-cell-group>
@@ -23,24 +23,24 @@
       </van-cell-group>
     </div>
     <div class="item litInput" style="border-bottom:10px solid #f2f2f2" @click="address=true">
-      <van-field v-model="addressDetail" label="店铺地址" placeholder="请选择您的店铺地址" readonly/>
-      <img src="@/assets/jian.png" class="upDown">
+      <van-field v-model="addressDetail" label="店铺地址" placeholder="请选择您的店铺地址" readonly />
+      <img src="@/assets/jian.png" class="upDown" />
     </div>
     <div class="item" style="border:none">
-      <van-field v-model="formData.linkName" label="联系人" placeholder="请输入您的店铺联系人"/>
+      <van-field v-model="formData.linkName" label="联系人" placeholder="请输入您的店铺联系人" />
     </div>
     <div class="item litInput2">
-      <van-field v-model="formData.phone" label="手机号" placeholder="请输入联系人的手机号码" type="number"/>
+      <van-field v-model="formData.phone" label="手机号" placeholder="请输入联系人的手机号码" type="number" />
       <span class="upDown">用于商家登录账号</span>
     </div>
     <div class="item">
-      <van-field v-model="formData.password" label="登录密码" placeholder="请输入商家登入密码 "/>
+      <van-field v-model="formData.password" label="登录密码" placeholder="请输入商家登入密码 " />
     </div>
     <div class="item" style="border:none">
-      <van-field v-model="formData.alipayName" label="支付宝姓名" placeholder="请输入商家收款的支付宝姓名"/>
+      <van-field v-model="formData.alipayName" label="支付宝姓名" placeholder="请输入商家收款的支付宝姓名" />
     </div>
     <div class="item litInput2">
-      <van-field v-model="formData.alipayAccount" label="支付宝账号" placeholder="请输入商家支付宝账号"/>
+      <van-field v-model="formData.alipayAccount" label="支付宝账号" placeholder="请输入商家支付宝账号" />
       <span class="upDown">用于商家支付宝收款</span>
     </div>
     <div class="item litInput2" style="border:none">
@@ -53,7 +53,7 @@
       <span class="upDown">输入80即8折</span>
     </div>
     <div class="item">
-      <van-field v-model="formData.legalName" label="企业法人" placeholder="请输入营业执照法人"/>
+      <van-field v-model="formData.legalName" label="企业法人" placeholder="请输入营业执照法人" />
     </div>
     <div class="photos">
       <div class="title">法人身份证-正反面</div>
@@ -65,25 +65,25 @@
         @delete="del"
       >
         <div class="upload">
-          <van-icon name="plus"/>
+          <van-icon name="plus" />
         </div>
       </van-uploader>
     </div>
     <div class="photos">
       <div class="title">营业执照</div>
-      <van-uploader :after-read="(file)=>onRead(file,'businessLicenseUrl')" >
-        <img :src="url+formData.businessLicenseUrl" alt="" v-if="formData.businessLicenseUrl">
+      <van-uploader :after-read="(file)=>onRead(file,'businessLicenseUrl')">
+        <img :src="url+formData.businessLicenseUrl" alt v-if="formData.businessLicenseUrl" />
         <div class="upload" v-else>
-          <van-icon name="plus"/>
+          <van-icon name="plus" />
         </div>
       </van-uploader>
     </div>
     <div class="photos">
       <div class="title">门店形象图</div>
       <van-uploader :after-read="(file)=>onRead(file,'storeImageUrl')">
-        <img :src="url+formData.storeImageUrl" alt="" v-if="formData.storeImageUrl">
+        <img :src="url+formData.storeImageUrl" alt v-if="formData.storeImageUrl" />
         <div class="upload" v-else>
-          <van-icon name="plus"/>
+          <van-icon name="plus" />
         </div>
       </van-uploader>
     </div>
@@ -96,7 +96,7 @@
       <div class="info">
         <div class="title">选择地址</div>
         <div class="ads" style="border-top: 1px solid #d2d2d2;" @click="areaShow=true">
-          <img src="@/assets/jian.png" alt="" class="upDown">
+          <img src="@/assets/jian.png" alt class="upDown" />
           <div class="area">{{formData.regionAddress?formData.regionAddress:'选择地区'}}</div>
         </div>
         <div class="ads">
@@ -127,7 +127,7 @@
       </div>
     </van-popup>
     <van-popup v-model="areaShow" position="bottom">
-      <van-area :area-list="areaList" @confirm="chooseArea" @cancel="areaShow=false"/>
+      <van-area :area-list="areaList" @confirm="chooseArea" @cancel="areaShow=false" />
     </van-popup>
   </div>
 </template>
@@ -190,7 +190,6 @@ export default {
           arr.push(url);
         }
         this.formData.legalCardUrl = arr.toString();
-        console.log(this.formData.legalCardUrl)
       } else {
         let url = await uploadImg(file);
         if (type == "fileList") {
@@ -205,10 +204,10 @@ export default {
         }
       }
     },
-    async del(file,i){
-      let arr=this.formData.legalCardUrl.split(',')
-      arr.splice(i.index,1)
-      this.formData.legalCardUrl=arr.toString()
+    async del(file, i) {
+      let arr = this.formData.legalCardUrl.split(",");
+      arr.splice(i.index, 1);
+      this.formData.legalCardUrl = arr.toString();
     },
     chooseArea(e) {
       this.formData.province = e[0].code;
@@ -239,27 +238,21 @@ export default {
               message: "请完善商铺地址"
             });
           } else {
-            if (ruleValidate(this.formData)) {
-              if (this.$route.query.id) {
-                this.formData.makerUserId = this.$route.query.id;
-              }
-              this.formData.lat = GetCookie("lat");
-              this.formData.lng = GetCookie("lng");
-              busiAuth(this.formData).then(res => {
-                if (res.code == 200) {
-                  this.$toast({
-                    message: res.message
-                  });
-                  this.$router.push({
-                    path: "/s1"
-                  });
-                }
-              });
-            } else {
-              this.$toast({
-                message: "请完善入驻信息"
-              });
+            if (this.$route.query.id) {
+              this.formData.makerUserId = this.$route.query.id;
             }
+            this.formData.lat = GetCookie("lat");
+            this.formData.lng = GetCookie("lng");
+            busiAuth(this.formData).then(res => {
+              if (res.code == 200) {
+                this.$toast({
+                  message: res.message
+                });
+                this.$router.push({
+                  path: "/s1"
+                });
+              }
+            });
           }
         } else {
           this.$toast({

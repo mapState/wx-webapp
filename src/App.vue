@@ -20,7 +20,7 @@ export default {
 
   mounted() {
     weChatAuth();
-    wechatSdk()
+    wechatSdk();
     // login({
     //   openId: "56845648456",
     //   name: "zxx",

@@ -3,7 +3,7 @@
     <div class="list">
       <div class="item" v-for="(item,i) in orderList" :key="i">
         <div class="name">
-          <img :src="url+item.image" class="upDown" style="border-radius:50%">
+          <img :src="url+item.image" class="upDown" style="border-radius:50%" />
           {{item.userName}}
         </div>
         <div class="goodsWrap">
@@ -15,6 +15,7 @@
         </div>
         <div class="btns">
           <div
+            v-show="!item.isSplit"
             @click.stop="toNext('/split',item.orderId,item.image,item.userName,item.money,item.createDate)"
           >免单拆分</div>
           <div @click.stop="true">
@@ -22,7 +23,7 @@
           </div>
         </div>
       </div>
-      <empty msg="暂无数据" v-show="orderList.length==0"/>
+      <empty msg="暂无数据" v-show="orderList.length==0" />
     </div>
     <tabbar :active="2"></tabbar>
   </div>

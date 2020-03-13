@@ -63,3 +63,10 @@ export function updateImage(params) {
         params
     })
 }
+export function groupList(params) {
+    return request({
+        url: '/front/mak/groupList',
+        method: 'get',
+        params
+    })
+}

@@ -39,7 +39,7 @@
           <div @click.stop="toNext('/send',item.orderId)" v-show="item.orderStatus==2">快递发货</div>
           
           <div @click.stop="toNext('/bussOrderDetail',item.orderId)" v-show="item.orderStatus==3">自取发货</div>
-          <div @click.stop="toNext('/split',item.orderId)" v-show="item.orderStatus==5">免单拆分</div>
+          <div @click.stop="toNext('/split',item.orderId)" v-show="item.orderStatus==5&&!isSplit">免单拆分</div>
           <div @click.stop="true">
             <a :href="'tel:'+item.userPhone" style="color:#B8741A">联系买家</a> 
           </div>

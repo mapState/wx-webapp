@@ -3,6 +3,7 @@
     <div class="info">
       <div class="title" @click="join=true">
         我的身份
+        <div style="float:right;">推广码</div>
         <img src="@/assets/er.png" class="upDown" />
       </div>
       <div class="name">
@@ -33,7 +34,7 @@
         <div class="num">{{detail.makB}}</div>
         <div class="name">推广总商铺数</div>
       </div>
-      <div class="item" @click="toNext('/team')" v-show="detail.mak.type==1||detail.mak.type==2">
+      <div class="item" @click="toNext('/team')">
         <img src="@/assets/team.png" class="top2" />
         <div class="num">{{detail.makC}}</div>
         <div class="name">团队人员</div>
@@ -75,7 +76,7 @@
 </template>
 
 <script>
-import { console,updateImage } from "@/api/mak";
+import { console, updateImage } from "@/api/mak";
 import { UPLOAD_DOMAIN } from "@/utils/const";
 import { uploadImg } from "@/utils/upload";
 import QrcodeVue from "qrcode.vue";
@@ -97,13 +98,13 @@ export default {
   methods: {
     async onRead(file, type) {
       this.imgUrl = await uploadImg(file);
-      updateImage({image:this.imgUrl})
+      updateImage({ image: this.imgUrl });
     },
     toNext(msg, active) {
       this.$router.push({
         path: msg,
         query: {
-          where:1
+          where: 1
         }
       });
     },

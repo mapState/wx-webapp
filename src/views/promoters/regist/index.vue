@@ -3,7 +3,7 @@
     <div class="tip">*欢迎加入众奖联盟，请填写申请信息</div>
     <div class="input">
       <div class="item require">
-        <van-field required v-model="formData.realName" label="真实姓名：" placeholder="请填写姓名"/>
+        <van-field required v-model="formData.realName" label="真实姓名：" placeholder="请填写姓名" />
       </div>
       <div class="item require">
         <van-field
@@ -15,12 +15,12 @@
         />
       </div>
       <div class="item">
-        <van-field v-model="formData.password" label="登录密码：" placeholder="请填写您的登录密码"/>
+        <van-field v-model="formData.password" label="登录密码：" placeholder="请填写您的登录密码" />
       </div>
       <div class="item2">
         创客类型：
         <span>
-          <img src="@/assets/dui.png" class="upDown">推广员
+          <img src="@/assets/dui.png" class="upDown" />推广员
         </span>
       </div>
       <!-- <div class="item2" @click="show=true">选择推广区域
@@ -32,7 +32,7 @@
         <div class="title">
           <span>*</span>请添加身份证正反面信息
         </div>
-        <van-uploader :after-read="onRead" v-model="fileList" :max-count="2"/>
+        <van-uploader :after-read="onRead" v-model="fileList" :max-count="2" />
       </div>
     </div>
     <div class="xieyi">
@@ -77,22 +77,16 @@ export default {
         arr.push(this.fileList[i].url);
       }
       this.formData.idCard = arr.toString();
-      console.log(this.formData);
     },
     makAdd() {
-      if (
-        ruleValidate(this.formData) &&
-        this.fileList.length == 2 &&
-        this.checked
-      ) {
+      if (this.checked) {
         let obj = { ...this.formData, pid: this.$route.query.id || 0 };
         makAdd(obj).then(res => {
           if (res.code == 200) {
             this.$router.push({
               path: "/s6"
             });
-            
-          }else{
+          } else {
             this.$toast({
               message: res.message
             });
@@ -100,7 +94,7 @@ export default {
         });
       } else {
         this.$toast({
-          message: "请完善注册信息"
+          message: "请阅读协议"
         });
       }
     },

@@ -466,8 +466,15 @@ export function logout(params) {
 }
 export function sign(data) {
     return request({
-        url: 'order/sign',
+        url: '/order/sign',
         method: 'post',
         data
+    })
+}
+export function getSysSet(params) {
+    return request({
+        url: '/front/cus/getSysSet',
+        method: 'get',
+        params
     })
 }

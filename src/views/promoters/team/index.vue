@@ -1,39 +1,20 @@
 <template>
   <div v-wechat-title="$route.meta.title" class="container">
-    <div class="person">
+    <div class="person" v-for="(item,i) in data" :key="i">
       <div>
-        <img src="@/assets/cover.png"/>张三
+        <img :src="url+item.image" />{{item.realName}}
       </div>
       <div>
         <div>
-          112
+          {{item.total}}
           <div class="name">推广商家</div>
         </div>
         <div>
-          112
+          {{item.money/100}}
           <div class="name">商家总营业额</div>
         </div>
         <div>
-          112
-          <div class="name">贡献金额</div>
-        </div>
-      </div>
-    </div>
-    <div class="person">
-      <div>
-        <img src="@/assets/cover.png"/>张三
-      </div>
-      <div>
-        <div>
-          112
-          <div class="name">推广商家</div>
-        </div>
-        <div>
-          112
-          <div class="name">商家总营业额</div>
-        </div>
-        <div>
-          112
+          {{item.giveTotal}}
           <div class="name">贡献金额</div>
         </div>
       </div>
@@ -42,16 +23,25 @@
 </template>
 
 <script>
+import { groupList, updateImage } from "@/api/mak";
+import { UPLOAD_DOMAIN } from "@/utils/const";
 export default {
   data() {
-    return {};
+    return {
+      url: UPLOAD_DOMAIN,
+      data:[]
+    };
   },
   methods: {
-    init() {}
+    groupList() {
+      groupList().then(res=>{
+        this.data=res.data
+      })
+    }
   },
 
   mounted() {
-    this.init();
+    this.groupList();
   }
 };
 </script>

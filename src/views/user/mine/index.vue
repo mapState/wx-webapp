@@ -135,7 +135,7 @@
             <div class="img">
               <img src="@/assets/service.png" />
             </div>
-            <br /><a href="tel:13666666666" style="color:#000">联系客服</a>
+            <br /><a :href="'tel:'+tel" style="color:#000">联系客服</a>
           </div>
         </div>
       </div>
@@ -143,7 +143,7 @@
     <van-popup v-model="join">
       <div class="join">
         <img :src="url+imgUrl" />
-        <div class="tip">二维码加群XXXXXXXXX</div>
+        <div class="tip">二维码加群</div>
       </div>
     </van-popup>
 
@@ -153,7 +153,7 @@
 
 <script>
 import tabbar from "@/components/tabBar";
-import { console, platQrcode } from "@/api/user";
+import { console, platQrcode,getSysSet } from "@/api/user";
 import { UPLOAD_DOMAIN } from "@/utils/const";
 export default {
   components: {
@@ -165,6 +165,7 @@ export default {
       join: false,
       show: false,
       imgUrl: "",
+      tel:'',
       detail: {}
     };
   },
@@ -185,11 +186,17 @@ export default {
         }
       });
     },
+    getSysSet(){
+      
+    },
     init() {
       this.getConsole();
       platQrcode().then(res => {
         this.imgUrl = res.data;
       });
+      getSysSet({type:8}).then(res=>{
+        this.tel=res.data.image
+      })
     }
   },
 
