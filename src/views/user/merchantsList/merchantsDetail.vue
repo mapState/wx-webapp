@@ -290,7 +290,6 @@ export default {
           19 * 60 * 60 * 1000
       ).getTime();
       this.time = mid - new Date().getTime();
-      console.log(this.time);
       getBusiInfo({ busiUserId: this.$route.query.id }).then(res => {
         this.detail = res.data;
       });
