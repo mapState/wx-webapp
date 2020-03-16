@@ -20,6 +20,7 @@ export async function uploadImg(file) {
             context.drawImage(img, 0, 0, 400, ((img.height*400)/img.width).toFixed(0))
             // 将绘制完成的图片重新转化为base64编码，file.file.type为图片类型，0.92为默认压缩质量
             file.content = canvas.toDataURL(file.file.type, 0.92)
+            // /\/(?:jpeg|png)/i.test(file.file.type)&&file.file.size>1500000
             // 最后将base64编码的图片保存到数组中，留待上传。
             var arr = file.content.split(","),
                 bstr = atob(arr[1]),
