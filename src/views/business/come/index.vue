@@ -181,7 +181,6 @@ export default {
   },
   methods: {
     async onRead(file, type) {
-      console.log(file);
 
       if (Array.isArray(file)) {
         let arr = [];
@@ -192,6 +191,7 @@ export default {
         this.formData.legalCardUrl = arr.toString();
       } else {
         let url = await uploadImg(file);
+        console.log(url)
         if (type == "fileList") {
           this.fileList[this.fileList.length - 1].url = url;
           let arr = [];
