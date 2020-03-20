@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <transition enter-active-class="animated fadeIn" >
+      <router-view></router-view>
+    </transition>
+    <!-- <router-view></router-view> -->
   </div>
 </template>
 
@@ -21,11 +24,6 @@ export default {
   mounted() {
     weChatAuth();
     wechatSdk();
-    // login({
-    //   openId: "56845648456",
-    //   name: "zxx",
-    //   logoUrl: "dfdf"
-    // });
     this.init();
   }
 };

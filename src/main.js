@@ -8,6 +8,8 @@ import 'amfe-flexible/index.js'
 import VueWechatTitle from 'vue-wechat-title'
 Vue.use(VueWechatTitle)
 import Es6Promise from 'es6-promise'
+import animated from 'animate.css'
+Vue.use(animated)
 require('es6-promise').polyfill();
 Es6Promise.polyfill()
 Vue.use(Vant);
