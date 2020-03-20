@@ -213,14 +213,14 @@ export default {
           let flag = true;
           if (this.checked) {
             if (!this.time) {
-              this.flag = false;
+              flag = false;
               this.$toast({
                 message: "请设置取货时间"
               });
             }
           } else {
             if (!this.detail) {
-              this.flag = false;
+              flag = false;
               this.$toast({
                 message: "请设置收货地址"
               });

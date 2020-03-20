@@ -96,7 +96,7 @@ export default {
       status: 1,
       money: "",
       time: 30 * 60 * 60 * 1000,
-      ways: device().weChat?"1":'3',
+      ways: device().weChat ? "1" : "3",
       url: UPLOAD_DOMAIN,
       device: device,
       detail: {}
@@ -129,103 +129,102 @@ export default {
       });
     },
     underBalance() {
-      consoleDetail().then(res => {
-        if (res.data.phone) {
-          if (this.money) {
-            if (this.ways == 1) {
+      if (this.money) {
+        if (this.ways == 3) {
+          aliPay({
+            busiUserId: this.$route.query.id,
+            money: this.money * 100,
+            type: 3,
+            message:
+              "http://hxkjzjlm.top/home/#/s2?id=" +
+              this.$route.query.id +
+              "&name=" +
+              this.detail.name +
+              "&money=" +
+              this.money
+          }).then(res => {
+            const div = document.createElement("div");
+            div.innerHTML = res.data;
+            document.body.appendChild(div);
+            document.forms[0].submit();
+          });
+        } else {
+          consoleDetail().then(res => {
+            if (res.data.phone) {
+              if (this.ways == 1) {
+                this.$dialog
+                  .confirm({
+                    title: "确认支付吗？"
+                  })
+                  .then(() => {
+                    underBalance({
+                      busiUserId: this.$route.query.id,
+                      money: this.money * 100
+                    }).then(res => {
+                      if (res.code == 200) {
+                        this.$router.push({
+                          path: "/s2",
+                          query: {
+                            name: this.detail.name,
+                            id: this.$route.query.id,
+                            money: this.money
+                          }
+                        });
+                        payDetail({ busiUserId: this.$route.query.id }).then(
+                          res => {
+                            this.detail = res.data;
+                          }
+                        );
+                      } else {
+                        this.$toast({
+                          message: res.message
+                        });
+                      }
+                    });
+                  })
+                  .catch(() => {
+                    // on cancel
+                  });
+              } else if (this.ways == 2) {
+                wxPay({
+                  busiUserId: this.$route.query.id,
+                  money: this.money * 100,
+                  type: 2
+                }).then(res => {
+                  weChatPay(
+                    res.data,
+                    "http://hxkjzjlm.top/home/#/s2?id=" +
+                      this.$route.query.id +
+                      "&name=" +
+                      this.detail.name +
+                      "&money=" +
+                      this.money
+                  );
+                });
+              }
+            } else {
               this.$dialog
                 .confirm({
-                  title: "确认支付吗？"
+                  title: "是否前去绑定手机号？"
                 })
                 .then(() => {
-                  underBalance({
-                    busiUserId: this.$route.query.id,
-                    money: this.money * 100
-                  }).then(res => {
-                    if (res.code == 200) {
-                      this.$router.push({
-                        path: "/s2",
-                        query: {
-                          name: this.detail.name,
-                          id: this.$route.query.id,
-                          money: this.money
-                        }
-                      });
-                      payDetail({ busiUserId: this.$route.query.id }).then(
-                        res => {
-                          this.detail = res.data;
-                        }
-                      );
-                    } else {
-                      this.$toast({
-                        message: res.message
-                      });
+                  let params = transformParams();
+                  this.$router.push({
+                    path: "/setMobile",
+                    query: {
+                      url: "/pay",
+                      params: JSON.stringify(params)
                     }
                   });
                 })
                 .catch(() => {
                   // on cancel
                 });
-            } else if (this.ways == 2) {
-              wxPay({
-                busiUserId: this.$route.query.id,
-                money: this.money * 100,
-                type: 2
-              }).then(res => {
-                weChatPay(
-                  res.data,
-                  "http://hxkjzjlm.top/home/#/s2?id=" +
-                    this.$route.query.id +
-                    "&name=" +
-                    this.detail.name +
-                    "&money=" +
-                    this.money
-                );
-              });
-            } else {
-              aliPay({
-                busiUserId: this.$route.query.id,
-                money: this.money * 100,
-                type: 3,
-                message:
-                  "http://hxkjzjlm.top/home/#/s2?id=" +
-                  this.$route.query.id +
-                  "&name=" +
-                  this.detail.name +
-                  "&money=" +
-                  this.money
-              }).then(res => {
-                const div = document.createElement("div");
-                div.innerHTML = res.data;
-                document.body.appendChild(div);
-                document.forms[0].submit();
-              });
             }
-          } else {
-            this.$toast({
-              message: "请输入金额"
-            });
-          }
-        } else {
-          this.$dialog
-            .confirm({
-              title: "是否前去绑定手机号？"
-            })
-            .then(() => {
-              let params = transformParams();
-              this.$router.push({
-                path: "/setMobile",
-                query: {
-                  url: "/pay",
-                  params: JSON.stringify(params)
-                }
-              });
-            })
-            .catch(() => {
-              // on cancel
-            });
+          });
         }
-      });
+      } else {
+      }
     },
     init() {
       payDetail({ busiUserId: this.$route.query.id }).then(res => {
