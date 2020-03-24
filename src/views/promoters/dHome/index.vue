@@ -52,7 +52,7 @@
       <div class="item" @click="toNext('/totalRed')">
         <img src="@/assets/money11.png" class="top2" />
         <div class="num">￥{{detail.mak.allMoney/100}}</div>
-        <div class="name">已结算分红</div>
+        <div class="name">已结算分润</div>
       </div>
       <div class="item pad" @click="toNext('/cDetail')">
         <img src="@/assets/record3.png" />

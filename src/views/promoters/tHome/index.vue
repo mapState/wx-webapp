@@ -50,7 +50,7 @@
       <div class="item">
         <img src="@/assets/money11.png" />
         <div class="num">￥1234567</div>
-        <div class="name">已结算分红</div>
+        <div class="name">已结算分润</div>
       </div>
       <div class="item" @click="toNext('/cDetail')">
         <img src="@/assets/record3.png" />
