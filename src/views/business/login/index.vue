@@ -36,7 +36,7 @@
     <div class="btn" @click="login">登录</div>
     <div class="btm">
       <van-checkbox v-model="checked" class="upDown"></van-checkbox>我已阅读并同意
-      <span>《用户服务协议》</span>
+      <span @click="$router.push({path:'/note'})">《用户服务协议》</span>
     </div>
   </div>
 </template>

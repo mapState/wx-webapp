@@ -37,7 +37,7 @@
     </div>
     <div class="xieyi">
       <van-checkbox v-model="checked" class="left"></van-checkbox>本人已阅读并同意
-      <span>《创客注册协议》</span>
+      <span @click="$router.push({path:'/note'})">《创客注册协议》</span>
     </div>
     <div class="sub" @click="makAdd">提交注册</div>
     <!-- <van-popup v-model="show" position="bottom" >

@@ -89,7 +89,7 @@
     </div>
     <div class="xieyi">
       <van-checkbox v-model="checked" class="left"></van-checkbox>本人已阅读并同意
-      <span>《入驻服务协议》</span>
+      <span @click="$router.push({path:'/note'})">《入驻服务协议》</span>
     </div>
     <div class="sub" @click="submit">提交</div>
     <van-popup v-model="address">

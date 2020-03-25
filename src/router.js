@@ -7,6 +7,7 @@ const s3 = () => import("@/views/success/s3.vue")
 const s4 = () => import("@/views/success/s4.vue")
 const s5 = () => import("@/views/success/s5.vue")
 const s6 = () => import("@/views/success/s6.vue")
+const note = () => import("@/views/success/note.vue")
 
 // 创客
 const dHome = () => import("@/views/promoters/dHome")
@@ -77,6 +78,7 @@ const merchantsDetail = () => import("@/views/user/merchantsList/merchantsDetail
 Vue.use(Router)
 export default new Router({
 	routes: [
+		{ path: '/note', component: note,meta: { title: '用户协议 ' }},
 		{ path: '/s1', component: s1,meta: { title: '商家入驻 ' }},
 		{ path: '/s2', component: s2,meta: { title: '支付 ' }},
 		{ path: '/s3', component: s3,meta: { title: '订单拆分 ' }},
