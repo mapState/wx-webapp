@@ -236,57 +236,59 @@ export default {
               selfDate: this.time,
               list: this.formData.list
             }).then(res => {
-              if (this.ways == 1) {
-                this.$dialog
-                  .confirm({
-                    title: "确认支付吗？"
-                  })
-                  .then(() => {
-                    orderBalance({
-                      orderId: res.data
-                    }).then(res => {
-                      if (res.code == 200) {
-                        this.$router.push({
-                          path: "/s2",
-                          query: {
-                            name: this.busiDetail.name,
-                            id: this.busiDetail.id,
-                            money: this.formData.money
-                          }
-                        });
-                        balance().then(res => {
-                          this.money = res.data;
-                        });
-                        // payDetail({ busiUserId: this.$route.query.id }).then(res => {
-                        //   this.detail = res.data;
-                        // });
-                      }
+              if (res.code == 200) {
+                if (this.ways == 1) {
+                  this.$dialog
+                    .confirm({
+                      title: "确认支付吗？"
+                    })
+                    .then(() => {
+                      orderBalance({
+                        orderId: res.data
+                      }).then(res => {
+                        if (res.code == 200) {
+                          this.$router.push({
+                            path: "/s2",
+                            query: {
+                              name: this.busiDetail.name,
+                              id: this.busiDetail.id,
+                              money: this.formData.money
+                            }
+                          });
+                          balance().then(res => {
+                            this.money = res.data;
+                          });
+                          // payDetail({ busiUserId: this.$route.query.id }).then(res => {
+                          //   this.detail = res.data;
+                          // });
+                        }
+                      });
+                    })
+                    .catch(() => {
+                      // on cancel
                     });
-                  })
-                  .catch(() => {
-                    // on cancel
+                } else {
+                  wxPay({
+                    addressId: this.detail.addressId,
+                    busiUserId: this.busiDetail.id,
+                    bySelf: Number(this.checked),
+                    message: this.message,
+                    money: this.formData.money * 100,
+                    selfDate: this.time,
+                    list: this.formData.list,
+                    type: 1
+                  }).then(res => {
+                    weChatPay(
+                      res.data,
+                      "http://hxkjzjlm.top/home/#/s2?id=" +
+                        this.busiDetail.id +
+                        "&name=" +
+                        this.busiDetail.name +
+                        "&money=" +
+                        this.formData.money
+                    );
                   });
-              } else {
-                wxPay({
-                  addressId: this.detail.addressId,
-                  busiUserId: this.busiDetail.id,
-                  bySelf: Number(this.checked),
-                  message: this.message,
-                  money: this.formData.money * 100,
-                  selfDate: this.time,
-                  list: this.formData.list,
-                  type: 1
-                }).then(res => {
-                  weChatPay(
-                    res.data,
-                    "http://hxkjzjlm.top/home/#/s2?id=" +
-                      this.busiDetail.id +
-                      "&name=" +
-                      this.busiDetail.name +
-                      "&money=" +
-                      this.formData.money
-                  );
-                });
+                }
               }
             });
           }
