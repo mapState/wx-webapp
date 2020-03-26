@@ -1,5 +1,5 @@
 <template>
-  <div v-wechat-title="$route.meta.title" class="container">
+  <div v-wechat-title="$route.meta.title" class="container" style="font-size:12px">
     <p>本协议是由华享（杭州）网络科技有限公司（以下简称“华享（杭州）网络”）向众奖联盟营销商家（以下简称“您”或“商家”）共同签署，旨在通过众奖联盟营销平台（www.hxkjzjlm.top）促进您和消费者完成在线交易服务（下称“本服务”）。</p>
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一、声明与承诺</p>
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、您确认，您在申请入驻众奖联盟营销平台之前，已充分阅读、理解并接受本协议的全部内容，一旦您使用本服务，即表示同意遵循本协议的所有约定。</p>
