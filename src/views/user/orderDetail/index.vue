@@ -219,7 +219,7 @@ export default {
               });
             }
           } else {
-            if (!this.detail) {
+            if (!this.detail.addressId) {
               flag = false;
               this.$toast({
                 message: "请设置收货地址"
@@ -289,6 +289,10 @@ export default {
                     );
                   });
                 }
+              } else {
+                this.$toast({
+                  message: res.message
+                });
               }
             });
           }
