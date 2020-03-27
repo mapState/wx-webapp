@@ -57,10 +57,10 @@
       <div class="item photos" style="border:none">
         <div class="title">规格类型主图</div>
         <van-uploader :after-read="(file)=>onRead(file,'one',i)">
-          <img :src="url+item.image" alt="" style="width:50px">
-          <!-- <div class="upload" v-else>
+          <img :src="url+item.image" alt="" style="width:50px" v-if="item.image">
+          <div class="upload" v-else>
             <van-icon name="plus"/>
-          </div>-->
+          </div>
         </van-uploader>
       </div>
     </div>
