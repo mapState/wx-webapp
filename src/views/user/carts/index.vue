@@ -52,7 +52,7 @@
         <van-checkbox
           v-model="checked"
           checked-color="#ffab3c"
-          @click="result.length==2?$refs.checkboxGroup.toggleAll(false):$refs.checkboxGroup.toggleAll(true)"
+          @click="result.length==list.length?$refs.checkboxGroup.toggleAll(false):$refs.checkboxGroup.toggleAll(true)"
         ></van-checkbox>
       </div>全选
       <div class="mid upDown" v-show="status">
