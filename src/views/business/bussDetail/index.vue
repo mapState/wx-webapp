@@ -12,7 +12,7 @@
         <div class="instro out">时间 {{item.createDate}}</div>
         <div class="right upDown">
           +{{(item.money/100-item.discountMoney/100).toFixed(2)}}元
-          <div class="tip">原价{{item.money/100}}元，折扣{{item.discountMoney/100}}</div>
+          <div class="tip">原价{{item.money/100}}元，折扣{{item.discountMoney/100}}元</div>
         </div>
         
       </div>
