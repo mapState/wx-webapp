@@ -35,7 +35,7 @@ export default {
       currentDate: new Date(),
       minDate: new Date(2000, 10, 1),
       list: [],
-      sum:0,
+      sum: 0
     };
   },
   methods: {
@@ -48,16 +48,18 @@ export default {
       return value;
     },
     cashList() {
-      this.sum=0;
+      this.sum = 0;
       cashList({
         date:
           this.currentDate.getFullYear() +
           "" +
-          (this.currentDate.getMonth() + 1)
+          (this.currentDate.getMonth() + 1 > 9
+            ? this.currentDate.getMonth() + 1
+            : "0" + (this.currentDate.getMonth() + 1))
       }).then(res => {
         this.list = res.data.data;
-        for(let i=0;i<this.list.length;i++){
-          this.sum+=this.list[i].money
+        for (let i = 0; i < this.list.length; i++) {
+          this.sum += this.list[i].money;
         }
         this.msg =
           this.currentDate.getFullYear() +
