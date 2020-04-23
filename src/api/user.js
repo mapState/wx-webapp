@@ -7,6 +7,13 @@ export function login(data) {
         data
     })
 }
+export function alilogin(params) {
+    return request({
+        url: '/front/cus/ali/login',
+        method: 'get',
+        params
+    })
+}
 export function feedback(data) {
     return request({
         url: '/front/cus/feedback',

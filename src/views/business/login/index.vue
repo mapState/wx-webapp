@@ -1,23 +1,24 @@
 <template>
   <div v-wechat-title="title" class="container">
     <div class="line"></div>
-    <div class="tab">
+    <div class="tab" v-if="!$route.query.pay">
       <div @click="chooseType(1)" :class="{active:type==1}">验证码登录</div>
       <div @click="chooseType(2)" :class="{active:type==2}">密码登录</div>
     </div>
+    <div style="height:100px" v-else></div>
     <div class="input">
       <div class="item">
-        <img src="@/assets/user.png" class="upDown">
+        <img src="@/assets/user.png" class="upDown" />
         <div class="shu upDown"></div>
         <div class="mid upDown">
-          <van-field v-model="phone" placeholder="请输入您的手机号码"/>
+          <van-field v-model="phone" placeholder="请输入您的手机号码" />
         </div>
       </div>
       <div class="item" v-if="type==1">
-        <img src="@/assets/lock.png" class="upDown">
+        <img src="@/assets/lock.png" class="upDown" />
         <div class="shu upDown"></div>
         <div class="mid upDown">
-          <van-field v-model="code" placeholder="请输入验证码"/>
+          <van-field v-model="code" placeholder="请输入验证码" />
         </div>
         <span
           class="upDown"
@@ -26,10 +27,10 @@
         >{{timeShow?this.time+'s':'获取验证码'}}</span>
       </div>
       <div class="item" v-else>
-        <img src="@/assets/lock.png" class="upDown">
+        <img src="@/assets/lock.png" class="upDown" />
         <div class="shu upDown"></div>
         <div class="mid upDown">
-          <van-field v-model="password" placeholder="请输入密码" type="password"/>
+          <van-field v-model="password" placeholder="请输入密码" type="password" />
         </div>
       </div>
     </div>
@@ -45,6 +46,7 @@
 import { login, sendPhone, updateOpenId } from "@/api/bussiness";
 import { GetCookie } from "@/utils/utils";
 import { makLogin } from "@/api/mak";
+import { alilogin } from "@/api/user";
 import wx from "weixin-js-sdk";
 export default {
   data() {
@@ -80,44 +82,62 @@ export default {
             }
           });
         } else {
-          login({
-            loginType: this.type,
-            password: this.password,
-            phone: this.phone,
-            code: this.code
-          }).then(res => {
-            if (res.code == 200) {
-              if (!res.data.open_id) {
-                this.$dialog
-                  .confirm({
-                    title: "是否绑定微信"
-                  })
-                  .then(() => {
-                    updateOpenId({ openId: GetCookie("openId") }).then(res => {
-                      this.$toast({
-                        message: res.message
-                      });
+          if (this.$route.query.pay) {
+            alilogin({
+              phone: this.phone,
+              code: this.code
+            }).then(res => {
+              if (res.code == 200) {
+                this.$router.push({
+                  path: "/pay",
+                  query:{
+                    id:localStorage.getItem("busiUserId")
+                  }
+                });
+              }
+            });
+          } else {
+            login({
+              loginType: this.type,
+              password: this.password,
+              phone: this.phone,
+              code: this.code
+            }).then(res => {
+              if (res.code == 200) {
+                if (!res.data.open_id) {
+                  this.$dialog
+                    .confirm({
+                      title: "是否绑定微信"
+                    })
+                    .then(() => {
+                      updateOpenId({ openId: GetCookie("openId") }).then(
+                        res => {
+                          this.$toast({
+                            message: res.message
+                          });
+                          this.$router.push({
+                            path: "/workbench"
+                          });
+                        }
+                      );
+                    })
+                    .catch(() => {
                       this.$router.push({
                         path: "/workbench"
                       });
                     });
-                  })
-                  .catch(() => {
-                    this.$router.push({
-                      path: "/workbench"
-                    });
+                } else {
+                  this.$router.push({
+                    path: "/workbench"
                   });
+                }
               } else {
-                this.$router.push({
-                  path: "/workbench"
+                this.$toast({
+                  message: res.message
                 });
               }
-            } else {
-              this.$toast({
-                message: res.message
-              });
-            }
-          });
+            });
+          }
         }
       } else {
         this.$toast({

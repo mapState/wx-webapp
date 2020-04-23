@@ -250,6 +250,7 @@ export default {
     if (device().weChat) {
       this.init();
     }
+    localStorage.setItem("busiUserId", this.$route.query.id);
     payDetail({ busiUserId: this.$route.query.id }).then(res => {
       this.detail = res.data;
     });
