@@ -6,9 +6,9 @@ import router from '../router'
 
 // create an axios instance
 const service = axios.create({
-  baseURL: 'http://192.168.0.122:8080/prize', // url = base url + request url
+  // baseURL: 'http://192.168.0.122:8080/prize', // url = base url + request url
   // baseURL: 'http://192.168.1.128:8080/prize', // url = base url + request url
-  // baseURL: 'http://hxkjzjlm.top/prize', // url = base url + request url
+  baseURL: 'http://hxkjzjlm.top/prize', // url = base url + request url
   withCredentials: true,// send cookies when cross-domain requests
   timeout: 10000 // request timeout
 })
