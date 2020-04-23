@@ -208,6 +208,7 @@ export default {
           if (result && result.city && result.bounds) {
             var cityinfo = result.city;
             var citybounds = result.bounds;
+            console.log(cityinfo)
             SetCookie("city", cityinfo);
             this.city=cityinfo
             // map.setBounds(citybounds);

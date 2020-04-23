@@ -90,8 +90,8 @@ export default {
               if (res.code == 200) {
                 this.$router.push({
                   path: "/pay",
-                  query:{
-                    id:localStorage.getItem("busiUserId")
+                  query: {
+                    id: localStorage.getItem("busiUserId")
                   }
                 });
               }
@@ -172,7 +172,11 @@ export default {
       if (this.$route.query.where) {
         this.title = "创客登录";
       } else {
-        this.title = "商家登录";
+        if (this.$route.query.pay) {
+          this.title = "登录";
+        } else {
+          this.title = "商家登录";
+        }
       }
     }
   },
