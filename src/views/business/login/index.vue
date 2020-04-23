@@ -88,12 +88,18 @@ export default {
               code: this.code
             }).then(res => {
               if (res.code == 200) {
-                this.$router.push({
-                  path: "/pay",
-                  query: {
-                    id: localStorage.getItem("busiUserId")
-                  }
-                });
+                if (localStorage.getItem("busiUserId")) {
+                  this.$router.push({
+                    path: "/pay",
+                    query: {
+                      id: localStorage.getItem("busiUserId")
+                    }
+                  });
+                } else {
+                  this.$router.push({
+                    path: "/home"
+                  });
+                }
               }
             });
           } else {
