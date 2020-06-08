@@ -75,7 +75,7 @@
         <div class="item" v-for="(item,i) in lineOrder" :key="i">
           <span>{{i+1}}</span>
           <img :src="url+item.image" class="upDown">
-          <div class="name upDown">{{item.name}}</div>
+          <div class="name upDown">{{item.name | limitName}}</div>
           <div
             class="tip upDown"
             v-show="i==0"
@@ -96,9 +96,9 @@
     <div class="tabContent" v-show="tab==2">
       <div class="inner">
         <div class="item" v-for="(item,i) in freeOrder" :key="i">
-          <span>{{i+1}}</span>
+          <span>{{i+1}}</span>  
           <img :src="url+item.image" class="upDown">
-          <div class="name upDown">{{item.name}}</div>
+          <div class="name upDown">{{item.name | limitName}}</div>
           <div class="tip upDown">{{item.count}}次免单</div>
           <div class="right upDown rc">
             <div class="in upDown" style="width:100%">
@@ -201,6 +201,16 @@ export default {
       show: false,
       over: false
     };
+  },
+  filters:{
+      limitName(val){
+          console.log(val)
+          if(val&&val.length>5){
+              let str=val.substr(0,5)+'...'
+              return str
+          }
+          return val
+      }
   },
   methods: {
     toNext(msg, id) {
